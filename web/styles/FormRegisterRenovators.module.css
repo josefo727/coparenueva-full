@@ -1,0 +1,33 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    max-width: 540px;
+    padding: 30px;
+    background: #ffffff;
+    font-family: sans-serif;
+    color: #202123;
+    font-weight: bold;
+    border-radius: 30px;
+}
+.form ::placeholder {
+    color: #202123;
+    font-weight: bold;
+}
+.gender span {
+    font: 500 14px sans-serif;
+}
+.registerRenovators {
+    display: flex;
+    color: #ffffff;
+    background: #344693;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    transition: 0.5s;
+    cursor: pointer;
+}
+.registerRenovators:hover {
+    background: #120639;
+    transition: 0.5s;
+}

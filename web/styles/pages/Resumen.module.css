@@ -1,0 +1,77 @@
+.containerResumen {
+    height: calc(100vh - 76px);
+    overflow: auto;
+    padding: 0 20px;
+    background: #f3f3f3;
+}
+.containerBox {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 30px 15px;
+    margin: auto;
+    max-width: 900px;
+}
+
+.box {
+    background: #ffffff;
+    color: #000000;
+    border-radius: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 21%;
+    min-width: 145px;
+    min-height: 120px;
+    margin: 5px;
+    padding: 13px 5px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+}
+.contentIconTitle {
+    display: flex;
+    align-items: center;
+}
+.icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 34px;
+    height: 36px;
+    margin: 6px;
+    font-size: 25px;
+    border-radius: 8px;
+    color: #000000;
+    background: #ebebeb;
+}
+.valor {
+    margin: 0;
+    font-size: 50px;
+}
+
+
+.policies, .closing {
+    background: #344693;
+    color: #ffffff;
+    width: 220px;
+}
+.policies .icon {
+    background: #6774ae;
+}
+.levelIncentive,
+.approximate,
+.closing {
+    width: 30%;
+    min-width: 230px;
+}
+
+@media (max-width: 821px) {
+    .containerResumen {
+        height: auto;
+        padding: 0 20px;
+    }
+    .box {
+        width: 100% !important;
+    }
+}

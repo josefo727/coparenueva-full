@@ -1,0 +1,25 @@
+.containerTerms {
+    height: calc(100vh - 76px);
+    overflow: auto;
+    padding: 0 20px;
+    background: #f3f3f3;
+}
+.terms {
+    width: 90%;
+    max-width: 1024px;
+    margin: 30px auto;
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 21px;
+}
+@media (max-width: 768px) {
+    .terms {
+        width: auto;
+    }
+    .containerTerms {
+        height: auto;
+    }
+    .instructions {
+        padding: 20px;
+    }
+}

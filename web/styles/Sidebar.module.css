@@ -1,0 +1,61 @@
+.main {
+    width: 100%;
+}
+.contentSidebar {
+    color: #8b8b8c;
+    font: 600 14px sans-serif;
+    z-index: 999 !important;
+}
+.menuItem a {
+    height: 35px !important;
+    width: 85%;
+    margin: 10px auto 10px 8%;
+    padding: 0;
+    padding-left: 12px !important;
+}
+.menuItem a:hover {
+    color: #ffffff;
+    background-color: #3c3c3c !important;
+    border-radius: 13px;
+    margin: 10px auto 10px 8%;
+}
+.menuItem.active a {
+    color: #ffffff;
+    background: #2d2d2e;
+    border-radius: 13px;
+    margin: 10px auto 10px 8%;
+}
+.active .activeBookmark {
+    height: 28px;
+    border: 2px solid #ffffff;
+    border-radius: 10px;
+    position: absolute;
+    top: 22%;
+    left: 0;
+}
+.collapse{
+    position: fixed;
+    bottom: 6.5%;
+    left: 237px;
+    transition: 1s;
+    padding: 7px 3px 5px 4px;
+    border-radius: 26px;
+    background: #232323;
+}
+.collapsed {
+    position: fixed;
+    bottom: 6.5%;
+    left: 67px;
+    transition: 1s;
+    padding: 7px 3px 5px 4px;
+    border-radius: 26px;
+    background: #232323;
+}
+@media (max-width: 768px) {
+    .contentSidebar {
+        z-index: 999;
+    }
+    .collapse, .collapsed {
+        display: none;
+    }
+}

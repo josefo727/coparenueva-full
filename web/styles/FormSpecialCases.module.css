@@ -1,0 +1,47 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    max-width: 540px;
+    margin: auto;
+    background: #ffffff;
+    font-family: sans-serif;
+    color: #202123;
+    font-weight: bold;
+    border-radius: 30px;
+}
+.form ::placeholder {
+    color: #202123;
+    font-weight: bold;
+}
+.title {
+    margin: 0;
+}
+.form label {
+    color: #202123;
+    font: bold 14px sans-serif;
+}
+.evaluarCaso {
+    display: flex;
+    color: #ffffff;
+    background: #2054a5;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    transition: 0.5s;
+    cursor: pointer;
+    width: 200px;
+    border-radius: 8px;
+}
+.inputs>div {
+    border-radius: 6px !important;
+}
+@media (max-width: 768px) {
+    .title {
+        font-size: 18px;
+    }
+    .evaluarCaso {
+        width: 90%;
+        margin: auto;
+    }
+}

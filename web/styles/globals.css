@@ -1,3 +1,31 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+body {
+    margin: 0;
+    font-family: sans-serif;
+}
+.ps-sidebar-root .ps-menu-root .css-ewdv3l {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 95vh;
+}
+.nextui-c-egxOLa.nextui-navbar-container {
+    max-width: 100%;
+    padding: 0 25px 0 0;
+}
+.showMobile {
+    display: none;
+}
+.nextui-c-fyNvBR {
+    white-space: normal !important;
+}
+@media (max-width: 600px) {
+    .nextui-navbar-content button {
+        display: flex;
+        flex-direction: column;
+    }
+}
+@media (max-width: 768px) {
+    .showMobile {
+        display: flex;
+    }
+}
