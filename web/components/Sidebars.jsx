@@ -108,7 +108,7 @@ export default function Sidebars({navTitle, navSubTitle, ruta, children}) {
                     </MenuItem>
                 </Menu>
                 <a className={classCollapse}
-                   hideIn="md"
+                   hidein="md"
                    onClick={() => collapse()}
                 >
                     {iscollapse ?
