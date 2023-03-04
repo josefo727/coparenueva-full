@@ -19,8 +19,6 @@ class UserControllerTest extends TestCase
         $user = User::factory()->create($this->getUserCredentials());
 
         Sanctum::actingAs($user);
-
-//        $this->actingAs($user);
     }
 
     protected function getUserCredentials()

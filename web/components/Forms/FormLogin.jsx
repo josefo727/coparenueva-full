@@ -1,24 +1,23 @@
 import styles from '../../styles/FormLogin.module.css'
 import { Input, Spacer, Button, useInput } from "@nextui-org/react";
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
-import Link from 'next/link'
 
-export default function FormLogin( {data, setInput, login, register }) {
+export default function FormLogin( {data, setInput, login }) {
 
     return (
         <>
-            <form className={styles.form}>
+            <form className={styles.form} onSubmit={e => login(e)}>
                 <Spacer y={2.5} />
                 <h1>Bienvenidos Renovadores</h1>
                 <p>Por favor inicia sesión para continuar.</p>
                 <Input
-                    name='name'
-                    value={data?.name}
+                    name='email'
+                    value={data?.email}
                     onChange={e => setInput(e)}
                     className={styles.user}
                     bordered
                     placeholder="usuario*"
-                    onChange={e => setInput(e)}
+                    required
                 />
                 <Spacer y={1} />
                 <Input.Password
@@ -27,12 +26,13 @@ export default function FormLogin( {data, setInput, login, register }) {
                     onChange={e => setInput(e)}
                     className={styles.password}
                     bordered
-                    placeholder="contraseña"
+                    placeholder="contraseña*"
                     visibleIcon={<BsEyeSlashFill/>}
                     hiddenIcon={<BsEyeFill/>}
+                    required
                 />
                 <Spacer y={1} />
-                <a className={styles.LoginButton} onClick={e => login(e)}>INGRESAR</a>
+                <button type="submit" className={styles.LoginButton}>INGRESAR</button>
                 <Spacer y={2.5} />
             </form>
         </>

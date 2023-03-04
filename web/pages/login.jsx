@@ -1,6 +1,8 @@
 import styles from './../styles/Login.module.css'
 import FormLogin from '../components/Forms/FormLogin'
 import {useState} from 'react';
+import { login } from './../auth'
+import Router from 'next/router';
 
 export default function Login() {
     const [data, setData] = useState({});
@@ -15,18 +17,18 @@ export default function Login() {
         });
     }
 
-    const login = (e) => {
-        e.preventDefault()
-        console.log(data);
+    const logIn = async (e) => {
+        e.preventDefault();
+        await login(data.email, data.password);
+        Router.push('/resumen');
     }
 
     return (
         <main className={styles.mainLogin}>
             <FormLogin
-                isLogin={true}
                 setInput={setInput}
                 data={data}
-                setData={setData}
+                login={logIn}
             />
         </main>
     )

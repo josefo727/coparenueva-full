@@ -27,7 +27,9 @@ class UserController extends Controller
         $user = User::create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
-            'password' => bcrypt($request->input('password'))
+            'password' => bcrypt($request->input('password')),
+            'terms' => $request->input('terms'),
+            'url' => $request->input('url'),
         ]);
 
         return response()->json($user, Response::HTTP_CREATED);
@@ -38,6 +40,8 @@ class UserController extends Controller
         $user->name = $request->input('name');
         $user->email = $request->input('email');
         $user->password = bcrypt($request->input('password'));
+        $user->terms = $request->input('terms');
+        $user->url = $request->input('url');
         $user->save();
 
         return response()->json($user, Response::HTTP_OK);
