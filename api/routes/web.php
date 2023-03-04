@@ -14,4 +14,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/', function() {
+    $api_info = [
+        'title' => 'Copa Renueva REST API',
+        'description' => 'API para acceder a los datos de la Copa Renueva',
+    ];
+
+    return response()->json($api_info, 200);
+});
+
 Route::get('/web-init', WebInit::class);
