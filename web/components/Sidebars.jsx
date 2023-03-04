@@ -87,6 +87,14 @@ export default function Sidebars({navTitle, navSubTitle, ruta, children}) {
                             <div className={styles.activeBookmark}/>
                             Mi equipo
                         </MenuItem>
+                        <MenuItem
+                            icon={<HiUsers />}
+                            component={<Link href="/usuarios" />}
+                            className={terms}
+                        >
+                            <div className={styles.activeBookmark}/>
+                            Usuarios
+                        </MenuItem>
                         <hr/>
                         <MenuItem
                             icon={<HiUsers />}
