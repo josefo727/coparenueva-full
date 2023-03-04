@@ -18,13 +18,12 @@ const login = async (email, password) => {
 
 const logout = async () => {
   try {
-    const response = await axios.post(`${API_URL}logout`, {}, {
+    await axios.post(`${API_URL}logout`, {}, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
     });
     localStorage.removeItem('token');
-    return response;
   } catch (error) {
     throw new Error('Error al cerrar sesión');
   }

@@ -5,7 +5,10 @@ import { login } from './../auth'
 import Router from 'next/router';
 
 export default function Login() {
-    const [data, setData] = useState({});
+    const [data, setData] = useState({
+        email: 'josefo727@gmail.com',
+        password: '000000'
+    });
 
     const setInput = e => {
         setField(e.target.name, e.target.value);

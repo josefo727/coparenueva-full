@@ -5,13 +5,20 @@ import { FaChevronRight, FaChevronLeft } from "react-icons/fa";
 import { HiUsers } from "react-icons/hi";
 import styles from '../styles/Sidebar.module.css';
 import NavbarTop from './NavbarTop';
-import Link from 'next/link'
+import Link from 'next/link';
+import { logout } from "../auth";
+import Router from 'next/router';
 
 export default function Sidebars({navTitle, navSubTitle, ruta, children}) {
     const { collapseSidebar } = useProSidebar();
     const { toggleSidebar } = useProSidebar();
     const [iscollapse, setIsCollapse] = useState(true);
     const [toggled, setToggled] = useState(false);
+
+    const exit = async () => {
+        await logout();
+        Router.push('/');
+    }
 
     const toggle = () => {
         setToggled(!toggled);
@@ -101,8 +108,8 @@ export default function Sidebars({navTitle, navSubTitle, ruta, children}) {
                     </div>
                     <MenuItem
                         icon={<HiUsers />}
-                        component={<Link href={"/"} />}
                         className={styles.menuItem}
+                        onClick={() => exit()}
                     >
                         Cerrar sesión
                     </MenuItem>
