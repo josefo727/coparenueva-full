@@ -5,10 +5,24 @@ import { useEffect } from 'react';
 import axios from 'axios';
 import DataTable from 'react-data-table-component';
 import { MdModeEdit, MdDeleteForever } from 'react-icons/md';
+import Link from "next/link";
 
 
 export default function Users() {
+    const API_URL = `${process.env.SERVER_API_HOST}`;
+    const [users, setUsers] = useState([]);
+    const [pending, setPending] = useState(true);
 
+    const getUsers = async () => {
+        setPending(true);
+        const resp = await axios.get(`${API_URL}/api/users`, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+        });
+        setUsers(resp.data.data);
+        setPending(false);
+    }
 
     const createUser = (user) => {
         console.log('editUser', user)
@@ -19,16 +33,18 @@ export default function Users() {
     const deleteUser = (user) => {
         console.log('deleteUser', user)
     }
-    const buttonCreate = (user) => {
+    const buttonCreate = () => {
         return (
             <a className={styles.buttonCreate} onClick={() => createUser()}>Crear Usuario</a>
         )
     }
-    const actions = (user) => {
+    const actions = (id) => {
+        console.log(id)
+
       return (
         <>
-            <a className={`${styles.actions} ${styles.editUser}`} onClick={() => editUser(user)}><MdModeEdit /></a>
-            <a className={`${styles.actions} ${styles.deleteUser}`} onClick={() => deleteUser(user)}><MdDeleteForever /></a>
+            <Link href={`/usuarios/editar/${id}`}><MdModeEdit /></Link>
+            <a onClick={() => deleteUser()}><MdDeleteForever /></a>
         </>
       )
     }
@@ -53,27 +69,12 @@ export default function Users() {
         },
         {
             name: 'acciones',
-            selector: row => actions(row),
+            selector: row => actions(row.id),
             sortable: false,
             right: true,
             reorder: false
         }
     ];
-
-    const API_URL = `${process.env.SERVER_API_HOST}/api/`;
-    const [users, setUsers] = useState([]);
-    const [pending, setPending] = useState(true);
-
-    const getUsers = async () => {
-        setPending(true)
-        const resp = await axios.get(`${API_URL}users`, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
-          },
-        });
-        setUsers(resp.data.data);
-        setPending(false)
-    }
 
     useEffect(() => {
         getUsers()
