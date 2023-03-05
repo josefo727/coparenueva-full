@@ -7,7 +7,12 @@ import { Spacer } from "@nextui-org/react";
 export default function SpecialCases() {
     return (
         <>
-            <Layout title='Casos Especiales' descripcion='Casos Especiales' navTitle='Casos Especiales' ruta='specials'>
+            <Layout
+                title='Casos Especiales'
+                descripcion='Casos Especiales'
+                navTitle='Casos Especiales'
+                ruta='specials'
+            >
                 <div className={styles.containerSpecialCases}>
                     <div className={styles.specialCases}>
                         <p>
