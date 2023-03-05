@@ -13,6 +13,7 @@ export default function Login() {
     const setInput = e => {
         setField(e.target.name, e.target.value);
     }
+
     const setField = (field, value) => {
         setData({
             ...data,
