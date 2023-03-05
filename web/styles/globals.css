@@ -29,3 +29,12 @@ body {
         display: flex;
     }
 }
+
+/****** Table Users ******/
+#tableUsers .sc-bZHTEL.sc-ilxdoh.clMIAz.VTreY {
+    font-size: 0;
+}
+#tableUsers .sc-bZHTEL.sc-ilxdoh.clMIAz.VTreY:before {
+    content: 'Usuarios por pagina';
+    font-size: 12px;
+}
