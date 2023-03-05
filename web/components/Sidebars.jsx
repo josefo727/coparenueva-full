@@ -8,6 +8,7 @@ import NavbarTop from './NavbarTop';
 import Link from 'next/link';
 import { logout } from "../auth";
 import Router from 'next/router';
+import { Image } from "@nextui-org/react";
 
 export default function Sidebars({navTitle, navSubTitle, ruta, children}) {
     const { collapseSidebar } = useProSidebar();
@@ -50,11 +51,19 @@ export default function Sidebars({navTitle, navSubTitle, ruta, children}) {
                 transitionDuration={1000}
                 breakPoint="md"
                 className={styles.contentSidebar}
-                backgroundColor="#120639"
+                backgroundColor="#111419"
                 ligth
             >
                 <Menu>
                     <div>
+                        <Image
+                            src="https://www.bmicos.com/ecuador/wp-content/uploads/sites/9/2020/12/logo-1.png"
+                            fill
+                            alt="BMI"
+                            sizes="(max-width: 768px) 100vw,
+                                (max-width: 1200px) 50vw,
+                                33vw"
+                        />
                         <MenuItem
                             icon={<BsFillGrid1X2Fill />}
                             component={<Link href="/resumen" />}
@@ -85,15 +94,7 @@ export default function Sidebars({navTitle, navSubTitle, ruta, children}) {
                             className={team}
                         >
                             <div className={styles.activeBookmark}/>
-                            Mi equipo
-                        </MenuItem>
-                        <MenuItem
-                            icon={<HiUsers />}
-                            component={<Link href="/usuarios" />}
-                            className={terms}
-                        >
-                            <div className={styles.activeBookmark}/>
-                            Usuarios
+                            Agentes <br/> renovadores
                         </MenuItem>
                         <hr/>
                         <MenuItem
@@ -112,6 +113,14 @@ export default function Sidebars({navTitle, navSubTitle, ruta, children}) {
                             <div className={styles.activeBookmark}/>
                             Términos y <br/>
                             condiciones
+                        </MenuItem>
+                        <MenuItem
+                            icon={<HiUsers />}
+                            component={<Link href="/usuarios" />}
+                            className={terms}
+                        >
+                            <div className={styles.activeBookmark}/>
+                            Usuarios
                         </MenuItem>
                     </div>
                     <MenuItem
