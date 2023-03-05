@@ -1,12 +1,11 @@
-import Layout from '/components/Layout'
 import styles from '/styles/Home.module.css'
 import Link from 'next/link'
-import { Image, Text } from "@nextui-org/react";
+import { Image, Text, Navbar } from "@nextui-org/react";
 
 export default function Home() {
   return (
     <section className={styles.home}>
-        <navbar className={styles.navbar}>
+        <Navbar className={styles.navbar}>
             <Text
                 h1
                 css={{
@@ -19,7 +18,7 @@ export default function Home() {
                     Sign In
                 </Link>
             </div>
-        </navbar>
+        </Navbar>
         <main>
             <div className={styles.logo}>
                 <Image
