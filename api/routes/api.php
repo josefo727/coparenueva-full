@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\UserTermController;
+use App\Http\Controllers\Api\SpecialCaseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,4 +34,5 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('user-term', [UserTermController::class, 'show'])->name('user-term.show');
     Route::put('user-term', [UserTermController::class, 'update'])->name('user-term.update');
     Route::apiResource('members', MemberController::class);
+    Route::apiResource('special-cases', SpecialCaseController::class);
 });

@@ -95,10 +95,7 @@ export default function Sidebars({navTitle, navSubTitle, ruta, children}) {
                             className={team}
                         >
                             <div className={styles.activeBookmark}/>
-<<<<<<< HEAD
                             Agentes <br/> renovadores
-=======
-                            Mi equipo
                         </MenuItem>
                         <MenuItem
                             icon={<HiUsers />}
@@ -107,7 +104,6 @@ export default function Sidebars({navTitle, navSubTitle, ruta, children}) {
                         >
                             <div className={styles.activeBookmark}/>
                             Usuarios
->>>>>>> 85b0351abdc0afc2d0c867eacaf6654a7688c63e
                         </MenuItem>
                         <hr/>
                         <MenuItem
