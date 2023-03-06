@@ -39,11 +39,9 @@ export default function Users() {
         }
         try {
             await axios.delete(`${API_URL}/api/users/${idUserDelete}`, headers)
-                .then(response => console.log(response));
             await closeModal();
             await getUsers();
         }catch (e) {
-            console.log(e)
         }
     }
     const isModal = (id) => {

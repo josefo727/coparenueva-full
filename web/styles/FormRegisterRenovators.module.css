@@ -20,18 +20,18 @@
 .createMember,
 .registerRenovators,
 .editRenovators {
+    background: #3264D3;
+    transition: 0.5s;
     display: flex;
     color: #ffffff;
-    background: #344693;
     align-items: center;
     justify-content: center;
     padding: 12px;
-    transition: 0.5s;
     cursor: pointer;
 }
 .createMember:hover,
 .registerRenovators:hover,
 .editRenovators:hover {
-    background: #111419;
+    background: #344693;
     transition: 0.5s;
 }

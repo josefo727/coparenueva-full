@@ -27,10 +27,15 @@
     margin: 0 5px;
     cursor: pointer;
     border-radius: 10px;
-    background: #344693;
+    background: #3264D3;
+    transition: 0.5s;
     color: #ffffff;
     font: 600 14px sans-serif;
     text-decoration: none;
+}
+.buttonCreate:hover {
+    background: #344693;
+    transition: 0.5s;
 }
 
 .contentDeleteConfirm {
@@ -68,10 +73,20 @@
 }
 
 .btnConfirm {
+    background: #3264D3;
+    transition: 0.5s;
+}
+.btnConfirm:hover {
     background: #344693;
+    transition: 0.5s;
 }
 .btnCancel {
+    background: #d33232;
+    transition: 0.5s;
+}
+.btnCancel:hover {
     background: #933434;
+    transition: 0.5s;
 }
 @media (max-width: 768px) {
     .containerMyTeam {

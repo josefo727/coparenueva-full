@@ -6,7 +6,7 @@ import Link from "next/link";
 import {AiOutlineArrowLeft} from "react-icons/ai";
 import Router from "next/router";
 
-export default function FormSpecialCases({special, isEdit}) {
+export default function FormSpecialCases({special, isEdit, getSpecialCases}) {
     const API_URL = `${process.env.SERVER_API_HOST}`;
     const [data, setData] = useState({name: '', email: '', detail: ''})
     const [alert, setAlert] = useState(false)
@@ -40,12 +40,12 @@ export default function FormSpecialCases({special, isEdit}) {
             try {
                 const response = await axios.post(`${API_URL}/api/special-cases/`, res, headers);
                 if (response.statusText === "Created") {
+                    await getSpecialCases()
                     setMessage('Reporte creado satisfactoriamente.');
                     setData({name: '', email: '', detail: ''});
                     setTimeout(() => {
                         setMessage('');
                     },3000)
-
                 }
             }catch (e) {
                 console.log(e)
@@ -57,7 +57,6 @@ export default function FormSpecialCases({special, isEdit}) {
 
     const updateSpecialCases = async (res) => {
         setAlert(false)
-        console.log(res)
         if (
             !!res.name &&
             !!res.email &&

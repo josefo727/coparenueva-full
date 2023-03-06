@@ -25,7 +25,6 @@ export default function SpecialCases() {
         });
         setSpecialCases(resp.data);
         setPending(false);
-        console.log(resp.data)
     }, []);
 
     const deleteSpecialCases = async () => {
@@ -36,11 +35,9 @@ export default function SpecialCases() {
         }
         try {
             await axios.delete(`${API_URL}/api/special-cases/${idSpecialDelete}`, headers)
-                .then(response => console.log(response));
             await closeModal();
             await getSpecialCases();
         }catch (e) {
-            console.log(e)
         }
     }
 
@@ -104,6 +101,16 @@ export default function SpecialCases() {
                 ruta='specials'
             >
                 <div className={styles.containerSpecialCases}>
+                    <div className={styles.table}>
+                        <DataTable
+                            columns={columns}
+                            expandableRows
+                            expandableRowsComponent={DetailComponent}
+                            data={specialCases}
+                            progressPending={pending}
+                            pagination
+                        />
+                    </div>
                     <div className={styles.contentTextForm}>
                         <div className={styles.specialCases}>
                             <p>
@@ -117,18 +124,8 @@ export default function SpecialCases() {
                             <Spacer y={2.5} />
                         </div>
                         <div className={styles.FormSpecialCases}>
-                            <FormSpecialCases/>
+                            <FormSpecialCases getSpecialCases={getSpecialCases}/>
                         </div>
-                    </div>
-                    <div className={styles.table} id='tableUsers'>
-                        <DataTable
-                            columns={columns}
-                            expandableRows
-                            expandableRowsComponent={DetailComponent}
-                            data={specialCases}
-                            progressPending={pending}
-                            pagination
-                        />
                     </div>
 
                     {showModal ?

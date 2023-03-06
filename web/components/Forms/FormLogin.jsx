@@ -12,6 +12,7 @@ export default function FormLogin( {data, setInput, login }) {
                     alt="background"
                 />
                 <Spacer y={0.5} />
+                <h>Bienvenido</h>
                 <p>Por favor inicia sesión para continuar.</p>
                 <Input
                     name='email'
@@ -19,7 +20,7 @@ export default function FormLogin( {data, setInput, login }) {
                     onChange={e => setInput(e)}
                     className={styles.user}
                     bordered
-                    placeholder="usuario*"S
+                    placeholder="Usuario*"S
                     required
                 />
                 <Spacer y={1} />
@@ -29,7 +30,7 @@ export default function FormLogin( {data, setInput, login }) {
                     onChange={e => setInput(e)}
                     className={styles.password}
                     bordered
-                    placeholder="contraseña*"
+                    placeholder="Contraseña*"
                     visibleIcon={<BsEyeSlashFill/>}
                     hiddenIcon={<BsEyeFill/>}
                     required

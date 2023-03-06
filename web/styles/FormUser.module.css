@@ -17,13 +17,13 @@
 
 .buttonCreateEdit {
     color: #ffffff !important;
-    background: #2054a5 !important;
+    background: #3264D3 !important;
     transition: 0.5s !important;
     font: 600 14px sans-serif !important;
     max-width: 200px;
     margin-left: auto;
 }
 .buttonCreateEdit:hover {
-    background: #003a70 !important;
+    background: #344693 !important;
     transition: 0.5s;
 }
