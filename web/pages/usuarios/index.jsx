@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import Layout from '/components/Layout'
 import styles from '/styles/pages/Users.module.css'
 import { useEffect } from 'react';
@@ -17,7 +17,7 @@ export default function Users() {
     const [showModal, setShowModal] = useState(false);
     const [idUserDelete, setIdUserDelete] = useState('');
 
-    const getUsers = async () => {
+    const getUsers = useCallback(async () => {
         setPending(true);
         const resp = await axios.get(`${API_URL}/api/users`, {
             headers: {
@@ -26,7 +26,13 @@ export default function Users() {
         });
         setUsers(resp.data.data);
         setPending(false);
-    }
+    }, []);
+
+    useEffect(() => {
+        getUsers()
+            .then(() => null);
+    }, [getUsers])
+
     const deleteUser = async () => {
         const headers = {
             headers: {
@@ -91,11 +97,6 @@ export default function Users() {
             reorder: false
         }
     ];
-
-    useEffect(() => {
-        getUsers()
-            .then(() => null);
-    }, [getUsers])
 
     return (
         <>
