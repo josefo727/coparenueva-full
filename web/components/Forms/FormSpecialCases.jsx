@@ -1,9 +1,14 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useCallback} from 'react'
 import styles from '/styles/FormSpecialCases.module.css'
-import { Input, Radio, Spacer,} from "@nextui-org/react";
+import {Input, Spacer, Textarea,} from "@nextui-org/react";
+import axios from "axios";
 
 export default function FormSpecialCases() {
-    const [data, setData] = useState({name: '', email: '', broker: '', details: ''})
+    const API_URL = `${process.env.SERVER_API_HOST}`;
+    const [data, setData] = useState({name: '', email: '', detail: ''})
+    const [alert, setAlert] = useState(false)
+    const [message, setMessage] = useState('')
+
     const setInput = e => {
         setField(e.target.name, e.target.value);
     }
@@ -13,26 +18,36 @@ export default function FormSpecialCases() {
             [field] : value
         });
     }
-    const validateEmail = () => {
-        return data.email.match('/^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}$/i');
-    };
-    const validEmail = validateEmail();
-
-    const ReportCase = (e) => {
-        e.preventDefault();
-        console.log(validEmail)
+    const ReportCase = useCallback(async (res) => {
+        setAlert(false)
+        console.log(res)
         if (
-            validEmail,
-            !!data.name &&
-            !!data.email &&
-            !!data.broker &&
-            !!data.details
+            !!res.name &&
+            !!res.email &&
+            !!res.detail
         ){
-            console.log('valido')
+            const headers = {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
+                }
+            }
+            try {
+                const response = await axios.post(`${API_URL}/api/special-cases/`, res, headers);
+                if (response.statusText === "Created") {
+                    setMessage('Reporte creado satisfactoriamente.');
+                    setData({name: '', email: '', detail: ''});
+                    setTimeout(() => {
+                        setMessage('');
+                    },3000)
+
+                }
+            }catch (e) {
+                console.log(e)
+            }
         } else {
-            console.log('not valid')
+            setAlert(true)
         }
-    }
+    }, []);
     useEffect(() => {
     },[])
     return (
@@ -47,7 +62,7 @@ export default function FormSpecialCases() {
                     type='text'
                     label="Nombre de renovador"
                     name="name"
-                    value={data.name}
+                    value={data?.name}
                     onChange={e => setInput(e)}
                     required='true'
                 />
@@ -59,36 +74,26 @@ export default function FormSpecialCases() {
                     label="Correo electrónico"
                     name="email"
                     type='email'
-                    value={data.email}
+                    value={data?.email}
                     onChange={e => setInput(e)}
                     required='true'
                 />
                 <Spacer y={1} />
-                <Input
-                    className={styles.inputs}
+
+                <Textarea
                     clearable
                     bordered
-                    type='text'
-                    label="Bróker al cual pertenezco"
-                    name="broker"
-                    value={data.broker}
-                    onChange={e => setInput(e)}
-                    required='true'
-                />
-                <Spacer y={1} />
-                <Input
                     className={styles.inputs}
-                    clearable
-                    bordered
-                    type='text'
                     label="Detalle de caso"
-                    name="details"
-                    value={data.details}
+                    name='detail'
+                    value={data?.detail}
                     onChange={e => setInput(e)}
                     required='true'
                 />
-                <Spacer y={1} />
-                <a className={styles.evaluarCaso} onClick={e => ReportCase(e)}>EVALUAR</a>
+
+                {alert ? <p className={styles.messageAlert}>Todos los campos son requeridos</p> : <Spacer y={1} />}
+                <a className={styles.evaluarCaso} onClick={() => ReportCase(data)}>EVALUAR</a>
+                {!!message ? <p className={styles.message}>{message}</p> : <Spacer y={1} />}
                 <Spacer y={2} />
             </form>
         </>

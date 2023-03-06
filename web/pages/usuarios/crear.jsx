@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Layout from "../../components/Layout";
 import styles from '/styles/pages/UserCreateEdit.module.css'
 import FormUser from "../../components/Forms/FormUser";
@@ -17,7 +17,7 @@ export default function Create() {
     })
     const API_URL = `${process.env.SERVER_API_HOST}`;
 
-    const createUser = async () => {
+    const createUser = useCallback(async () => {
         const headers = {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -30,7 +30,7 @@ export default function Create() {
         }catch (e) {
             console.log(e)
         }
-    }
+    }, []);
     const setInput = e => {
         setField(e.target.name, e.target.value);
     }
