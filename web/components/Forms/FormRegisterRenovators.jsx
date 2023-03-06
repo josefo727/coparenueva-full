@@ -1,16 +1,19 @@
-import React, {useState} from 'react'
+import React, {useState, useCallback, useEffect} from 'react'
 
 import styles from '/styles/FormRegisterRenovators.module.css'
 import { Input, Radio, Spacer,} from "@nextui-org/react";
+import axios from "axios";
+import Router from "next/router";
 
-export default function FormRegisterRenovators() {
+export default function FormRegisterRenovators({renovator, isCreate, getMembers, createMember}) {
 
-    const [data, setData] = useState({name: '', gender: ''})
+    const [data, setData] = useState({})
+    const API_URL = `${process.env.SERVER_API_HOST}`;
     const setName = e => {
         setField(e.target.name, e.target.value);
     }
     const setGender = e => {
-        setField('gender', e);
+        setField('genre', e);
     }
     const setField = (field, value) => {
         setData({
@@ -18,32 +21,71 @@ export default function FormRegisterRenovators() {
             [field] : value
         });
     }
+    const RegisterRenovators = useCallback(async (res) => {
+        const headers = {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+            }
+        }
+        try {
+            const response = await axios.post(`${API_URL}/api/members/`, res, headers);
+            console.log(response);
+            await getMembers()
+        }catch (e) {
+            console.log(e)
+        }
+    }, []);
 
-    const RegisterRenovators = (e) => {
-        e.preventDefault();
-        console.log(data)
-    }
+    const EditRenovators = useCallback(async (res) => {
+        const headers = {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+            }
+        }
+        try {
+            const response = await axios.put(`${API_URL}/api/members/${res.id}`, res, headers);
+            console.log(response);
+            createMember()
+        }catch (e) {
+            console.log(e)
+        }
+    }, []);
+    useEffect(() => {
+        setData(renovator)
+    },[renovator])
 
     return (
         <>
             <form className={styles.form}>
+                { !isCreate ? <a className={styles.createMember} onClick={() => createMember()}>Crear Miembro</a> :null }
                 <p>Registra tu equipo de renovadores</p>
                 <Input
                     clearable
                     bordered
                     label="Name"
                     name="name"
-                    value={data.name}
+                    value={data?.name}
                     onChange={e => setName(e)}
-                    required='true'
+                    required={true}
                 />
                 <Spacer y={1} />
-                <Radio.Group className={styles.gender} label="Género" name='gender' onChange={e => setGender(e)}>
+                <Radio.Group
+                    className={styles.gender}
+                    label="Género"
+                    name='genre'
+                    value={data?.genre}
+                    onChange={e => setGender(e)}
+                >
                     <Radio value="male">Hombre</Radio>
                     <Radio value="female">Mujer</Radio>
                 </Radio.Group>
                 <Spacer y={1} />
-                <a className={styles.registerRenovators} onClick={e => RegisterRenovators(e)}>REGISTRAR</a>
+                {
+                    isCreate ?
+                        <a className={styles.registerRenovators} onClick={() => RegisterRenovators(data)}>REGISTRAR</a>
+                    :
+                        <a className={styles.editRenovators} onClick={() => EditRenovators(data)}>Editar</a>
+                }
             </form>
         </>
     )

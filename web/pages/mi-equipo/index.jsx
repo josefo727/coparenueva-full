@@ -1,48 +1,90 @@
 import Layout from '/components/Layout'
 import styles from '/styles/pages/MyTeam.module.css'
-import { Image, Grid, Text, Avatar } from "@nextui-org/react";
+import { Image, Text, Spacer } from "@nextui-org/react";
 import FormRegisterRenovators from '/components/Forms/FormRegisterRenovators'
+import {useEffect, useState, useCallback} from "react";
+import axios from "axios";
 
+import { Slide } from 'react-slideshow-image';
+import 'react-slideshow-image/dist/styles.css';
 
 export default function MyTeam() {
+    const API_URL = `${process.env.SERVER_API_HOST}`;
+    const [members, setMembers] = useState(null)
+    const [renovator, setRenovator] = useState({name: '', genre: ''})
+    const [isCreate, setIsCreate] = useState(true)
+    const [load, setLoad] = useState(false);
+
+    const getMembers = useCallback(async () => {
+        setLoad(true);
+        setMembers(null);
+        const resp = await axios.get(`${API_URL}/api/members`, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+        });
+        setMembers(resp.data.data);
+        setLoad(false);
+        setIsCreate(true);
+    }, []);
+
+
+    const editMember = (member) => {
+        setRenovator(({name: '', genre: ''}))
+        console.log(member);
+        setIsCreate(false);
+        setRenovator(member)
+    }
+    const createMember = async () => {
+        setRenovator(({name: '', genre: ''}))
+        setIsCreate(true);
+    }
+
+    useEffect(() => {
+        getMembers()
+            .then(r => null)
+    },[]);
+
+    
     return (
         <>
             <Layout title='Mi equipo' descripcion='Mi Equipo de renovación' navTitle='Mi equipo de renovación' ruta='team'>
                 <div className={styles.containerMyTeam}>
                     <div className={styles.team}>
-                        <Grid.Container gap={2} className={styles.grid}>
-                            <Grid className={styles.contentUserImage}>
-                                <Image
-                                    src="/photo.jpeg"
-                                    alt="Default Image"
-                                    width={200}
-                                    height={200}
-                                    className={styles.imageUser}
+                        <Spacer y={2.5}/>
+                        {!load ?
+                            <>
+                                <div className={styles.contentSlider}>
+                                    <Slide
+                                        slidesToScroll={2}
+                                        slidesToShow={3}
+                                        indicators={true}
+                                    >
+                                        {members?.map((member, index) => (
+                                            <div key={index}>
+                                                <Image
+                                                    src={member.genre === 'male' ? 'male_user.jpeg' : 'female_user.jpeg'}
+                                                    alt="Default Image"
+                                                    width={200}
+                                                    height={200}
+                                                    className={styles.imageMember}
+                                                    onClick={() => editMember(member)}
+                                                />
+                                                <Text className={styles.name}>{member.name}</Text>
+                                            </div>
+                                        ))}
+                                    </Slide>
+                                </div>
+
+                                <FormRegisterRenovators
+                                    renovator={renovator}
+                                    isCreate={isCreate}
+                                    getMembers={getMembers}
+                                    createMember={createMember}
                                 />
-                                <Text className={styles.name}>FirstName Surname</Text>
-                            </Grid>
-                            <Grid className={styles.contentUserImage}>
-                                <Image
-                                    src="/photo.jpeg"
-                                    alt="Default Image"
-                                    width={200}
-                                    height={200}
-                                    className={styles.imageUser}
-                                />
-                                <Text className={styles.name}>FirstName Surname</Text>
-                            </Grid>
-                            <Grid className={styles.contentUserImage}>
-                                <Image
-                                    src="/photo.jpeg"
-                                    alt="Default Image"
-                                    width={200}
-                                    height={200}
-                                    className={styles.imageUser}
-                                />
-                                <Text className={styles.name}>FirstName Surname</Text>
-                            </Grid>
-                        </Grid.Container>
-                        <FormRegisterRenovators/>
+                            </>
+                        :null
+                        }
                     </div>
                 </div>
             </Layout>

@@ -21,10 +21,20 @@
     color: #202123;
     font: bold 14px sans-serif;
 }
+.messageAlert {
+    font-size: 13px;
+    color: red;
+}
+.message {
+    padding: 10px;
+    color: #13a452;
+    background: #dafbe8;
+    border-radius: 11px;
+}
 .evaluarCaso {
     display: flex;
     color: #ffffff;
-    background: #2054a5;
+    background: #344693;
     align-items: center;
     justify-content: center;
     padding: 12px;
@@ -33,8 +43,15 @@
     width: 200px;
     border-radius: 8px;
 }
+.evaluarCaso:hover {
+    background: #111419;
+    transition: 0.5s;
+}
 .inputs>div {
     border-radius: 6px !important;
+}
+.inputs>textarea {
+    font-family: sans-serif !important;
 }
 @media (max-width: 768px) {
     .title {

@@ -32,7 +32,7 @@ export default function Edit() {
             .then(() => null);
     }, [getUser])
 
-    const updateUser = async () => {
+    const updateUser = useCallback(async () => {
         if ( !!user.name && !!user.email ) {
             const headers = {
                 headers: {
@@ -47,7 +47,8 @@ export default function Edit() {
                 console.log(e)
             }
         }
-    }
+    }, []);
+
     const setInput = e => {
         setField(e.target.name, e.target.value);
     }
