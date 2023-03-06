@@ -53,6 +53,15 @@
 .inputs>textarea {
     font-family: sans-serif !important;
 }
+
+.goBack {
+    text-decoration: none;
+    color: #010101;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 80px;
+}
 @media (max-width: 768px) {
     .title {
         font-size: 18px;

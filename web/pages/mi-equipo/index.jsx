@@ -31,7 +31,6 @@ export default function MyTeam() {
 
     const editMember = (member) => {
         setRenovator(({name: '', genre: ''}))
-        console.log(member);
         setIsCreate(false);
         setRenovator(member)
     }

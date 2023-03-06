@@ -21,7 +21,7 @@ export default function FormRegisterRenovators({renovator, isCreate, getMembers,
             [field] : value
         });
     }
-    const RegisterRenovators = useCallback(async (res) => {
+    const RegisterRenovators = async (res) => {
         const headers = {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -34,9 +34,9 @@ export default function FormRegisterRenovators({renovator, isCreate, getMembers,
         }catch (e) {
             console.log(e)
         }
-    }, []);
+    };
 
-    const EditRenovators = useCallback(async (res) => {
+    const EditRenovators = async (res) => {
         const headers = {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -49,7 +49,7 @@ export default function FormRegisterRenovators({renovator, isCreate, getMembers,
         }catch (e) {
             console.log(e)
         }
-    }, []);
+    };
     useEffect(() => {
         setData(renovator)
     },[renovator])
@@ -84,7 +84,7 @@ export default function FormRegisterRenovators({renovator, isCreate, getMembers,
                     isCreate ?
                         <a className={styles.registerRenovators} onClick={() => RegisterRenovators(data)}>REGISTRAR</a>
                     :
-                        <a className={styles.editRenovators} onClick={() => EditRenovators(data)}>Editar</a>
+                        <a className={styles.editRenovators} onClick={() => EditRenovators(data)}>EDITAR</a>
                 }
             </form>
         </>

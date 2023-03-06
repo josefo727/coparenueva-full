@@ -32,7 +32,7 @@ export default function Edit() {
             .then(() => null);
     }, [getUser])
 
-    const updateUser = useCallback(async () => {
+    const updateUser = async () => {
         if ( !!user.name && !!user.email ) {
             const headers = {
                 headers: {
@@ -42,12 +42,11 @@ export default function Edit() {
             try {
                 const response = await axios.put(`${API_URL}/api/users/`+id, user, headers);
                 console.log(response);
-                Router.push('/usuarios');
+                await Router.push('/usuarios');
             }catch (e) {
-                console.log(e)
             }
         }
-    }, []);
+    };
 
     const setInput = e => {
         setField(e.target.name, e.target.value);

@@ -3,12 +3,14 @@
     overflow: auto;
     padding: 0 20px;
     background: #f3f3f3;
+}
+.contentTextForm {
     display: flex;
     justify-content: center;
     align-items: flex-start;
 }
 .specialCases p {
-    font-size: 16Spx;
+    font-size: 16px;
     margin: 0;
 }
 .specialCases, .FormSpecialCases {
@@ -18,6 +20,78 @@
     border-radius: 21px;
     width: 45%;
 }
+.specialCasesEdit {
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 21px;
+    width: 90%;
+    max-width: 500px;
+    margin: 15px auto;
+}
+.containerTable {
+    height: calc(100vh - 76px);
+    overflow: auto;
+    padding: 0 20px;
+    background: #f3f3f3;
+}
+.table {
+    width: 80%;
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 23px 50px;
+    background: #ffffff;
+    border-radius: 21px;
+}
+.actions {
+    font-size: 22px;
+    cursor: pointer;
+    margin: 0 5px;
+    color: #010101;
+}
+
+/* Modal */
+
+.contentDeleteConfirm {
+    position: fixed;
+    display: flex;
+    z-index: 200;
+    right: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+.deleteConfirm {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 11px;
+    width: 400px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.btnConfirm, .btnCancel {
+    margin: 0 18px;
+    cursor: pointer;
+    border-radius: 11px;
+    color: #ffffff;
+    font: 600 14px sans-serif;
+    text-decoration: none;
+    padding: 8px 15px;
+}
+
+.btnConfirm {
+    background: #344693;
+}
+.btnCancel {
+    background: #933434;
+}
+
 @media (max-width: 1023px) {
     .containerSpecialCases {
         height: auto;
