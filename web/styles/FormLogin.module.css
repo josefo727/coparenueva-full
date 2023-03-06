@@ -34,7 +34,7 @@
     border-radius: 0;
     box-shadow: 0 0 0 2px #111419;
 }
-.form h1{
+.form h3 {
     margin: auto;
 }
 .form p {
@@ -49,6 +49,8 @@
     padding: 12px;
     transition: 0.5s;
     cursor: pointer;
+    border: none;
+    border-radius: 11px
 }
 .LoginButton:hover {
     background: #003a70;

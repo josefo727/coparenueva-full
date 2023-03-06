@@ -8,9 +8,9 @@ export default function PlayerBase() {
             <Layout title='Base de jugadores' descripcion='base de jugadores' navTitle='Base de jugadores' ruta='playersBase'>
                 <div className={styles.containerPlayersBase}>
                     <div className={styles.playersBase}>
-                        <Text>
+                        <p>
                             Renovadores, antes de iniciar la temporada de renovaciones no olvides leer las todas las instrucciones ubicadas en el menú.
-                        </Text>
+                        </p>
                         <Spacer y={1} />
                         <p>
                             Sabemos que todos nuestros jugadores (clientes) son importantes, sin embargo, necesitamos renovar nuestros jugadores estrella. Descarga la base y descubre cuáles son.

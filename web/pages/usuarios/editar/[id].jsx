@@ -40,8 +40,7 @@ export default function Edit() {
                 }
             }
             try {
-                const response = await axios.put(`${API_URL}/api/users/`+id, user, headers);
-                console.log(response);
+                await axios.put(`${API_URL}/api/users/`+id, user, headers);
                 await Router.push('/usuarios');
             }catch (e) {
             }

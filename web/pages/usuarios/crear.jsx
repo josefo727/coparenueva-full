@@ -24,11 +24,9 @@ export default function Create() {
             }
         }
         try {
-            const response = await axios.post(`${API_URL}/api/users/`, user, headers);
-            console.log(response);
+            await axios.post(`${API_URL}/api/users/`, user, headers);
             await Router.push('/usuarios');
         }catch (e) {
-            console.log(e)
         }
     };
     const setInput = e => {

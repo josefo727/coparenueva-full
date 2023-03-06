@@ -34,17 +34,18 @@
 .evaluarCaso {
     display: flex;
     color: #ffffff;
-    background: #344693;
+    background: #3264D3;
+    transition: 0.5s;
     align-items: center;
     justify-content: center;
     padding: 12px;
-    transition: 0.5s;
     cursor: pointer;
-    width: 200px;
+    width: 90%;
+    max-width: 200px;
     border-radius: 8px;
 }
 .evaluarCaso:hover {
-    background: #111419;
+    background: #344693;
     transition: 0.5s;
 }
 .inputs>div {
@@ -62,7 +63,7 @@
     justify-content: space-between;
     width: 80px;
 }
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
     .title {
         font-size: 18px;
     }

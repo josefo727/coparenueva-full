@@ -1,14 +1,17 @@
 import React, { useState } from "react";
 import { Sidebar, SubMenu, Menu, MenuItem, useProSidebar, breakPoint } from "react-pro-sidebar";
-import { BsFillGrid1X2Fill, BsFillFileTextFill } from "react-icons/bs";
-import { FaChevronRight, FaChevronLeft } from "react-icons/fa";
-import { HiUsers } from "react-icons/hi";
 import styles from '../styles/Sidebar.module.css';
 import NavbarTop from './NavbarTop';
 import Link from 'next/link';
 import { logout } from "../auth";
 import Router from 'next/router';
 import { Image } from "@nextui-org/react";
+//icons
+import { BsFillGrid1X2Fill, BsFillFileTextFill } from "react-icons/bs";
+import { FaChevronRight, FaChevronLeft, FaTasks, FaCog, FaUsers } from "react-icons/fa";
+import { BiLogOut } from "react-icons/bi";
+import { GoChecklist } from "react-icons/go";
+import { HiUsers } from "react-icons/hi";
 
 export default function Sidebars({navTitle, navSubTitle, ruta, children}) {
     const { collapseSidebar } = useProSidebar();
@@ -57,16 +60,15 @@ export default function Sidebars({navTitle, navSubTitle, ruta, children}) {
             >
                 <Menu>
                     <div>
-                        <Image
-                            src="/Logo-BMI_RGB_blanco.png"
-                            fill
-                            alt="BMI"
-                            sizes="(max-width: 768px) 100vw,
-                                (max-width: 1200px) 50vw,
-                                33vw"
-                        />
+                        <div className={styles.logo}>
+                            <Image
+                                src="/Logo-BMI_RGB_blanco.png"
+                                fill
+                                alt="BMI"
+                            />
+                        </div>
                         <MenuItem
-                            icon={<BsFillGrid1X2Fill />}
+                            icon={<BsFillGrid1X2Fill className={styles.icon}/>}
                             component={<Link href="/resumen" />}
                             className={resumen}
                         >
@@ -74,7 +76,7 @@ export default function Sidebars({navTitle, navSubTitle, ruta, children}) {
                             Resumen
                         </MenuItem>
                         <MenuItem
-                            icon={<BsFillFileTextFill />}
+                            icon={<FaTasks className={styles.icon}/>}
                             component={<Link href="/instrucciones" />}
                             className={instructions}
                         >
@@ -82,7 +84,7 @@ export default function Sidebars({navTitle, navSubTitle, ruta, children}) {
                             Instrucciones
                         </MenuItem>
                         <MenuItem
-                            icon={<BsFillFileTextFill />}
+                            icon={<BsFillFileTextFill className={styles.icon}/>}
                             component={<Link href="/base-de-jugadores" />}
                             className={playersBase}
                         >
@@ -90,7 +92,7 @@ export default function Sidebars({navTitle, navSubTitle, ruta, children}) {
                             Base de jugadores
                         </MenuItem>
                         <MenuItem
-                            icon={<HiUsers />}
+                            icon={<FaUsers className={styles.icon}/>}
                             component={<Link href="/mi-equipo" />}
                             className={team}
                         >
@@ -99,7 +101,7 @@ export default function Sidebars({navTitle, navSubTitle, ruta, children}) {
                         </MenuItem>
                         <hr/>
                         <MenuItem
-                            icon={<HiUsers />}
+                            icon={<FaCog className={styles.icon}/>}
                             component={<Link href="/casos-especiales" />}
                             className={specials}
                         >
@@ -107,7 +109,7 @@ export default function Sidebars({navTitle, navSubTitle, ruta, children}) {
                             Casos Especiales
                         </MenuItem>
                         <MenuItem
-                            icon={<HiUsers />}
+                            icon={<GoChecklist className={styles.icon}/>}
                             component={<Link href="/terminos-y-condiciones" />}
                             className={terms}
                         >
@@ -116,7 +118,7 @@ export default function Sidebars({navTitle, navSubTitle, ruta, children}) {
                             condiciones
                         </MenuItem>
                         <MenuItem
-                            icon={<HiUsers />}
+                            icon={<HiUsers className={styles.icon}/>}
                             component={<Link href="/usuarios" />}
                             className={users}
                         >
@@ -125,7 +127,7 @@ export default function Sidebars({navTitle, navSubTitle, ruta, children}) {
                         </MenuItem>
                     </div>
                     <MenuItem
-                        icon={<HiUsers />}
+                        icon={<BiLogOut className={styles.icon}/>}
                         className={styles.menuItem}
                         onClick={() => exit()}
                     >

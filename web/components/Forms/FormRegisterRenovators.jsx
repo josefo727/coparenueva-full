@@ -28,11 +28,9 @@ export default function FormRegisterRenovators({renovator, isCreate, getMembers,
             }
         }
         try {
-            const response = await axios.post(`${API_URL}/api/members/`, res, headers);
-            console.log(response);
+            await axios.post(`${API_URL}/api/members/`, res, headers);
             await getMembers()
         }catch (e) {
-            console.log(e)
         }
     };
 
@@ -43,11 +41,10 @@ export default function FormRegisterRenovators({renovator, isCreate, getMembers,
             }
         }
         try {
-            const response = await axios.put(`${API_URL}/api/members/${res.id}`, res, headers);
-            console.log(response);
-            createMember()
+            await axios.put(`${API_URL}/api/members/${res.id}`, res, headers);
+            await getMembers();
+            await createMember()
         }catch (e) {
-            console.log(e)
         }
     };
     useEffect(() => {
@@ -62,7 +59,7 @@ export default function FormRegisterRenovators({renovator, isCreate, getMembers,
                 <Input
                     clearable
                     bordered
-                    label="Name"
+                    label="Nombre completo"
                     name="name"
                     value={data?.name}
                     onChange={e => setName(e)}

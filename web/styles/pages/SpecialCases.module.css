@@ -6,8 +6,11 @@
 }
 .contentTextForm {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: flex-start;
+    width: 90%;
+    max-width: 930px;
+    margin: auto;
 }
 .specialCases p {
     font-size: 16px;
@@ -35,12 +38,15 @@
     background: #f3f3f3;
 }
 .table {
-    width: 80%;
-    max-width: 1200px;
-    margin: 50px auto;
+    width: 75%;
+    max-width: 800px;
+    margin: 15px auto;
+    display: flex;
+    justify-content: center;
     padding: 23px 50px;
     background: #ffffff;
     border-radius: 21px;
+    flex-direction: column;
 }
 .actions {
     font-size: 22px;
@@ -93,15 +99,27 @@
 }
 
 @media (max-width: 1023px) {
-    .containerSpecialCases {
-        height: auto;
-        flex-wrap: wrap;
-    }
     .specialCases p {
         font-size: 20px;
     }
     .specialCases, .FormSpecialCases {
         width: 75%;
         margin-top: 8px;;
+    }
+}
+@media (max-width: 1024px) {
+    .contentTextForm {
+        display: flex;
+        flex-direction: column;
+    }
+    .table {
+        width: 85%;
+        margin: 15px auto;
+        padding: 10px 15px;
+
+    }
+    .specialCases, .FormSpecialCases {
+        width: 90%;
+        margin: 15px auto;
     }
 }

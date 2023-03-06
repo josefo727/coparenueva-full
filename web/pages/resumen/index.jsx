@@ -13,33 +13,33 @@ export default function Resumen() {
             <Layout
                 title='Resumen'
                 descripcion='Resumen'
-                navTitle='¡Hola, renovador!'
-                navSubTitle='Bienvenido a la COPA RENUEVA. Más renuevo, más gano.'
+                navTitle='¡Hola, Agente Renovador!'
+                navSubTitle='Bienvenida/o a la Temporada de Renovaciones. Renueva más, gana más'
                 ruta='resumen'>
      
                 <div className={styles.containerResumen}>
                     <section className={styles.containerBox}>
                         <div className={`${styles.box} ${styles.policies}`}>
                             <div className={styles.contentIconTitle}>
-                                <span>Polizas a renovar <br/> Grupo objetivo</span>
+                                <span>Pólizas a renovar <br/> “Público objetivo”</span>
                             </div>
                             <h1 className={styles.valor }>100</h1>
                         </div>
                         <div className={`${styles.box}`}>
                             <div className={styles.contentIconTitle}>
-                                <span>Polizas <br/> Renovadas</span>
+                                <span>Pólizas <br/> renovadas</span>
                             </div>
                             <h2 className={styles.valor}>82</h2>
                         </div>
                         <div className={`${styles.box}`}>
                             <div className={styles.contentIconTitle}>
-                                <span>Indice de <br/> Renovación</span>
+                                <span>Índice de <br/> renovación</span>
                             </div>
                             <h2 className={styles.valor}>82%</h2>
                         </div>
                         <div className={`${styles.box}`}>
                             <div className={styles.contentIconTitle}>
-                                <span>Prima <br/> Renovada</span>
+                                <span>Prima  <br/> renovada</span>
                             </div>
                             <h2 className={styles.valor}>$50k</h2>
                         </div>
@@ -62,7 +62,7 @@ export default function Resumen() {
                             </h2>
                         </div>
                         <div className={`${styles.box}`}>
-                            <span>Pólizas <br/> Canceladas </span>
+                            <span>Pólizas <br/> canceladas </span>
                             <h2 className={styles.valor}>
                                 30
                             </h2>
@@ -74,12 +74,12 @@ export default function Resumen() {
                     </section>
                     <div className={`${styles.containerBoxEnd}`}>
                         <div>
-                            <a className={styles.downloadLink}>Descargar base de jugadores</a>
+                            <a className={styles.downloadLink}>Descargar informe detallado</a>
                         </div>
                         <div>
                             <Text css={{ color: "#808B96" }}>
-                                Este reporte se actualizará cada semana.<br/>
-                                Fecha de corte: 12 Marzo 2023
+                                Este reporte se actualizará cada semana
+                                Fecha de actualización: 12 de Marzo 2023
                             </Text>
                         </div>
                     </div>

@@ -47,7 +47,7 @@ export default function MyTeam() {
     
     return (
         <>
-            <Layout title='Mi equipo' descripcion='Mi Equipo de renovación' navTitle='Mi equipo de renovación' ruta='team'>
+            <Layout title='Mi equipo' descripcion='Mi equipo-Agentes Renovadores' navTitle='Mi equipo-Agentes Renovadores' ruta='team'>
                 <div className={styles.containerMyTeam}>
                     <div className={styles.team}>
                         <Spacer y={2.5}/>

@@ -13,8 +13,9 @@
     border-radius: 21px;
 }
 .downloadLink {
-    color: #ffffff;
     background: #3264D3;
+    transition: 0.5s;
+    color: #ffffff;
     font: 600 15px sans-serif;
     display: flex;
     align-items: center;
@@ -25,6 +26,10 @@
     border-radius: 30px;
     margin-bottom: 12px;
     text-align: center;
+}
+.downloadLink:hover {
+    background: #344693;
+    transition: 0.5s;
 }
 
 @media (max-width: 768px) {
