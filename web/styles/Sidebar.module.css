@@ -15,13 +15,13 @@
 }
 .menuItem a:hover {
     color: #ffffff;
-    background-color: #3c3c3c !important;
+    background-color: #3264D3 !important;
     border-radius: 13px;
     margin: 10px auto 10px 8%;
 }
 .menuItem.active a {
     color: #ffffff;
-    background: #2d2d2e;
+    background: #3264D3;
     border-radius: 13px;
     margin: 10px auto 10px 8%;
 }

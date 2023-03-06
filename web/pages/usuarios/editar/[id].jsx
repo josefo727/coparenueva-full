@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import {useRouter} from "next/router";
 import Layout from "../../../components/Layout";
 import styles from '/styles/pages/UserCreateEdit.module.css';
@@ -14,14 +14,24 @@ export default function Edit() {
     const API_URL = `${process.env.SERVER_API_HOST}`;
     const [user, setUser] = useState([]);
 
-    const getUser = async () => {
-        const resp = await axios.get(`${API_URL}/api/users/`+id, {
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem('token')}`,
-            },
+    const getUser = useCallback(async () => {
+      try {
+        const resp = await axios.get(`${API_URL}/api/users/` + id, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
         });
         setUser(resp.data);
-    }
+      } catch (error) {
+        console.error(error);
+      }
+    }, [id]);
+
+    useEffect(() => {
+        getUser()
+            .then(() => null);
+    }, [getUser])
+
     const updateUser = async () => {
         if ( !!user.name && !!user.email ) {
             const headers = {
@@ -47,8 +57,6 @@ export default function Edit() {
             [field] : value
         });
     }
-
-    useEffect(() => {if (id) {getUser().then(() => null);}},[id]);
 
     return(
         <>

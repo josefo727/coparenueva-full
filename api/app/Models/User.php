@@ -43,6 +43,16 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function members()
+    {
+        return $this->hasMany(Member::class, 'broker_id');
+    }
+
+    public function specialCases()
+    {
+        return $this->hasMany(SpecialCase::class, 'broker_id');
+    }
+
     public function isAdmin()
     {
         return $this->is_admin;

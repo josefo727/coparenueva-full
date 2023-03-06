@@ -12,6 +12,18 @@
     max-width: 900px;
 }
 
+.containerBox2 {
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto;
+    max-width: 900px;
+}
+
+.containerBoxEnd {
+    text-align: center;
+}
+
+
 .box {
     background: #ffffff;
     color: #000000;
@@ -20,15 +32,72 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    width: 21%;
+    width: 12%;
     min-width: 145px;
-    min-height: 120px;
+    min-height: 100px;
     margin: 5px;
     padding: 13px 5px;
-    font-size: 18px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: left;
+}
+
+.box2 {
+    color: #000000;
+    border-radius: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 12%;
+    min-width: 145px;
+    min-height: 100px;
+    margin: 5px;
+    padding: 13px 5px;
+    font-size: 16px;
     font-weight: bold;
     text-align: center;
+    margin: 0px auto;
 }
+
+.downloadLink {
+    color: #ffffff;
+    background: #3264D3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 70%;
+    max-width: 380px;
+    height: 35px;
+    border-radius: 30px;
+    margin-bottom: 12px;
+    text-align: center;
+    margin: 0px auto;
+}
+
+.tres{
+    background-color: gray;
+    width: 40px;
+    height: 75px;
+    border-radius: 100px;
+}
+
+.dos {
+    background-color: orange;
+    width: 40px;
+    height: 75px;
+    border-radius: 100px;
+    transform: translate(0px, -35px);
+}
+
+.uno {
+    background-color: gray;
+    width: 40px;
+    height: 75px;
+    border-radius: 100px;
+    transform: translate(0px, -70px);
+}
+
 .contentIconTitle {
     display: flex;
     align-items: center;
@@ -46,19 +115,32 @@
     background: #ebebeb;
 }
 .valor {
-    margin: 0;
-    font-size: 50px;
+    margin-bottom: 25px;
+    font-size: 40px;
 }
 
 
 .policies, .closing {
-    background: #344693;
+    background: #3264D3;
     color: #ffffff;
     width: 220px;
 }
 .policies .icon {
     background: #6774ae;
 }
+
+.renewed,  .closing {
+    background: #ffffff;
+    color: #000000;
+    width: 100px;
+}
+
+.botonResumen {
+    display: flex;
+    align-items: center;
+}
+
+
 .levelIncentive,
 .approximate,
 .closing {

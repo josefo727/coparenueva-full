@@ -5,24 +5,23 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Member extends Model
+class SpecialCase extends Model
 {
     use HasFactory;
-
-    protected $fillable = ['name', 'genre', 'broker_id'];
 
     protected static function boot()
     {
         parent::boot();
 
-        static::creating(function ($member) {
-            $member->broker_id = auth()->id();
+        static::creating(function ($specialCase) {
+            if (is_null($specialCase->broker_id)) {
+                $specialCase->broker_id = auth()->id();
+            }
         });
     }
 
-    public function team()
+    public function owner()
     {
         return $this->belongsTo(User::class, 'broker_id');
     }
-
 }

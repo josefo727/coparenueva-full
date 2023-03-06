@@ -8,7 +8,7 @@
     align-items: flex-start;
 }
 .specialCases p {
-    font-size: 24px;
+    font-size: 16Spx;
     margin: 0;
 }
 .specialCases, .FormSpecialCases {
@@ -24,7 +24,7 @@
         flex-wrap: wrap;
     }
     .specialCases p {
-        font-size: 18px;
+        font-size: 20px;
     }
     .specialCases, .FormSpecialCases {
         width: 75%;
