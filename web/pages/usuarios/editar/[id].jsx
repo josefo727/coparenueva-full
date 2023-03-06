@@ -23,7 +23,6 @@ export default function Edit() {
         setUser(resp.data);
     }
     const updateUser = async () => {
-        user.password = '000000'
         if ( !!user.name && !!user.email ) {
             const headers = {
                 headers: {

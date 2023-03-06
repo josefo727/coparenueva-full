@@ -27,6 +27,7 @@ export default function FormUser( {user, setInput, createUser, updateUser, isCre
                     label="E-mail*"
                     required
                     type='email'
+                    autocomplete="off"
                 />
                 <Spacer y={1} />
                 <Input
@@ -47,6 +48,7 @@ export default function FormUser( {user, setInput, createUser, updateUser, isCre
                     hiddenIcon={<BsEyeFill/>}
                     value={user?.password}
                     onChange={e => setInput(e)}
+                    autocomplete="off"
                     required
                 />
                 <Spacer y={1} />

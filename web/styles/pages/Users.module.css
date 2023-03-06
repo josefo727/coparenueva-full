@@ -16,6 +16,7 @@
     font-size: 22px;
     cursor: pointer;
     margin: 0 5px;
+    color: #010101;
 }
 .buttonCreate {
     display: flex;
@@ -32,6 +33,46 @@
     text-decoration: none;
 }
 
+.contentDeleteConfirm {
+    position: fixed;
+    display: flex;
+    z-index: 200;
+    right: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+.deleteConfirm {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 11px;
+    width: 400px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.btnConfirm, .btnCancel {
+    margin: 0 18px;
+    cursor: pointer;
+    border-radius: 11px;
+    color: #ffffff;
+    font: 600 14px sans-serif;
+    text-decoration: none;
+    padding: 8px 15px;
+}
+
+.btnConfirm {
+    background: #344693;
+}
+.btnCancel {
+    background: #933434;
+}
 @media (max-width: 768px) {
     .containerMyTeam {
         height: auto;

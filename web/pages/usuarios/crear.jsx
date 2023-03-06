@@ -11,7 +11,7 @@ export default function Create() {
     const [user, setUser] = useState({
         name: '',
         email: '',
-        password: '111111',
+        password: '',
         terms: '',
         url: ''
     })

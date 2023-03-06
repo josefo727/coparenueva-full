@@ -6,12 +6,16 @@ import axios from 'axios';
 import DataTable from 'react-data-table-component';
 import { MdModeEdit, MdDeleteForever } from 'react-icons/md';
 import Link from "next/link";
+import Router from "next/router";
+import {log} from "util";
 
 
 export default function Users() {
     const API_URL = `${process.env.SERVER_API_HOST}`;
     const [users, setUsers] = useState([]);
     const [pending, setPending] = useState(true);
+    const [showModal, setShowModal] = useState(false);
+    const [idUserDelete, setIdUserDelete] = useState('');
 
     const getUsers = async () => {
         setPending(true);
@@ -23,21 +27,40 @@ export default function Users() {
         setUsers(resp.data.data);
         setPending(false);
     }
-    const deleteUser = (user) => {
-        console.log('deleteUser', user)
+    const deleteUser = async () => {
+        const headers = {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+            }
+        }
+        try {
+            await axios.delete(`${API_URL}/api/users/${idUserDelete}`, headers)
+                .then(response => console.log(response));
+            await closeModal();
+            await getUsers();
+        }catch (e) {
+            console.log(e)
+        }
+    }
+    const isModal = (id) => {
+        setShowModal(true);
+        setIdUserDelete(id);
+    }
+    const closeModal = () => {
+        setShowModal(false);
+        setIdUserDelete('');
+
     }
     const buttonCreate = (id) => {
         return (
             <Link className={styles.buttonCreate}  href={`/usuarios/crear`}>Crear Usuario</Link>
         )
     }
-    const actions = (id) => {
-        console.log(id)
-
+    const actions = (id, is_admin) => {
       return (
         <>
-            <Link href={`/usuarios/editar/${id}`}><MdModeEdit /></Link>
-            <a onClick={() => deleteUser()}><MdDeleteForever /></a>
+            <Link className={styles.actions} href={`/usuarios/editar/${id}`}><MdModeEdit /></Link>
+            {!is_admin ? <a className={styles.actions} onClick={() => isModal(id)}><MdDeleteForever /></a> :null}
         </>
       )
     }
@@ -62,7 +85,7 @@ export default function Users() {
         },
         {
             name: 'acciones',
-            selector: row => actions(row.id),
+            selector: row => actions(row.id, row.is_admin),
             sortable: false,
             right: true,
             reorder: false
@@ -94,6 +117,17 @@ export default function Users() {
                         />
                     </div>
                 </div>
+                {showModal ?
+                    <div className={styles.contentDeleteConfirm}>
+                        <div className={styles.deleteConfirm}>
+                            <p>Esta seguro de eliminar este usuario</p>
+                            <div >
+                                <a className={styles.btnConfirm} onClick={() => deleteUser()}>Confirmar</a>
+                                <a className={styles.btnCancel} onClick={() => closeModal()}>Cancelar</a>
+                            </div>
+                        </div>
+                    </div>
+                :null}
             </Layout>
         </>
     )
