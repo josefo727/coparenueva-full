@@ -20,7 +20,6 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'terms',
         'url'
     ];
 
@@ -46,6 +45,11 @@ class User extends Authenticatable
     public function isAdmin()
     {
         return $this->is_admin;
+    }
+
+    public function iHaveAcceptedTermsAndConditions()
+    {
+        return $this->terms;
     }
 
 }
