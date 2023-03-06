@@ -28,7 +28,6 @@ class UserController extends Controller
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'password' => bcrypt($request->input('password')),
-            'terms' => $request->input('terms'),
             'url' => $request->input('url'),
         ]);
 
@@ -39,7 +38,6 @@ class UserController extends Controller
     {
         $user->name = $request->input('name');
         $user->email = $request->input('email');
-        $user->terms = $request->input('terms');
         $user->url = $request->input('url');
         if ($request->filled('password')) {
             $user->password = bcrypt($request->input('password'));

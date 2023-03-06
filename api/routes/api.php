@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\MemberController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\UserTermController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,5 +30,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::apiResource('users', UserController::class);
+    Route::get('user-term', [UserTermController::class, 'show'])->name('user-term.show');
+    Route::put('user-term', [UserTermController::class, 'update'])->name('user-term.update');
     Route::apiResource('members', MemberController::class);
 });
