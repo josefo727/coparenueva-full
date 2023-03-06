@@ -35,7 +35,7 @@ export default function FormRegisterRenovators() {
                     name="name"
                     value={data.name}
                     onChange={e => setName(e)}
-                    required='true'
+                    required={true}
                 />
                 <Spacer y={1} />
                 <Radio.Group className={styles.gender} label="Género" name='gender' onChange={e => setGender(e)}>
