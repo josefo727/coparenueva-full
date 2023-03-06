@@ -23,19 +23,12 @@ export default function Users() {
         setUsers(resp.data.data);
         setPending(false);
     }
-
-    const createUser = (user) => {
-        console.log('editUser', user)
-    }
-    const editUser = (user) => {
-        console.log('editUser', user)
-    }
     const deleteUser = (user) => {
         console.log('deleteUser', user)
     }
-    const buttonCreate = () => {
+    const buttonCreate = (id) => {
         return (
-            <a className={styles.buttonCreate} onClick={() => createUser()}>Crear Usuario</a>
+            <Link className={styles.buttonCreate}  href={`/usuarios/crear`}>Crear Usuario</Link>
         )
     }
     const actions = (id) => {

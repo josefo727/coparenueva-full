@@ -29,6 +29,7 @@
     background: #344693;
     color: #ffffff;
     font: 600 14px sans-serif;
+    text-decoration: none;
 }
 
 @media (max-width: 768px) {

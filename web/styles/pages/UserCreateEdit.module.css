@@ -1,9 +1,11 @@
+.containerUserCreate,
 .containerUserEdit {
     height: calc(100vh - 76px);
     overflow: auto;
     padding: 0 20px;
     background: #f3f3f3;
 }
+.userCreate,
 .userEdit {
     width: 80%;
     max-width: 1200px;
@@ -12,7 +14,14 @@
     background: #ffffff;
     border-radius: 21px;
 }
-
+.goBack {
+    text-decoration: none;
+    color: #010101;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 80px;
+}
 @media (max-width: 768px) {
     .containerMyTeam {
         height: auto;

@@ -2,13 +2,15 @@ import axios from "axios";
 import { useState, useEffect } from 'react';
 import {useRouter} from "next/router";
 import Layout from "../../../components/Layout";
-import styles from '/styles/pages/UserEdit.module.css'
+import styles from '/styles/pages/UserCreateEdit.module.css';
+import {AiOutlineArrowLeft} from 'react-icons/ai';
 import FormUser from "../../../components/Forms/FormUser";
+import Router from 'next/router';
+import Link from "next/link";
 
 export default function Edit() {
     const router = useRouter()
     const { id } = router.query
-
     const API_URL = `${process.env.SERVER_API_HOST}`;
     const [user, setUser] = useState([]);
 
@@ -20,6 +22,23 @@ export default function Edit() {
         });
         setUser(resp.data);
     }
+    const updateUser = async () => {
+        user.password = '000000'
+        if ( !!user.name && !!user.email ) {
+            const headers = {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
+                }
+            }
+            try {
+                const response = await axios.put(`${API_URL}/api/users/`+id, user, headers);
+                console.log(response);
+                Router.push('/usuarios');
+            }catch (e) {
+                console.log(e)
+            }
+        }
+    }
     const setInput = e => {
         setField(e.target.name, e.target.value);
     }
@@ -29,17 +48,8 @@ export default function Edit() {
             [field] : value
         });
     }
-    // CKeditor
-    const userEdit = () => {
-        console.log(user)      
-    }
 
-    useEffect(() => {
-        if (id) {
-            getUser()
-                .then(() => null);
-        }
-    }, [id]);
+    useEffect(() => {if (id) {getUser().then(() => null);}},[id]);
 
     return(
         <>
@@ -51,11 +61,12 @@ export default function Edit() {
             >
                 <div className={styles.containerUserEdit}>
                     <div className={styles.userEdit}>
+                        <Link className={styles.goBack} href='/usuarios'><AiOutlineArrowLeft/> regresar</Link>
                         {user ?
                             <FormUser
-                                data={user}
+                                user={user}
                                 setInput={setInput}
-                                userEdit={userEdit}
+                                updateUser={updateUser}
                             />
                         :null
                         }

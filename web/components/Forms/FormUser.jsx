@@ -1,9 +1,9 @@
 import styles from '../../styles/FormUser.module.css'
-import { Input, Spacer, Button, Textarea, Checkbox } from "@nextui-org/react";
+import { Input, Spacer, Button } from "@nextui-org/react";
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 
-export default function FormUser( {data, setInput, userEdit,  isCreate = false}) {
-    console.log(!!data?.is_admin)
+export default function FormUser( {user, setInput, createUser, updateUser, isCreate = false}) {
+
     return (
         <>
             <form className={styles.form} >
@@ -11,7 +11,7 @@ export default function FormUser( {data, setInput, userEdit,  isCreate = false})
                 <Input
                     className={styles.name}
                     name='name'
-                    value={data?.name}
+                    value={user?.name}
                     onChange={e => setInput(e)}
                     bordered
                     label="Nombre*"
@@ -21,30 +21,21 @@ export default function FormUser( {data, setInput, userEdit,  isCreate = false})
                 <Input
                     className={styles.email}
                     name='email'
-                    value={data?.email}
+                    value={user?.email}
                     onChange={e => setInput(e)}
                     bordered
                     label="E-mail*"
                     required
+                    type='email'
                 />
                 <Spacer y={1} />
                 <Input
                     className={styles.url}
                     name='url'
-                    value={data?.url}
+                    value={user?.url}
                     onChange={e => setInput(e)}
                     bordered
                     label="URL"
-                    required
-                />
-                <Spacer y={1} />
-                <Textarea
-                    bordered
-                    className={styles.terms}
-                    name='terms'
-                    label="Términos y Condiciones"
-                    value={data?.terms}
-                    onChange={e => setInput(e)}
                 />
                 <Spacer y={1} />
                 <Input.Password
@@ -54,7 +45,7 @@ export default function FormUser( {data, setInput, userEdit,  isCreate = false})
                     label="Contraseña*"
                     visibleIcon={<BsEyeSlashFill/>}
                     hiddenIcon={<BsEyeFill/>}
-                    value={data?.password}
+                    value={user?.password}
                     onChange={e => setInput(e)}
                     required
                 />
@@ -62,13 +53,16 @@ export default function FormUser( {data, setInput, userEdit,  isCreate = false})
                 {
                     isCreate ?
                         <>
-                            <Button type="submit" className={styles.buttonCreateEdit}>Crear</Button>
+                            <Button
+                                className={styles.buttonCreateEdit}
+                                onClick={() => createUser()}
+                            >Crear</Button>
                         </>
                     :
                         <>
-                            <Button type="submit"
-                                    className={styles.buttonCreateEdit}
-                                    onClick={() => userEdit()}
+                            <Button
+                                className={styles.buttonCreateEdit}
+                                onClick={() => updateUser()}
                             >Editar</Button>
                         </>
                 }

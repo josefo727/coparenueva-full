@@ -1,3 +1,4 @@
+import React from "react";
 import styles from './../styles/Login.module.css'
 import FormLogin from '../components/Forms/FormLogin'
 import {useState} from 'react';
@@ -10,21 +11,22 @@ export default function Login() {
         password: '000000'
     });
 
-    const setInput = e => {
+    const setInput = (e: React.ChangeEvent<HTMLInputElement>)  => {
+        e.preventDefault()
         setField(e.target.name, e.target.value);
     }
 
-    const setField = (field, value) => {
+    const setField = (field: string, value: string) => {
         setData({
             ...data,
             [field] : value
         });
     }
 
-    const logIn = async (e) => {
+    const logIn = async (e: React.ChangeEvent<HTMLInputElement>)  => {
         e.preventDefault();
         await login(data.email, data.password);
-        Router.push('/resumen');
+        await Router.push('/resumen');
     }
 
     return (
