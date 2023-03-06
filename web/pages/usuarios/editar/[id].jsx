@@ -48,7 +48,12 @@ export default function Edit() {
         });
     }
 
-    useEffect(() => {if (id) {getUser().then(() => null);}},[id]);
+    useEffect(() => {
+        if (id) {
+            getUser()
+                .then(() => null);
+        }
+    },[id, getUser]);
 
     return(
         <>

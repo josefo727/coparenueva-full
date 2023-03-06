@@ -95,8 +95,7 @@ export default function Users() {
     useEffect(() => {
         getUsers()
             .then(() => null);
-
-    }, [])
+    }, [getUsers])
 
     return (
         <>
