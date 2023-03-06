@@ -17,7 +17,7 @@ export default function Users() {
 
     const getUsers = useCallback(async () => {
         setPending(true);
-        const resp = await axios.get(`${API_URL}/api/members`, {
+        const resp = await axios.get(`${API_URL}/api/users`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
             },

@@ -58,7 +58,7 @@ export default function Sidebars({navTitle, navSubTitle, ruta, children}) {
                 <Menu>
                     <div>
                         <Image
-                            src="https://www.bmicos.com/ecuador/wp-content/uploads/sites/9/2020/12/logo-1.png"
+                            src="/Logo-BMI_RGB_blanco.png"
                             fill
                             alt="BMI"
                             sizes="(max-width: 768px) 100vw,
@@ -97,14 +97,6 @@ export default function Sidebars({navTitle, navSubTitle, ruta, children}) {
                             <div className={styles.activeBookmark}/>
                             Agentes <br/> renovadores
                         </MenuItem>
-                        <MenuItem
-                            icon={<HiUsers />}
-                            component={<Link href="/usuarios" />}
-                            className={users}
-                        >
-                            <div className={styles.activeBookmark}/>
-                            Usuarios
-                        </MenuItem>
                         <hr/>
                         <MenuItem
                             icon={<HiUsers />}
@@ -126,7 +118,7 @@ export default function Sidebars({navTitle, navSubTitle, ruta, children}) {
                         <MenuItem
                             icon={<HiUsers />}
                             component={<Link href="/usuarios" />}
-                            className={terms}
+                            className={users}
                         >
                             <div className={styles.activeBookmark}/>
                             Usuarios
