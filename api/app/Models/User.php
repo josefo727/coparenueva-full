@@ -48,4 +48,9 @@ class User extends Authenticatable
         return $this->is_admin;
     }
 
+    public function iHaveAcceptedTermsAndConditions()
+    {
+        return $this->terms;
+    }
+
 }

@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->boolean('is_admin')->default(false);
-            $table->text('terms')->nullable();
+            $table->boolean('terms')->default(false);
             $table->string('url')->nullable();
             $table->timestamps();
         });

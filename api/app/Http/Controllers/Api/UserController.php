@@ -12,9 +12,9 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::paginate(10);
+        $users = User::query()->get();
 
-        return response()->json($users, Response::HTTP_OK);
+        return response()->json(['data' => $users], Response::HTTP_OK);
     }
 
     public function show(User $user)
@@ -28,7 +28,6 @@ class UserController extends Controller
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'password' => bcrypt($request->input('password')),
-            'terms' => $request->input('terms'),
             'url' => $request->input('url'),
         ]);
 
@@ -39,9 +38,10 @@ class UserController extends Controller
     {
         $user->name = $request->input('name');
         $user->email = $request->input('email');
-        $user->password = bcrypt($request->input('password'));
-        $user->terms = $request->input('terms');
         $user->url = $request->input('url');
+        if ($request->filled('password')) {
+            $user->password = bcrypt($request->input('password'));
+        }
         $user->save();
 
         return response()->json($user, Response::HTTP_OK);
