@@ -6,6 +6,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Response;
 use Tests\TestCase;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\Sanctum;
 
 class UserControllerTest extends TestCase
@@ -99,15 +100,16 @@ class UserControllerTest extends TestCase
         ]);
     }
 
+
     /** @test */
-    public function should_update_a_user()
+    public function should_update_user_with_password()
     {
         $user = User::factory()->create();
 
         $data = [
             'name' => 'Test User Updated',
             'email' => 'testuserupdated@example.com',
-            'password' => 'password'
+            'password' => 'new_password',
         ];
 
         $response = $this->putJson(route('users.update', $user), $data);
@@ -119,13 +121,43 @@ class UserControllerTest extends TestCase
                 'name',
                 'email',
                 'created_at',
-                'updated_at'
+                'updated_at',
             ]);
 
         $this->assertDatabaseHas('users', [
             'name' => 'Test User Updated',
-            'email' => 'testuserupdated@example.com'
+            'email' => 'testuserupdated@example.com',
         ]);
+        $this->assertTrue(Hash::check('new_password', $user->fresh()->password));
+    }
+
+    /** @test */
+    public function should_update_user_without_password()
+    {
+        $user = User::factory()->create();
+
+        $data = [
+            'name' => 'Test User Updated',
+            'email' => 'testuserupdated@example.com',
+        ];
+
+        $response = $this->putJson(route('users.update', $user), $data);
+
+        $response
+            ->assertStatus(Response::HTTP_OK)
+            ->assertJsonStructure([
+                'id',
+                'name',
+                'email',
+                'created_at',
+                'updated_at',
+            ]);
+
+        $this->assertDatabaseHas('users', [
+            'name' => 'Test User Updated',
+            'email' => 'testuserupdated@example.com',
+        ]);
+        $this->assertNotNull($user->fresh()->password);
     }
 
     /** @test */
@@ -141,5 +173,7 @@ class UserControllerTest extends TestCase
         $this->assertNull(User::find($user->id));
 
         $this->assertEquals(204, $response->status());
+
+        $this->assertModelMissing($user);
     }
 }
