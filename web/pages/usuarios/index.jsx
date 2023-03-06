@@ -5,30 +5,62 @@ import { useEffect } from 'react';
 import axios from 'axios';
 import DataTable from 'react-data-table-component';
 import { MdModeEdit, MdDeleteForever } from 'react-icons/md';
+import Link from "next/link";
+import Router from "next/router";
+import {log} from "util";
 
 
 export default function Users() {
+    const API_URL = `${process.env.SERVER_API_HOST}`;
+    const [users, setUsers] = useState([]);
+    const [pending, setPending] = useState(true);
+    const [showModal, setShowModal] = useState(false);
+    const [idUserDelete, setIdUserDelete] = useState('');
 
+    const getUsers = async () => {
+        setPending(true);
+        const resp = await axios.get(`${API_URL}/api/users`, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+        });
+        setUsers(resp.data.data);
+        setPending(false);
+    }
+    const deleteUser = async () => {
+        const headers = {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+            }
+        }
+        try {
+            await axios.delete(`${API_URL}/api/users/${idUserDelete}`, headers)
+                .then(response => console.log(response));
+            await closeModal();
+            await getUsers();
+        }catch (e) {
+            console.log(e)
+        }
+    }
+    const isModal = (id) => {
+        setShowModal(true);
+        setIdUserDelete(id);
+    }
+    const closeModal = () => {
+        setShowModal(false);
+        setIdUserDelete('');
 
-    const createUser = (user) => {
-        console.log('editUser', user)
     }
-    const editUser = (user) => {
-        console.log('editUser', user)
-    }
-    const deleteUser = (user) => {
-        console.log('deleteUser', user)
-    }
-    const buttonCreate = (user) => {
+    const buttonCreate = (id) => {
         return (
-            <a className={styles.buttonCreate} onClick={() => createUser()}>Crear Usuario</a>
+            <Link className={styles.buttonCreate}  href={`/usuarios/crear`}>Crear Usuario</Link>
         )
     }
-    const actions = (user) => {
+    const actions = (id, is_admin) => {
       return (
         <>
-            <a className={`${styles.actions} ${styles.editUser}`} onClick={() => editUser(user)}><MdModeEdit /></a>
-            <a className={`${styles.actions} ${styles.deleteUser}`} onClick={() => deleteUser(user)}><MdDeleteForever /></a>
+            <Link className={styles.actions} href={`/usuarios/editar/${id}`}><MdModeEdit /></Link>
+            {!is_admin ? <a className={styles.actions} onClick={() => isModal(id)}><MdDeleteForever /></a> :null}
         </>
       )
     }
@@ -53,27 +85,12 @@ export default function Users() {
         },
         {
             name: 'acciones',
-            selector: row => actions(row),
+            selector: row => actions(row.id, row.is_admin),
             sortable: false,
             right: true,
             reorder: false
         }
     ];
-
-    const API_URL = `${process.env.SERVER_API_HOST}/api/`;
-    const [users, setUsers] = useState([]);
-    const [pending, setPending] = useState(true);
-
-    const getUsers = async () => {
-        setPending(true)
-        const resp = await axios.get(`${API_URL}users`, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
-          },
-        });
-        setUsers(resp.data.data);
-        setPending(false)
-    }
 
     useEffect(() => {
         getUsers()
@@ -100,6 +117,17 @@ export default function Users() {
                         />
                     </div>
                 </div>
+                {showModal ?
+                    <div className={styles.contentDeleteConfirm}>
+                        <div className={styles.deleteConfirm}>
+                            <p>Esta seguro de eliminar este usuario</p>
+                            <div >
+                                <a className={styles.btnConfirm} onClick={() => deleteUser()}>Confirmar</a>
+                                <a className={styles.btnCancel} onClick={() => closeModal()}>Cancelar</a>
+                            </div>
+                        </div>
+                    </div>
+                :null}
             </Layout>
         </>
     )
