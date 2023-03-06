@@ -40,6 +40,7 @@ export default function Sidebars({navTitle, navSubTitle, ruta, children}) {
     const instructions = ruta === 'instructions' ? `${styles.menuItem} ${styles.active}` : `${styles.menuItem}`
     const playersBase = ruta === 'playersBase' ? `${styles.menuItem} ${styles.active}` : `${styles.menuItem}`
     const team = ruta === 'team' ? `${styles.menuItem} ${styles.active}` : `${styles.menuItem}`
+    const users = ruta === 'users' ? `${styles.menuItem} ${styles.active}` : `${styles.menuItem}`
     const specials = ruta === 'specials' ? `${styles.menuItem} ${styles.active}` : `${styles.menuItem}`
     const terms = ruta === 'terms' ? `${styles.menuItem} ${styles.active}` : `${styles.menuItem}`
     const classCollapse = iscollapse ? `${styles.collapse}` : `${styles.collapsed}`
@@ -94,7 +95,19 @@ export default function Sidebars({navTitle, navSubTitle, ruta, children}) {
                             className={team}
                         >
                             <div className={styles.activeBookmark}/>
+<<<<<<< HEAD
                             Agentes <br/> renovadores
+=======
+                            Mi equipo
+                        </MenuItem>
+                        <MenuItem
+                            icon={<HiUsers />}
+                            component={<Link href="/usuarios" />}
+                            className={users}
+                        >
+                            <div className={styles.activeBookmark}/>
+                            Usuarios
+>>>>>>> 85b0351abdc0afc2d0c867eacaf6654a7688c63e
                         </MenuItem>
                         <hr/>
                         <MenuItem

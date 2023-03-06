@@ -10,7 +10,9 @@ export default function Layout({children, title, description, navTitle, navSubTi
                 <title>{title}</title>
                 <meta name="Description" content={description}/>
             </Head>
-            <Sidebars navTitle={navTitle} navSubTitle={navSubTitle} ruta={ruta} children={children}/>
+            <Sidebars navTitle={navTitle} navSubTitle={navSubTitle} ruta={ruta}>
+                {children}
+            </Sidebars>
         </ProSidebarProvider>
     )
 }
