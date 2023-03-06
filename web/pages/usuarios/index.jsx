@@ -6,8 +6,6 @@ import axios from 'axios';
 import DataTable from 'react-data-table-component';
 import { MdModeEdit, MdDeleteForever } from 'react-icons/md';
 import Link from "next/link";
-import Router from "next/router";
-import {log} from "util";
 
 
 export default function Users() {
@@ -19,7 +17,7 @@ export default function Users() {
 
     const getUsers = useCallback(async () => {
         setPending(true);
-        const resp = await axios.get(`${API_URL}/api/users`, {
+        const resp = await axios.get(`${API_URL}/api/members`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
             },

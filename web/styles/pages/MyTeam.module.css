@@ -23,7 +23,15 @@
     font-weight: 600;
     max-width: 200px;
 }
-
+.contentSlider {
+    max-width: 800px;
+}
+.imageMember{
+    background: #ffffff;
+    border-radius: 11px;
+    padding: 13px 13px 0;
+    cursor: pointer;
+}
 @media (max-width: 768px) {
     .containerMyTeam {
         height: auto;

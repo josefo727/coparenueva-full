@@ -17,7 +17,9 @@
 .gender span {
     font: 500 14px sans-serif;
 }
-.registerRenovators {
+.createMember,
+.registerRenovators,
+.editRenovators {
     display: flex;
     color: #ffffff;
     background: #344693;
@@ -27,7 +29,9 @@
     transition: 0.5s;
     cursor: pointer;
 }
-.registerRenovators:hover {
+.createMember:hover,
+.registerRenovators:hover,
+.editRenovators:hover {
     background: #111419;
     transition: 0.5s;
 }
