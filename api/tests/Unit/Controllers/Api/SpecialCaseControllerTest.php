@@ -2,6 +2,7 @@
 
 namespace Tests\Unit\Controllers\Api;
 
+use App\Models\Member;
 use App\Models\User;
 use App\Models\SpecialCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -14,6 +15,7 @@ class SpecialCaseControllerTest extends TestCase
     use RefreshDatabase, WithFaker;
 
     private User $user;
+    private Member $member;
     private SpecialCase $specialCase;
 
     public function setUp(): void
@@ -21,7 +23,11 @@ class SpecialCaseControllerTest extends TestCase
         parent::setUp();
         $this->user = User::factory()->create($this->getUserCredentials());
         $this->actingAs($this->user);
-        $this->specialCase = SpecialCase::factory()->create();
+        $this->member = Member::factory()->create();
+        $this->specialCase = SpecialCase::factory()->create([
+            'member_id' => $this->member->id,
+            'broker_id' => $this->user->id,
+        ]);
     }
 
     protected function getUserCredentials()
@@ -41,7 +47,8 @@ class SpecialCaseControllerTest extends TestCase
             ->assertOk()
             ->assertJsonCount(1)
             ->assertJsonFragment([
-                'name' => $this->specialCase->name,
+                'member_id' => $this->specialCase->member_id,
+                'name' => $this->specialCase->member->name,
                 'email' => $this->specialCase->email,
                 'detail' => $this->specialCase->detail,
                 'broker_id' => $this->user->id
@@ -52,7 +59,7 @@ class SpecialCaseControllerTest extends TestCase
     public function should_store_new_special_case()
     {
         $data = [
-            'name' => 'Test Special Case',
+            'member_id' => $this->member->id,
             'email' => 'testspecialcase@example.com',
             'detail' => 'Test detail'
         ];
@@ -62,7 +69,7 @@ class SpecialCaseControllerTest extends TestCase
         $response
             ->assertCreated()
             ->assertJsonFragment([
-                'name' => $data['name'],
+                'member_id' => $data['member_id'],
                 'email' => $data['email'],
                 'detail' => $data['detail'],
                 'broker_id' => $this->user->id
@@ -79,7 +86,7 @@ class SpecialCaseControllerTest extends TestCase
         $response
             ->assertOk()
             ->assertJsonFragment([
-                'name' => $this->specialCase->name,
+                'member_id' => $this->specialCase->member->id,
                 'email' => $this->specialCase->email,
                 'detail' => $this->specialCase->detail,
                 'broker_id' => $this->user->id
@@ -90,8 +97,8 @@ class SpecialCaseControllerTest extends TestCase
     public function should_not_show_special_case_of_another_user()
     {
         $user = User::factory()->create();
-
-        $specialCase = SpecialCase::factory()->create(['broker_id' => $user->id]);
+        $member = Member::factory()->create(['broker_id' => $user->id]);
+        $specialCase = SpecialCase::factory()->create(['member_id' => $member->id]);
 
         $response = $this->getJson(route('special-cases.show', $specialCase->id));
 
@@ -102,7 +109,7 @@ class SpecialCaseControllerTest extends TestCase
     public function should_update_special_case_of_authenticated_user()
     {
         $data = [
-            'name' => 'Updated Test Special Case',
+            'member_id' => $this->member->id,
             'email' => 'updatedtestspecialcase@example.com',
             'detail' => 'Updated test detail'
         ];
@@ -112,7 +119,7 @@ class SpecialCaseControllerTest extends TestCase
         $response
             ->assertOk()
             ->assertJsonFragment([
-                'name' => $data['name'],
+                'member_id' => $data['member_id'],
                 'email' => $data['email'],
                 'detail' => $data['detail'],
                 'broker_id' => $this->user->id
@@ -132,5 +139,4 @@ class SpecialCaseControllerTest extends TestCase
 
         $this->assertModelMissing($specialCase);
     }
-
 }

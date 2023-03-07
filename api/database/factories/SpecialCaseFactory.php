@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Member;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\User;
 
@@ -18,10 +19,10 @@ class SpecialCaseFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->name,
             'email' => $this->faker->unique()->safeEmail,
             'detail' => $this->faker->text,
-            'broker_id' => optional(User::inRandomOrder()->first())->id
+            'broker_id' => optional(User::inRandomOrder()->first())->id,
+            'member_id' => Member::first()->id,
         ];
     }
 }

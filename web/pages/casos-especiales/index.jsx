@@ -15,6 +15,17 @@ export default function SpecialCases() {
     const [pending, setPending] = useState(true);
     const [showModal, setShowModal] = useState(false);
     const [idSpecialDelete, setIdSpecialDelete] = useState('');
+    const [members, setMembers] = useState([]);
+
+    const getMembers = async () => {
+        const resp = await axios.get(`${API_URL}/api/members`, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+        });
+        const MEMBERS = await resp.data;
+        setMembers(MEMBERS);
+    }
 
     const getSpecialCases = useCallback(async () => {
         setPending(true);
@@ -90,6 +101,8 @@ export default function SpecialCases() {
 
     useEffect(() => {
         getSpecialCases()
+            .then(() => null);
+        getMembers()
             .then(() => null);
     }, [getSpecialCases])
     return (

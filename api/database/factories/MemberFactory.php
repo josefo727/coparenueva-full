@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,6 +20,7 @@ class MemberFactory extends Factory
         return [
             'name' => fake()->name(),
             'genre' => fake()->randomElement(['male', 'female']),
+            'broker_id' => User::factory()->create()->id,
         ];
     }
 }

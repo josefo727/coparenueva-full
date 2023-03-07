@@ -41,6 +41,15 @@ class KpiController extends Controller
         return response()->json($kpi);
     }
 
+    public function kpiUser($id): JsonResponse
+    {
+        $kpi = Kpi::query()
+            ->where('broker_id', $id)
+            ->first();
+
+        return response()->json($kpi);
+    }
+
     public function update(KpiFormRequest $request, Kpi $kpi): JsonResponse
     {
         if ($this->isNotAuthorized()) {
