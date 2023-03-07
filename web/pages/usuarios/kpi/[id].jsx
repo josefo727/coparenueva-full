@@ -20,13 +20,13 @@ export default function Pki() {
         'renewed_premium': 0,
         'incentive_percentage': 0,
         'canceled_policies': 0,
-        'broker_id': id,
+        'broker_id': Number(id),
     })
 
     const getKpi = useCallback(async () => {
       if (id) {
           try {
-              const resp = await axios.get(`${API_URL}/api/kpis-user/` + id, {
+              const resp = await axios.get(`${API_URL}/api/kpis-user/${id}`, {
                   headers: {
                       Authorization: `Bearer ${localStorage.getItem('token')}`,
                   },
@@ -51,14 +51,14 @@ export default function Pki() {
         }catch (e) {
         }
     };
-    const updateKpi = async () => {
+    const updateKpi = async (data) => {
         const headers = {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
             }
         }
         try {
-            await axios.put(`${API_URL}/api/kpis/`+id, kpi, headers);
+            await axios.put(`${API_URL}/api/kpis/${data.id}`, data, headers);
             await Router.push('/usuarios');
         }catch (e) {
         }

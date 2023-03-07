@@ -41,7 +41,7 @@ class KpiController extends Controller
         return response()->json($kpi);
     }
 
-    public function kpiUser($id): JsonResponse
+    public function kpisUser($id): JsonResponse
     {
         $kpi = Kpi::query()
             ->where('broker_id', $id)
