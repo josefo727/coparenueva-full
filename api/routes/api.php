@@ -10,6 +10,8 @@ use App\Http\Controllers\Api\UserTermController;
 use App\Http\Controllers\Api\SpecialCaseController;
 use App\Http\Controllers\Api\KpiController;
 use App\Http\Controllers\Api\BrokerKpiController;
+use App\Http\Controllers\Api\MyTeamController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -38,6 +40,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::put('user-term', [UserTermController::class, 'update'])->name('user-term.update');
     Route::put('accept-terms', [AcceptTermsController::class, 'update'])->name('accept-terms.update');
     Route::apiResource('members', MemberController::class);
+    Route::get('my-team', [MyTeamController::class, 'index']);
     Route::apiResource('special-cases', SpecialCaseController::class);
     Route::apiResource('kpis', KpiController::class);
 });

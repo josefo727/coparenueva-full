@@ -19,6 +19,14 @@ class AcceptTermsController extends Controller
         $user->terms = true;
         $user->save();
 
-        return response()->json(['success' => true], 200);
+        return response()->json(['user' => [
+            'id' => $user->id,
+            'name' => $user->name,
+            'email' => $user->email,
+            'is_admin' => $user->is_admin,
+            'terms' => $user->terms,
+            'url' => $user->url,
+            'url_summary_detail' => $user->url_summary_detail,
+        ]], 200);
     }
 }

@@ -16,7 +16,7 @@ export default function Resumen() {
                 navTitle='¡Hola, Agente Renovador!'
                 navSubTitle='Bienvenida/o a la Temporada de Renovaciones. Renueva más, gana más'
                 ruta='resumen'>
-     
+
                 <div className={styles.containerResumen}>
                     <section className={styles.containerBox}>
                         <div className={`${styles.box} ${styles.policies}`}>
