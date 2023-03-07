@@ -43,5 +43,5 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('my-team', [MyTeamController::class, 'index']);
     Route::apiResource('special-cases', SpecialCaseController::class);
     Route::apiResource('kpis', KpiController::class);
-    Route::apiResource('kpis-user/{id}', [KpiController::class, 'kpisUser']);
+    Route::get('kpis-user/{id}', [KpiController::class, 'kpisUser']);
 });
