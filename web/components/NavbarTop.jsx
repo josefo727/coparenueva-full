@@ -2,8 +2,16 @@ import styles from '/styles/Navbar.module.css'
 import {Navbar, Link, Text, Dropdown, User} from "@nextui-org/react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import React from "react";
+import {logout} from "../auth";
+import Router from "next/router";
+import { BiLogOut } from "react-icons/bi";
 
 export default function NavbarTop({navTitle, navSubTitle, toggle}) {
+    const exit = async () => {
+        await logout();
+        Router.push('/');
+    }
+
     const collapseItems = [
         "Features",
         "Customers",
@@ -49,14 +57,9 @@ export default function NavbarTop({navTitle, navSubTitle, toggle}) {
                         />
                     </Dropdown.Trigger>
                     <Dropdown.Menu color="primary" aria-label="User Actions">
-                        {userDropdown.map(({name, key}) => (
-                            <Dropdown.Item
-                                key={key}
-                                color={key === "delete" ? "error" : "default"}
-                            >
-                                {name}
-                            </Dropdown.Item>
-                        ))}
+                        <Dropdown.Item icon={<BiLogOut/>} >
+                            <a onClick={() => exit()}>Logout</a>
+                        </Dropdown.Item>
                     </Dropdown.Menu>
                 </Dropdown>
             </Navbar.Content>
