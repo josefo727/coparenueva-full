@@ -17,15 +17,15 @@ class BrokerKpiController extends Controller
     {
         $brokerId = auth()->user()->id;
 
-        $pki = Kpi::where('broker_id', $brokerId)->firstOrFail();
+        $pki = Kpi::where('broker_id', $brokerId)->first();
 
-        $renewalRate = ($pki->renewed_policies / $pki->renewal_target_audience) * 100;
-
-        if (is_null($renewalRate)) {
+        if (is_null($pki)) {
             return response()->json([
                 'success' => false,
             ]);
         }
+
+        $renewalRate = ($pki->renewed_policies / $pki->renewal_target_audience) * 100;
 
         $incentiveLevel = null;
         switch (true) {

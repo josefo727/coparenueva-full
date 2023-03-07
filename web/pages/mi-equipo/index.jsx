@@ -14,6 +14,7 @@ export default function MyTeam() {
     const [renovator, setRenovator] = useState({name: '', genre: ''})
     const [isCreate, setIsCreate] = useState(true)
     const [load, setLoad] = useState(false);
+    const [itemSlider, setItemSlider] = useState(1);
 
     const getMembers = useCallback(async () => {
         setLoad(true);
@@ -44,6 +45,15 @@ export default function MyTeam() {
             .then(r => null)
     },[]);
 
+    useEffect(() => {
+        if (members) {
+            if (members.length <= 2) {
+                setItemSlider(members.length);
+            } else {
+                setItemSlider(3)
+            }
+        }
+    },[members]);
     
     return (
         <>
@@ -55,8 +65,8 @@ export default function MyTeam() {
                             <>
                                 <div className={styles.contentSlider}>
                                     <Slide
-                                        slidesToScroll={2}
-                                        slidesToShow={3}
+                                        slidesToScroll={itemSlider}
+                                        slidesToShow={itemSlider}
                                         indicators={true}
                                     >
                                         {members?.map((member, index) => (

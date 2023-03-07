@@ -12,7 +12,7 @@ export default function FormLogin( {data, setInput, login }) {
                     alt="background"
                 />
                 <Spacer y={0.5} />
-                <h>Bienvenido</h>
+                <h3>Bienvenido</h3>
                 <p>Por favor inicia sesión para continuar.</p>
                 <Input
                     name='email'

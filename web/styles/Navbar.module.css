@@ -44,6 +44,9 @@
     color: #aeadad;
     font-size: 18px;
 }
+.logout {
+
+}
 @media (max-width: 1024px) {
     .navSubTitle{
         display: none;
