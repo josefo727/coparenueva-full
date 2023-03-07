@@ -7,7 +7,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\UserTermController;
 use App\Http\Controllers\Api\SpecialCaseController;
-
+use App\Http\Controllers\Api\KpiController;
+use App\Http\Controllers\Api\BrokerKpiController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -32,7 +33,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::apiResource('users', UserController::class);
     Route::get('user-term', [UserTermController::class, 'show'])->name('user-term.show');
+    Route::get('broker-pki', [BrokerKpiController::class, 'show'])->name('broker-pki.show');
     Route::put('user-term', [UserTermController::class, 'update'])->name('user-term.update');
     Route::apiResource('members', MemberController::class);
     Route::apiResource('special-cases', SpecialCaseController::class);
+    Route::apiResource('kpis', KpiController::class);
 });

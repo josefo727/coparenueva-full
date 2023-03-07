@@ -8,8 +8,9 @@ const login = async (email, password) => {
       email,
       password,
     });
-    const { token } = response.data;
+    const { token, user } = response.data;
     localStorage.setItem('token', token);
+    localStorage.setItem('user', JSON.stringify(user));
     return token;
   } catch (error) {
     throw new Error('Error al autenticar usuario');
@@ -24,6 +25,7 @@ const logout = async () => {
       },
     });
     localStorage.removeItem('token');
+    localStorage.removeItem('user');
   } catch (error) {
     throw new Error('Error al cerrar sesión');
   }
@@ -31,8 +33,11 @@ const logout = async () => {
 
 const isAuthenticated = () => !!localStorage.getItem('token');
 
+const user = () => JSON.parse(localStorage.getItem('user'));
+
 export {
     login,
     logout,
-    isAuthenticated
+    user,
+    isAuthenticated,
 }

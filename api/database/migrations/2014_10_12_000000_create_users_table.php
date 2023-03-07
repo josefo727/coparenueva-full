@@ -23,6 +23,7 @@ return new class extends Migration
             $table->boolean('is_admin')->default(false);
             $table->boolean('terms')->default(false);
             $table->string('url')->nullable();
+            $table->string('url_summary_detail')->nullable();
             $table->timestamps();
         });
     }

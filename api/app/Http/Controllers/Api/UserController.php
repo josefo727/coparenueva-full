@@ -29,6 +29,7 @@ class UserController extends Controller
             'email' => $request->input('email'),
             'password' => bcrypt($request->input('password')),
             'url' => $request->input('url'),
+            'url_summary_detail' => $request->input('url_summary_detail'),
         ]);
 
         return response()->json($user, Response::HTTP_CREATED);
@@ -39,6 +40,7 @@ class UserController extends Controller
         $user->name = $request->input('name');
         $user->email = $request->input('email');
         $user->url = $request->input('url');
+        $user->url_summary_detail = $request->input('url_summary_detail');
         if ($request->filled('password')) {
             $user->password = bcrypt($request->input('password'));
         }
