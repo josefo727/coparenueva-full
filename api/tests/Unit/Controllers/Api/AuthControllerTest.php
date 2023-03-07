@@ -28,7 +28,15 @@ class AuthControllerTest extends TestCase
         ]);
 
         $response->assertStatus(Response::HTTP_OK)
-            ->assertJsonStructure(['token']);
+            ->assertJsonStructure(['token', 'user' => [
+                'id',
+                'name',
+                'email',
+                'is_admin',
+                'terms',
+                'url',
+                'url_summary_detail'
+            ]]);
 
         $this->assertAuthenticatedAs($user);
     }
