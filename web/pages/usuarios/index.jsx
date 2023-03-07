@@ -60,10 +60,11 @@ export default function Users() {
     }
     const actions = (id, is_admin) => {
       return (
-        <>
+        <div className={styles.contentIcon}>
+            <Link className={styles.kpi} href={`/usuarios/kpi/${id}`}>kpi</Link>
             <Link className={styles.actions} href={`/usuarios/editar/${id}`}><MdModeEdit /></Link>
             {!is_admin ? <a className={styles.actions} onClick={() => isModal(id)}><MdDeleteForever /></a> :null}
-        </>
+        </div>
       )
     }
     const columns = [
