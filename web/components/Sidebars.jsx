@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import { Sidebar, SubMenu, Menu, MenuItem, useProSidebar, breakPoint } from "react-pro-sidebar";
 import styles from '../styles/Sidebar.module.css';
 import NavbarTop from './NavbarTop';
 import Link from 'next/link';
-import { logout } from "../auth";
+import { logout, user } from "../auth";
 import Router from 'next/router';
 import { Image } from "@nextui-org/react";
 //icons
@@ -18,10 +18,11 @@ export default function Sidebars({navTitle, navSubTitle, ruta, children}) {
     const { toggleSidebar } = useProSidebar();
     const [iscollapse, setIsCollapse] = useState(true);
     const [toggled, setToggled] = useState(false);
+    const USER = user();
 
     const exit = async () => {
         await logout();
-        Router.push('/');
+        await Router.push('/');
     }
 
     const toggle = () => {
@@ -47,7 +48,6 @@ export default function Sidebars({navTitle, navSubTitle, ruta, children}) {
     const specials = ruta === 'specials' ? `${styles.menuItem} ${styles.active}` : `${styles.menuItem}`
     const terms = ruta === 'terms' ? `${styles.menuItem} ${styles.active}` : `${styles.menuItem}`
     const classCollapse = iscollapse ? `${styles.collapse}` : `${styles.collapsed}`
-
     return (
         <div style={{ display: 'flex' }}>
             <Sidebar
@@ -117,14 +117,18 @@ export default function Sidebars({navTitle, navSubTitle, ruta, children}) {
                             Términos y <br/>
                             condiciones
                         </MenuItem>
-                        <MenuItem
-                            icon={<HiUsers className={styles.icon}/>}
-                            component={<Link href="/usuarios" />}
-                            className={users}
-                        >
-                            <div className={styles.activeBookmark}/>
-                            Usuarios
-                        </MenuItem>
+                        {
+                            USER?.is_admin ?
+                                <MenuItem
+                                    icon={<HiUsers className={styles.icon}/>}
+                                    component={<Link href="/usuarios" />}
+                                    className={users}
+                                >
+                                    <div className={styles.activeBookmark}/>
+                                    Usuarios
+                                </MenuItem>
+                            :null
+                        }
                     </div>
                     <MenuItem
                         icon={<BiLogOut className={styles.icon}/>}

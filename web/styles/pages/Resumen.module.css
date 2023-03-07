@@ -9,7 +9,7 @@
     flex-wrap: wrap;
     padding: 30px 15px;
     margin: auto;
-    max-width: 900px;
+    max-width: 930px;
 }
 .containerBox2 {
     display: flex;
@@ -28,11 +28,10 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    width: 12%;
     min-width: 145px;
     min-height: 100px;
     margin: 5px;
-    padding: 13px 5px;
+    padding: 10px;
     font-size: 16px;
     font-weight: bold;
     text-align: left;
@@ -48,12 +47,11 @@
     width: 12%;
     min-width: 145px;
     min-height: 100px;
-    margin: 5px;
     padding: 13px 5px;
     font-size: 16px;
     font-weight: bold;
     text-align: center;
-    margin: 0px auto;
+    margin: 0 auto;
 }
 .downloadLink {
     background: #3264D3;
@@ -68,6 +66,7 @@
     border-radius: 30px;
     text-align: center;
     margin: 0px auto;
+    text-decoration: none;
 }
 .downloadLink:hover {
     background: #344693;
@@ -82,7 +81,7 @@
 }
 
 .dos {
-    background-color: orange;
+    background-color: gray;
     width: 40px;
     height: 75px;
     border-radius: 100px;
@@ -95,6 +94,9 @@
     height: 75px;
     border-radius: 100px;
     transform: translate(0px, -70px);
+}
+.levelActive {
+    background-color: orange !important;
 }
 
 .contentIconTitle {

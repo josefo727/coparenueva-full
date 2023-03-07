@@ -18,23 +18,20 @@ export default function Layout({children, title, description, navTitle, navSubTi
         }
     },[isAuthenticated]);
 
+    if (!auth) return null;
+
+
     return (
         <>
-            {auth ?
-                <ProSidebarProvider>
-                    <Head>
-                        <title>{title}</title>
-                        <meta name="Description" content={description}/>
-                    </Head>
-                    <Sidebars navTitle={navTitle} navSubTitle={navSubTitle} ruta={ruta}>
-                        {children}
-                    </Sidebars>
-                </ProSidebarProvider>
-                :
-                <div className={styles.isLoad}>
-                    <Loading/>
-                </div>
-            }
+            <ProSidebarProvider>
+                <Head>
+                    <title>{title}</title>
+                    <meta name="Description" content={description}/>
+                </Head>
+                <Sidebars navTitle={navTitle} navSubTitle={navSubTitle} ruta={ruta}>
+                    {children}
+                </Sidebars>
+            </ProSidebarProvider>
         </>
     )
 }

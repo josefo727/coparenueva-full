@@ -1,8 +1,16 @@
 import Layout from '/components/Layout'
 import styles from '/styles/pages/PlayersBase.module.css'
 import {Spacer,Text} from '@nextui-org/react';
+import {useEffect, useState} from "react";
+import {user} from "../../auth";
 
 export default function PlayerBase() {
+
+    const [urlDetail, setUrlDetail] = useState({});
+    useEffect(() => {
+        const USER = user();
+        setUrlDetail(USER?.url);
+    }, [])
     return (
         <>
             <Layout title='Base de jugadores' descripcion='base de jugadores' navTitle='Base de jugadores' ruta='playersBase'>
@@ -16,7 +24,14 @@ export default function PlayerBase() {
                             Sabemos que todos nuestros jugadores (clientes) son importantes, sin embargo, necesitamos renovar nuestros jugadores estrella. Descarga la base y descubre cuáles son.
                         </p>
                         <Spacer y={2} />
-                        <a className={styles.downloadLink}>Descargar base de jugadores</a>
+                        {!!urlDetail &&
+                            <a
+                                href={urlDetail}
+                                target='_blank'
+                                className={styles.downloadLink}
+                                rel="noreferrer"
+                            >Descargar base de jugadores</a>
+                        }
                     </div>
                 </div>
             </Layout>
