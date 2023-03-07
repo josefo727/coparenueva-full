@@ -26,7 +26,7 @@ export default function Pki() {
     const getKpi = useCallback(async () => {
       if (id) {
           try {
-              const resp = await axios.get(`${API_URL}/api/kpis/` + id, {
+              const resp = await axios.get(`${API_URL}/api/kpis-user/` + id, {
                   headers: {
                       Authorization: `Bearer ${localStorage.getItem('token')}`,
                   },
