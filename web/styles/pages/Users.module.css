@@ -12,11 +12,26 @@
     background: #ffffff;
     border-radius: 21px;
 }
+.contentIcon {
+    display: flex;
+    align-items: center;
+}
 .actions {
     font-size: 22px;
     cursor: pointer;
     margin: 0 5px;
     color: #010101;
+}
+.kpi {
+    cursor: pointer;
+    border-radius: 6px;
+    background: #010101;
+    color: #ffffff;
+    text-decoration: none;
+    font: 900 14px sans-serif;
+    margin: 10px;
+    padding: 3px 8px;
+    height: 100%;
 }
 .buttonCreate {
     display: flex;
