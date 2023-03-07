@@ -1,6 +1,41 @@
+import { useEffect, useState } from 'react'
 import Layout from '/components/Layout'
 import styles from '/styles/pages/TermsAndConditions.module.css'
+import { user, token } from './../../auth';
+import axios from 'axios';
+import { GrCheckbox } from 'react-icons/gr';
+
 export default function TermsAndConditions() {
+    const API_URL = `${process.env.SERVER_API_HOST}`;
+    const [hasAcceptedTheTerms, setHasAcceptedTheTerms] = useState(false);
+    const [isAdmin, setIsAdmin] = useState(false);
+
+    const accept = async () => {
+        console.log('aceptado');
+            const TOKEN = token();
+        console.log(TOKEN);
+            const headers = {
+                headers: {
+                    Authorization: `Bearer ${TOKEN}`,
+                }
+            }
+            try {
+                const response = await axios.put(`${API_URL}/api/accept-terms`, {}, headers);
+                const { user } = await response.data;
+                localStorage.setItem('user', JSON.stringify(user));
+                setHasAcceptedTheTerms(user.terms);
+            }catch (e) {
+                console.log(e);
+            }
+
+    }
+
+    useEffect(() => {
+        const USER = user();
+        setIsAdmin(USER.is_admin);
+        setHasAcceptedTheTerms(USER.terms)
+    }, [user])
+
     return (
         <>
             <Layout title='Términos y Condiciones' descripcion='Términos y Condiciones' navTitle='Términos y condiciones' ruta='terms'>
@@ -17,6 +52,19 @@ export default function TermsAndConditions() {
                         <ol>• No se realizarán exclusiones a causa de cancelación de póliza y/o contrato por fallecimiento.</ol>
                         <p><strong>No se realizará ningún tipo de excepción que no esté explícitamente descrita en los términos y condiciones de la campaña.</strong></p>
                     </div>
+                    {
+                        !isAdmin &&
+                        <div className={styles.terms}>
+                            {
+                                hasAcceptedTheTerms
+                                    ? 'Usted ha aceptado los términos y condiciones.'
+                                    : <div>
+                                        <span onClick={accept}><GrCheckbox /></span> Acepto los términos y condiciones leídos
+                                    </div>
+                            }
+                        </div>
+                    }
+
                 </div>
             </Layout>
         </>
