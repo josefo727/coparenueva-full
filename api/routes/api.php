@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AcceptTermsController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\MemberController;
 use Illuminate\Http\Request;
@@ -35,6 +36,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('user-term', [UserTermController::class, 'show'])->name('user-term.show');
     Route::get('broker-pki', [BrokerKpiController::class, 'show'])->name('broker-pki.show');
     Route::put('user-term', [UserTermController::class, 'update'])->name('user-term.update');
+    Route::put('accept-terms', [AcceptTermsController::class, 'update'])->name('accept-terms.update');
     Route::apiResource('members', MemberController::class);
     Route::apiResource('special-cases', SpecialCaseController::class);
     Route::apiResource('kpis', KpiController::class);
