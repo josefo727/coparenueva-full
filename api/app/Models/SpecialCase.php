@@ -9,6 +9,12 @@ class SpecialCase extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'email',
+        'detail',
+        'member_id'
+    ];
+
     protected static function boot()
     {
         parent::boot();
@@ -23,5 +29,10 @@ class SpecialCase extends Model
     public function owner()
     {
         return $this->belongsTo(User::class, 'broker_id');
+    }
+
+    public function member()
+    {
+        return $this->belongsTo(Member::class);
     }
 }

@@ -15,9 +15,13 @@ return new class extends Migration
     {
         Schema::create('special_cases', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 60);
             $table->string('email', 30);
             $table->text('detail');
+            $table->unsignedBigInteger('member_id');
+            $table->foreign('member_id')
+                ->references('id')
+                ->on('members')
+                ->onDelete('cascade');
             $table->unsignedBigInteger('broker_id');
             $table->foreign('broker_id')
                 ->references('id')

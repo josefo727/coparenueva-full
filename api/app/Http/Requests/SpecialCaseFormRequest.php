@@ -24,7 +24,7 @@ class SpecialCaseFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|max:255',
+            'member_id' => 'required|exists:members,id',
             'email' => 'required|email|max:255',
             'detail' => 'required|string',
         ];

@@ -11,7 +11,19 @@ class SpecialCaseController extends Controller
 {
     public function index()
     {
-        $specialCases = auth()->user()->specialCases;
+        $specialCases = SpecialCase::query()
+            ->where('broker_id', auth()->user()->id)
+            ->get();
+
+        $specialCases = $specialCases->map(function($sc) {
+            return [
+                'member_id' => $sc->member_id,
+                'name' => $sc->member->name,
+                'email' => $sc->email,
+                'detail' => $sc->detail,
+                'broker_id' => $sc->broker_id
+            ];
+        });
 
         return response()->json($specialCases);
     }
@@ -19,7 +31,7 @@ class SpecialCaseController extends Controller
     public function store(SpecialCaseFormRequest $request)
     {
         $specialCase = new SpecialCase();
-        $specialCase->name = $request->input('name');
+        $specialCase->member_id = $request->input('member_id');
         $specialCase->email = $request->input('email');
         $specialCase->detail = $request->input('detail');
         $specialCase->save();
@@ -42,7 +54,7 @@ class SpecialCaseController extends Controller
             return response()->json(['error' => 'Unauthorized'], Response::HTTP_UNAUTHORIZED);
         }
 
-        $specialCase->name = $request->input('name');
+        $specialCase->member_id = $request->input('member_id');
         $specialCase->email = $request->input('email');
         $specialCase->detail = $request->input('detail');
         $specialCase->save();
