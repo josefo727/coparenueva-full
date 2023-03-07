@@ -26,9 +26,9 @@ class BrokerKpiControllerTest extends TestCase
     }
 
     /** @test */
-    public function should_return_broker_pki()
+    public function should_return_broker_kpi()
     {
-        $response = $this->getJson('/api/broker-pki');
+        $response = $this->getJson('/api/broker-kpi');
 
         $response->assertStatus(200)
             ->assertJsonStructure([

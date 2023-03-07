@@ -17,15 +17,15 @@ class BrokerKpiController extends Controller
     {
         $brokerId = auth()->user()->id;
 
-        $pki = Kpi::where('broker_id', $brokerId)->first();
+        $kpi = Kpi::where('broker_id', $brokerId)->first();
 
-        if (is_null($pki)) {
+        if (is_null($kpi)) {
             return response()->json([
                 'success' => false,
             ]);
         }
 
-        $renewalRate = ($pki->renewed_policies / $pki->renewal_target_audience) * 100;
+        $renewalRate = ($kpi->renewed_policies / $kpi->renewal_target_audience) * 100;
 
         $incentiveLevel = null;
         switch (true) {
@@ -40,15 +40,15 @@ class BrokerKpiController extends Controller
                 break;
         }
 
-        $approximateIncentiveValue = $pki->incentive_percentage * $pki->renewed_premium;
+        $approximateIncentiveValue = $kpi->incentive_percentage * $kpi->renewed_premium;
 
         return response()->json([
             'success' => true,
-            'renewal_target_audience' => $pki->renewal_target_audience,
-            'renewed_policies' => $pki->renewed_policies,
-            'renewed_premium' => $pki->renewed_premium,
-            'incentive_percentage' => $pki->incentive_percentage,
-            'canceled_policies' => $pki->canceled_policies,
+            'renewal_target_audience' => $kpi->renewal_target_audience,
+            'renewed_policies' => $kpi->renewed_policies,
+            'renewed_premium' => $kpi->renewed_premium,
+            'incentive_percentage' => $kpi->incentive_percentage,
+            'canceled_policies' => $kpi->canceled_policies,
             'renewal_rate' => intval($renewalRate, 2),
             'incentive_level' => $incentiveLevel,
             'approximate_incentive_value' => $approximateIncentiveValue,

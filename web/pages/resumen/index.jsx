@@ -17,7 +17,7 @@ export default function Resumen() {
             }
         }
         try {
-            const response = await axios.get(`${API_URL}/api/broker-pki/`, headers);
+            const response = await axios.get(`${API_URL}/api/broker-kpi/`, headers);
             const KPI = await response.data;
             setKpi(KPI);
         }catch (e) {

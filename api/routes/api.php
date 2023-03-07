@@ -36,7 +36,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::apiResource('users', UserController::class);
     Route::get('user-term', [UserTermController::class, 'show'])->name('user-term.show');
-    Route::get('broker-pki', [BrokerKpiController::class, 'show'])->name('broker-pki.show');
+    Route::get('broker-kpi', [BrokerKpiController::class, 'show'])->name('broker-kpi.show');
     Route::put('user-term', [UserTermController::class, 'update'])->name('user-term.update');
     Route::put('accept-terms', [AcceptTermsController::class, 'update'])->name('accept-terms.update');
     Route::apiResource('members', MemberController::class);
