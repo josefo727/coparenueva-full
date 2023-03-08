@@ -1,16 +1,17 @@
 import React, {useState, useEffect, useCallback} from 'react'
 import styles from '/styles/FormSpecialCases.module.css'
-import {Input, Spacer, Textarea,} from "@nextui-org/react";
+import {Input, Spacer, Textarea, Dropdown } from "@nextui-org/react";
 import axios from "axios";
 import Link from "next/link";
 import {AiOutlineArrowLeft} from "react-icons/ai";
 import Router from "next/router";
 
-export default function FormSpecialCases({special, isEdit, getSpecialCases}) {
+
+export default function FormSpecialCases({special, isEdit, getSpecialCases, members}) {
     const API_URL = `${process.env.SERVER_API_HOST}`;
-    const [data, setData] = useState({name: '', email: '', detail: ''})
-    const [alert, setAlert] = useState(false)
-    const [message, setMessage] = useState('')
+    const [data, setData] = useState({name: '', email: '', detail: ''});
+    const [alert, setAlert] = useState(false);
+    const [message, setMessage] = useState('');
 
     useEffect(() => {
         setData(special);
@@ -26,7 +27,6 @@ export default function FormSpecialCases({special, isEdit, getSpecialCases}) {
     }
     const ReportCase = async (res) => {
         setAlert(false)
-        console.log(res)
         if (
             !!res.name &&
             !!res.email &&
@@ -69,7 +69,6 @@ export default function FormSpecialCases({special, isEdit, getSpecialCases}) {
             }
             try {
                 const response = await axios.put(`${API_URL}/api/special-cases/${res.id}`, res, headers);
-                console.log(response)
                 if (response.statusText === "OK") {
                     setData({name: '', email: '', detail: ''});
                     Router.push('/casos-especiales');
@@ -92,17 +91,11 @@ export default function FormSpecialCases({special, isEdit, getSpecialCases}) {
                 <Spacer y={1} />
                 <h3 className={styles.title}>¿Deseas reportar un caso?</h3>
                 <Spacer y={2} />
-                <Input
-                    className={styles.inputs}
-                    clearable
-                    bordered
-                    type='text'
-                    label="Nombre de renovador"
-                    name="name"
+                {/*
                     value={data?.name}
-                    onChange={e => setInput(e)}
-                    required='true'
-                />
+                    name="name"
+                */}
+
                 <Spacer y={1} />
                 <Input
                     className={styles.inputs}

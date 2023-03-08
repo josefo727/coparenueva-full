@@ -51,7 +51,6 @@ export default function Users() {
     const closeModal = () => {
         setShowModal(false);
         setIdUserDelete('');
-
     }
     const buttonCreate = (id) => {
         return (

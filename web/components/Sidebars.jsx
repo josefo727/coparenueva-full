@@ -32,7 +32,6 @@ export default function Sidebars({navTitle, navSubTitle, ruta, children}) {
             setIsCollapse(!iscollapse)
             collapseSidebar()
         }
-        console.log(breakPoint)
     }
     const collapse = () => {
         setIsCollapse(!iscollapse)

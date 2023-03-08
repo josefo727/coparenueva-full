@@ -13,7 +13,7 @@ const login = async (email, password) => {
     localStorage.setItem('user', JSON.stringify(user));
     return token;
   } catch (error) {
-    throw new Error('Error al autenticar usuario');
+    return false;
   }
 }
 

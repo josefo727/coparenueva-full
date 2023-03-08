@@ -13,7 +13,6 @@ export default function TermsAndConditions() {
     const accept = async () => {
         console.log('aceptado');
             const TOKEN = token();
-        console.log(TOKEN);
             const headers = {
                 headers: {
                     Authorization: `Bearer ${TOKEN}`,

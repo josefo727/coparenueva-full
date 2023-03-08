@@ -19,8 +19,7 @@ export default function Pki() {
         'renewed_policies': 0,
         'renewed_premium': 0,
         'incentive_percentage': 0,
-        'canceled_policies': 0,
-        'broker_id': Number(id),
+        'canceled_policies': 0
     })
 
     const getKpi = useCallback(async () => {
@@ -31,8 +30,12 @@ export default function Pki() {
                       Authorization: `Bearer ${localStorage.getItem('token')}`,
                   },
               });
-              setKpi(resp.data);
-              setIsCreate(false)
+              setKpi({
+                  ...kpi,
+                  ...resp.data,
+                  ['broker_id'] : Number(id)
+              });
+              setIsCreate(Object.keys(resp.data).length === 0)
           } catch (error) {
               console.error(error);
           }
@@ -63,10 +66,6 @@ export default function Pki() {
         }catch (e) {
         }
     };
-
-    useEffect(() => {
-        console.log(kpi)
-    }, [kpi])
 
     useEffect(() => {
         getKpi()

@@ -25,12 +25,6 @@ export default function Resumen() {
     };
 
     useEffect(() => {
-        if (kpi) {
-            console.log(kpi);
-        }
-    },[kpi])
-
-    useEffect(() => {
         getKpi().then(() => null)
         const USER = user();
         setUrlSummaryDetail(USER?.url_summary_detail);

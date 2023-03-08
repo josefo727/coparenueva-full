@@ -10,7 +10,7 @@ import 'react-slideshow-image/dist/styles.css';
 
 export default function MyTeam() {
     const API_URL = `${process.env.SERVER_API_HOST}`;
-    const [members, setMembers] = useState(null)
+    const [members, setMembers] = useState(null);
     const [renovator, setRenovator] = useState({name: '', genre: ''})
     const [isCreate, setIsCreate] = useState(true)
     const [load, setLoad] = useState(false);
