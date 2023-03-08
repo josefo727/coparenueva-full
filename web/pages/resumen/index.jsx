@@ -61,7 +61,7 @@ export default function Resumen() {
                             <div className={styles.contentIconTitle}>
                                 <span>Índice de <br/> renovación</span>
                             </div>
-                            <h2 className={styles.valor}>{kpi?.incentive_percentage || '0'}%</h2>
+                            <h2 className={styles.valor}>{kpi?.renewal_rate || '0'}%</h2>
                         </div>
                         <div className={`${styles.box}`}>
                             <div className={styles.contentIconTitle}>
