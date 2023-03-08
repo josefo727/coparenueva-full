@@ -17,6 +17,7 @@ class SpecialCaseController extends Controller
 
         $specialCases = $specialCases->map(function($sc) {
             return [
+                'id' => $sc->id,
                 'member_id' => $sc->member_id,
                 'name' => $sc->member->name,
                 'email' => $sc->email,
@@ -45,7 +46,14 @@ class SpecialCaseController extends Controller
             return response()->json(['error' => 'Unauthorized'], Response::HTTP_UNAUTHORIZED);
         }
 
-        return response()->json($specialCase);
+        return response()->json([
+            'id' => $specialCase->id,
+            'member_id' => $specialCase->member_id,
+            'name' => $specialCase->member->name,
+            'email' => $specialCase->email,
+            'detail' => $specialCase->detail,
+            'broker_id' => $specialCase->broker_id
+        ]);
     }
 
     public function update(SpecialCaseFormRequest $request, SpecialCase $specialCase)

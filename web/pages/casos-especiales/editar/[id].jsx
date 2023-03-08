@@ -10,7 +10,6 @@ export default function Edit() {
     const { id } = router.query
     const API_URL = `${process.env.SERVER_API_HOST}`;
     const [data, setData] = useState([]);
-    const [members, setMembers] = useState(null)
 
     const getSpecialCases = useCallback(async () => {
       try {
@@ -25,21 +24,7 @@ export default function Edit() {
       }
     }, [id]);
 
-    const getMembers = useCallback(async () => {
-        setMembers(null);
-        try {
-            const resp = await axios.get(`${API_URL}/api/members`, {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem('token')}`,
-                },
-            });
-            setMembers(resp.data.data);
-        } catch (e) {}
-    }, []);
-
     useEffect(() => {
-        getMembers()
-            .then(() => null);
         if (id) {
             getSpecialCases()
                 .then(() => null);
@@ -58,7 +43,6 @@ export default function Edit() {
                         {data ?
                             <FormSpecialCases
                                 special={data}
-                                members={members}
                                 isEdit={true}
                             />
                         :null

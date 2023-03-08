@@ -11,7 +11,6 @@ export default function TermsAndConditions() {
     const [isAdmin, setIsAdmin] = useState(false);
 
     const accept = async () => {
-        console.log('aceptado');
             const TOKEN = token();
             const headers = {
                 headers: {
