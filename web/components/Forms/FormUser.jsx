@@ -39,6 +39,15 @@ export default function FormUser( {user, setInput, createUser, updateUser, isCre
                     label="URL"
                 />
                 <Spacer y={1} />
+                <Input
+                    className={styles.url}
+                    name='url_summary_detail'
+                    value={user?.url_summary_detail}
+                    onChange={e => setInput(e)}
+                    bordered
+                    label="URL resumen"
+                />
+                <Spacer y={1} />
                 <Input.Password
                     bordered
                     className={styles.password}

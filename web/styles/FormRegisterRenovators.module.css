@@ -18,8 +18,8 @@
     font: 500 14px sans-serif;
 }
 .createMember,
-.registerRenovators,
-.editRenovators {
+.registerRenovators {
+    border-radius: 11px;
     background: #3264D3;
     transition: 0.5s;
     display: flex;
@@ -30,8 +30,84 @@
     cursor: pointer;
 }
 .createMember:hover,
-.registerRenovators:hover,
-.editRenovators:hover {
+.registerRenovators:hover {
     background: #344693;
     transition: 0.5s;
+}
+
+
+.contentDeleteConfirm {
+    position: fixed;
+    display: flex;
+    z-index: 200;
+    right: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+.deleteConfirm {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 11px;
+    width: 400px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.editRenovators, .deleteRenovators {
+    width: 40%;
+    margin: 10px 5px;
+    border-radius: 11px;
+    transition: 0.5s;
+    display: flex;
+    color: #ffffff;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    cursor: pointer;
+}
+.btnConfirm, .btnCancel {
+    margin: 0 18px;
+    cursor: pointer;
+    border-radius: 11px;
+    color: #ffffff;
+    font: 600 14px sans-serif;
+    text-decoration: none;
+    padding: 8px 15px;
+}
+.editRenovators,
+.btnConfirm {
+    background: #3264D3;
+    transition: 0.5s;
+}
+.editRenovators:hover,
+.btnConfirm:hover {
+    background: #344693;
+    transition: 0.5s;
+}
+.deleteRenovators,
+.btnCancel {
+    background: #d33232;
+    transition: 0.5s;
+}
+.deleteRenovators:hover,
+.btnCancel:hover {
+    background: #933434;
+    transition: 0.5s;
+}
+.actions {
+    display: flex;
+    justify-content: space-between;
+}
+.error {
+    font: 500 15px sans-serif;
+    text-align: center;
+    color: #b50000;
 }

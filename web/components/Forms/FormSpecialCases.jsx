@@ -1,22 +1,58 @@
-import React, {useState, useEffect, useCallback} from 'react'
+import React, {useState, useEffect, useMemo} from 'react'
 import styles from '/styles/FormSpecialCases.module.css'
-import {Input, Spacer, Textarea,} from "@nextui-org/react";
+import {Input, Spacer, Textarea, Dropdown } from "@nextui-org/react";
 import axios from "axios";
 import Link from "next/link";
 import {AiOutlineArrowLeft} from "react-icons/ai";
 import Router from "next/router";
+import Select from "react-select";
+
 
 export default function FormSpecialCases({special, isEdit, getSpecialCases}) {
     const API_URL = `${process.env.SERVER_API_HOST}`;
-    const [data, setData] = useState({name: '', email: '', detail: ''})
-    const [alert, setAlert] = useState(false)
-    const [message, setMessage] = useState('')
+    const [data, setData] = useState({member_id: '', email: '', detail: ''});
+    const [alert, setAlert] = useState(false);
+    const [message, setMessage] = useState('');
+    const [selected, setSelected] = useState({ value: null, label: null });
+
+
+    const [members, setMembers] = useState([]);
+
+    const getMembers = async () => {
+        setMembers(null);
+        const resp = await axios.get(`${API_URL}/api/members`, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+        });
+
+        setMembers(resp.data.data);
+    };
+
+
+    const options = useMemo(() => {
+        return members?.map(member => {
+            return { value: member.id, label: member.name }
+        });
+    },[members]);
+
+    useEffect(() => {
+        getMembers()
+            .then(()=>null)
+    },[]);
 
     useEffect(() => {
         setData(special);
-    },[special])
+        const MEMBER = options?.find(option => option.value === special?.member_id)
+        setSelected(MEMBER)
+    },[special]);
+
     const setInput = e => {
         setField(e.target.name, e.target.value);
+    }
+    const setSelect = e => {
+        setSelected(e);
+        setField('member_id', e.value);
     }
     const setField = (field, value) => {
         setData({
@@ -26,9 +62,8 @@ export default function FormSpecialCases({special, isEdit, getSpecialCases}) {
     }
     const ReportCase = async (res) => {
         setAlert(false)
-        console.log(res)
         if (
-            !!res.name &&
+            !!res.member_id &&
             !!res.email &&
             !!res.detail
         ){
@@ -38,11 +73,12 @@ export default function FormSpecialCases({special, isEdit, getSpecialCases}) {
                 }
             }
             try {
-                const response = await axios.post(`${API_URL}/api/special-cases/`, res, headers);
+                const response = await axios.post(`${API_URL}/api/special-cases`, res, headers);
                 if (response.statusText === "Created") {
                     await getSpecialCases()
                     setMessage('Reporte creado satisfactoriamente.');
-                    setData({name: '', email: '', detail: ''});
+                    setData({member_id: '', email: '', detail: ''});
+                    setSelected({ value: null, label: null })
                     setTimeout(() => {
                         setMessage('');
                     },3000)
@@ -58,7 +94,7 @@ export default function FormSpecialCases({special, isEdit, getSpecialCases}) {
     const updateSpecialCases = async (res) => {
         setAlert(false)
         if (
-            !!res.name &&
+            !!res.member_id &&
             !!res.email &&
             !!res.detail
         ){
@@ -69,9 +105,8 @@ export default function FormSpecialCases({special, isEdit, getSpecialCases}) {
             }
             try {
                 const response = await axios.put(`${API_URL}/api/special-cases/${res.id}`, res, headers);
-                console.log(response)
                 if (response.statusText === "OK") {
-                    setData({name: '', email: '', detail: ''});
+                    setData({member_id: '', email: '', detail: ''});
                     Router.push('/casos-especiales');
                 }
             }catch (e) {
@@ -92,16 +127,11 @@ export default function FormSpecialCases({special, isEdit, getSpecialCases}) {
                 <Spacer y={1} />
                 <h3 className={styles.title}>¿Deseas reportar un caso?</h3>
                 <Spacer y={2} />
-                <Input
+                <Select
                     className={styles.inputs}
-                    clearable
-                    bordered
-                    type='text'
-                    label="Nombre de renovador"
-                    name="name"
-                    value={data?.name}
-                    onChange={e => setInput(e)}
-                    required='true'
+                    options={options}
+                    value={selected}
+                    onChange={e => setSelect(e)}
                 />
                 <Spacer y={1} />
                 <Input
