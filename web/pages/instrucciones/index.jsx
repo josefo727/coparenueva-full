@@ -7,7 +7,7 @@ export default function Instructions() {
             <Layout title='Instrucciones' descripcion='Instrucciones' navTitle='Instrucciones' ruta='instructions'>
                 <div className={styles.containerInstructions}>
                     <div className={styles.instructions}>
-                        <h1>Términos generales</h1>
+                        <h1>Instrucciones generales</h1>
                         <div>
 
                             <p>1. Objetivo:</p>

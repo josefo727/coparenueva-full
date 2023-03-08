@@ -72,7 +72,7 @@ export default function MyTeam() {
                                         {members?.map((member, index) => (
                                             <div key={index}>
                                                 <Image
-                                                    src={member.genre === 'male' ? 'male_user.jpeg' : 'female_user.jpeg'}
+                                                    src={member.genre === 'male' ? 'male.png' : 'female.png'}
                                                     alt="Default Image"
                                                     width={200}
                                                     height={200}

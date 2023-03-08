@@ -49,7 +49,7 @@ export default function Resumen() {
                             <div className={styles.contentIconTitle}>
                                 <span>Pólizas a renovar <br/> “Público objetivo”</span>
                             </div>
-                            <h1 className={styles.valor }>{kpi?.renewed_policies || '0'}</h1>
+                            <h1 className={styles.valor }>{kpi?.renewal_target_audience || '0'}</h1>
                         </div>
                         <div className={`${styles.box}`}>
                             <div className={styles.contentIconTitle}>
@@ -98,24 +98,24 @@ export default function Resumen() {
                             </h2>
                         </div>
                     </section>
-                    {!!urlSummaryDetail ?
                         <div className={`${styles.containerBoxEnd}`}>
-                            <div>
-                                <a
-                                    href={urlSummaryDetail}
-                                    target='_blank' className={styles.downloadLink}
-                                    rel="noreferrer"
-                                >Descargar informe detallado</a>
-                            </div>
+                            {!!urlSummaryDetail ?
+                                <div>
+                                    <a
+                                        href={urlSummaryDetail}
+                                        target='_blank' className={styles.downloadLink}
+                                        rel="noreferrer"
+                                    >Descargar informe detallado</a>
+                                </div>
+                            :null
+                            }
                             <div>
                                 <Text css={{ color: "#808B96" }}>
                                     Este reporte se actualizará cada semana
-                                    Fecha de actualización: 12 de Marzo 2023
+                                    Fecha de actualización: {kpi?.updated_at}
                                 </Text>
                             </div>
                         </div>
-                    :null
-                    }
                 </div>
             </Layout>
         </>
