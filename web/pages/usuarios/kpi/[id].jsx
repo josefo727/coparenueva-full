@@ -125,7 +125,7 @@ export default function Pki() {
                                 type='number'
                                 min="0"
                                 step="1"
-                                label="Índice de renovación"
+                                label="Porcentaje de incentivo"
                                 name="incentive_percentage"
                                 value={kpi?.incentive_percentage}
                                 onChange={e => setInput(e)}
