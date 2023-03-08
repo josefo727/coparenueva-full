@@ -40,8 +40,9 @@ class BrokerKpiController extends Controller
                 break;
         }
 
-        $approximateIncentiveValue = $kpi->incentive_percentage * $kpi->renewed_premium;
-
+        $approximateIncentiveValue = $kpi->incentive_percentage * $kpi->renewed_premium/100;
+        $date = $kpi->updated_at;
+        $date->locale('es');
         return response()->json([
             'success' => true,
             'renewal_target_audience' => $kpi->renewal_target_audience,
@@ -52,6 +53,7 @@ class BrokerKpiController extends Controller
             'renewal_rate' => intval($renewalRate, 2),
             'incentive_level' => $incentiveLevel,
             'approximate_incentive_value' => $approximateIncentiveValue,
+            'updated_at' => $date->isoFormat('DD [de] MMMM [de] YYYY')
         ]);
     }
 }
