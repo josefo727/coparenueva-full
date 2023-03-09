@@ -82,6 +82,9 @@ export default function FormRegisterRenovators({renovator, isCreate, getMembers,
     useEffect(() => {
         setData(renovator)
     },[renovator])
+    useEffect(() => {
+        document.querySelector('#member_name').value = data?.name || ''
+    },[data])
 
     return (
         <>
@@ -89,11 +92,12 @@ export default function FormRegisterRenovators({renovator, isCreate, getMembers,
                 { !isCreate ? <a className={styles.createMember} onClick={() => createMember()}>Crear Miembro</a> :null }
                 <p>Registra tu equipo de renovadores</p>
                 <Input
+                    id='member_name'
                     clearable
                     bordered
                     label="Nombre completo"
                     name="name"
-                    value={data?.name}
+                    defaultValue={data?.name}
                     onChange={e => setName(e)}
                     required={true}
                 />

@@ -1,17 +1,25 @@
 import styles from '../../styles/FormUser.module.css'
 import { Input, Spacer, Button } from "@nextui-org/react";
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
+import {useEffect} from "react";
 
 export default function FormUser( {user, setInput, createUser, updateUser, isCreate = false}) {
-
+    useEffect(() => {
+        document.querySelector('#name').value = user?.name || '';
+        document.querySelector('#email').value = user?.email || '';
+        document.querySelector('#url').value = user?.url || '';
+        document.querySelector('#urlDetail').value = user?.url_summary_detail || '';
+        document.querySelector('#password').value = user?.password || '';
+    },[user])
     return (
         <>
             <form className={styles.form} >
                 <Spacer y={1.5} />
                 <Input
-                    className={styles.name}
+                    id='name'
                     name='name'
-                    value={user?.name}
+                    className={styles.name}
+                    defaultValue={user?.name}
                     onChange={e => setInput(e)}
                     bordered
                     label="Nombre*"
@@ -19,9 +27,10 @@ export default function FormUser( {user, setInput, createUser, updateUser, isCre
                 />
                 <Spacer y={1} />
                 <Input
-                    className={styles.email}
+                    id='email'
                     name='email'
-                    value={user?.email}
+                    className={styles.email}
+                    defaultValue={user?.email}
                     onChange={e => setInput(e)}
                     bordered
                     label="E-mail*"
@@ -31,31 +40,34 @@ export default function FormUser( {user, setInput, createUser, updateUser, isCre
                 />
                 <Spacer y={1} />
                 <Input
-                    className={styles.url}
+                    id='url'
                     name='url'
-                    value={user?.url}
+                    className={styles.url}
+                    defaultValue={user?.url}
                     onChange={e => setInput(e)}
                     bordered
                     label="URL"
                 />
                 <Spacer y={1} />
                 <Input
-                    className={styles.url}
+                    id='urlDetail'
                     name='url_summary_detail'
-                    value={user?.url_summary_detail}
+                    className={styles.url}
+                    defaultValue={user?.url_summary_detail}
                     onChange={e => setInput(e)}
                     bordered
                     label="URL resumen"
                 />
                 <Spacer y={1} />
                 <Input.Password
+                    id='password'
                     bordered
                     className={styles.password}
                     name='password'
                     label="Contraseña*"
                     visibleIcon={<BsEyeSlashFill/>}
                     hiddenIcon={<BsEyeFill/>}
-                    value={user?.password}
+                    defaultValue={user?.password}
                     onChange={e => setInput(e)}
                     autocomplete="off"
                     required

@@ -21,7 +21,7 @@ export default function FormLogin( {data, setInput, login, message }) {
                     <p>Por favor inicia sesión para continuar.</p>
                     <Input
                         name='email'
-                        value={data?.email}
+                        defaultValue={data?.email}
                         onChange={e => setInput(e)}
                         className={styles.user}
                         bordered
@@ -31,7 +31,7 @@ export default function FormLogin( {data, setInput, login, message }) {
                     <Spacer y={1} />
                     <Input.Password
                         name='password'
-                        value={data?.password}
+                        defaultValue={data?.password}
                         onChange={e => setInput(e)}
                         className={styles.password}
                         bordered

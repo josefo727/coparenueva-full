@@ -42,26 +42,26 @@ export default function Pki() {
       }
     }, [id]);
 
-    const createKpi = async () => {
+    const createKpi = async (res) => {
         const headers = {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
             }
         }
         try {
-            await axios.post(`${API_URL}/api/kpis`, kpi, headers);
+            await axios.post(`${API_URL}/api/kpis`, res, headers);
             await Router.push('/usuarios');
         }catch (e) {
         }
     };
-    const updateKpi = async (data) => {
+    const updateKpi = async (res) => {
         const headers = {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
             }
         }
         try {
-            await axios.put(`${API_URL}/api/kpis/${data.id}`, data, headers);
+            await axios.put(`${API_URL}/api/kpis/${res.id}`, res, headers);
             await Router.push('/usuarios');
         }catch (e) {
         }
@@ -81,7 +81,15 @@ export default function Pki() {
             [field] : Number(value)
         });
     }
-
+    useEffect(() => {
+        if (document.querySelector('#renewalTargetAudience')) {
+            document.querySelector('#renewalTargetAudience').value = kpi?.renewal_target_audience || 0;
+            document.querySelector('#renewedPolicies').value = kpi?.renewed_policies || 0;
+            document.querySelector('#incentivePercentage').value = kpi?.incentive_percentage || 0;
+            document.querySelector('#renewedPremium').value = kpi?.renewed_premium || 0;
+            document.querySelector('#canceledPolicies').value = kpi?.canceled_policies || 0;
+        }
+    },[kpi])
     return(
         <>
             <Layout
@@ -99,57 +107,62 @@ export default function Pki() {
                                 <h1>Editar PKI</h1>
                             }
                             <Input
+                                id="renewalTargetAudience"
+                                name="renewal_target_audience"
                                 bordered
                                 type='number'
                                 min="0"
                                 step="1"
                                 label="Público objetivo de renovación"
-                                name="renewal_target_audience"
-                                value={kpi?.renewal_target_audience}
+                                defaultValue={kpi?.renewal_target_audience}
                                 onChange={e => setInput(e)}
                             />
                             <Spacer y={1} />
                             <Input
+                                id="renewedPolicies"
+                                name="renewed_policies"
                                 bordered
                                 type='number'
                                 min="0"
                                 step="1"
                                 label="Pólizas renovadas"
-                                name="renewed_policies"
-                                value={kpi?.renewed_policies}
+                                defaultValue={kpi?.renewed_policies}
                                 onChange={e => setInput(e)}
                             />
                             <Spacer y={1} />
                             <Input
+                                id="incentivePercentage"
+                                name="incentive_percentage"
                                 bordered
                                 type='number'
                                 min="0"
                                 step="1"
                                 label="Porcentaje de incentivo"
-                                name="incentive_percentage"
-                                value={kpi?.incentive_percentage}
+                                defaultValue={kpi?.incentive_percentage}
                                 onChange={e => setInput(e)}
                             />
                             <Spacer y={1} />
                             <Input
+                                id="renewedPremium"
+                                name="renewed_premium"
                                 bordered
                                 type='number'
                                 min="0"
                                 step="1"
                                 label="Prima renovada"
-                                name="renewed_premium"
-                                value={kpi?.renewed_premium}
+                                defaultValue={kpi?.renewed_premium}
                                 onChange={e => setInput(e)}
                             />
                             <Spacer y={1} />
                             <Input
+                                id="canceledPolicies"
+                                name="canceled_policies"
                                 bordered
                                 type='number'
                                 min="0"
                                 step="1"
                                 label="pólizas canceladas"
-                                name="canceled_policies"
-                                value={kpi?.canceled_policies}
+                                defaultValue={kpi?.canceled_policies}
                                 onChange={e => setInput(e)}
                             />
                             <Spacer y={1} />

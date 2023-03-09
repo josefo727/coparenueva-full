@@ -12,6 +12,14 @@
     background: #ffffff;
     border-radius: 21px;
 }
+.separator {
+    display: block;
+    margin: 10px 0;
+}
+.separator:before {
+    content: '-';
+    margin-right: 15px;
+}
 @media (max-width: 768px) {
     .terms {
         width: auto;
