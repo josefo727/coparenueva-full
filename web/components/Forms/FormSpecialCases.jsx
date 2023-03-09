@@ -25,10 +25,13 @@ export default function FormSpecialCases({special, isEdit, getSpecialCases}) {
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
             },
         });
-
         setMembers(resp.data.data);
     };
 
+    useEffect(() => {
+        getMembers()
+            .then(()=>null)
+    },[]);
 
     const options = useMemo(() => {
         return members?.map(member => {
@@ -36,15 +39,13 @@ export default function FormSpecialCases({special, isEdit, getSpecialCases}) {
         });
     },[members]);
 
-    useEffect(() => {
-        getMembers()
-            .then(()=>null)
-    },[]);
 
     useEffect(() => {
-        setData(special);
-        const MEMBER = options?.find(option => option.value === special?.member_id)
-        setSelected(MEMBER)
+        if(!!special) {
+            setData(special);
+            const MEMBER = options?.find(option => option.value === special?.member_id)
+            setSelected(MEMBER)
+        }
     },[special]);
 
     const setInput = e => {
@@ -61,11 +62,12 @@ export default function FormSpecialCases({special, isEdit, getSpecialCases}) {
         });
     }
     const ReportCase = async (res) => {
-        setAlert(false)
+        setAlert(false);
+        console.log(res)
         if (
-            !!res.member_id &&
-            !!res.email &&
-            !!res.detail
+            !!res?.member_id &&
+            !!res?.email &&
+            !!res?.detail
         ){
             const headers = {
                 headers: {
@@ -90,9 +92,7 @@ export default function FormSpecialCases({special, isEdit, getSpecialCases}) {
             setAlert(true)
         }
     };
-
     const updateSpecialCases = async (res) => {
-        setAlert(false)
         if (
             !!res.member_id &&
             !!res.email &&
@@ -118,8 +118,11 @@ export default function FormSpecialCases({special, isEdit, getSpecialCases}) {
     };
 
 
+
     useEffect(() => {
-    },[])
+        document.querySelector('#email').value = data?.email || '';
+        document.querySelector('#detail').value = data?.detail || '';
+    },[data])
     return (
         <>
             <form className={styles.form}>
@@ -135,25 +138,27 @@ export default function FormSpecialCases({special, isEdit, getSpecialCases}) {
                 />
                 <Spacer y={1} />
                 <Input
+                    id='email'
                     className={styles.inputs}
                     clearable
                     bordered
                     label="Correo electrónico"
                     name="email"
                     type='email'
-                    value={data?.email}
+                    defaultValue={data?.email}
                     onChange={e => setInput(e)}
                     required='true'
                 />
                 <Spacer y={1} />
 
                 <Textarea
+                    id='detail'
                     clearable
                     bordered
                     className={styles.inputs}
                     label="Detalle de caso"
                     name='detail'
-                    value={data?.detail}
+                    defaultValue={data?.detail}
                     onChange={e => setInput(e)}
                     required='true'
                     rows={12}
