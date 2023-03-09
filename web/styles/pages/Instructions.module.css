@@ -11,6 +11,7 @@
     padding: 23px 50px;
     background: #ffffff;
     border-radius: 21px;
+    font-size: 14px;
 }
 .downloadLink {
     color: #ffffff;
@@ -26,7 +27,17 @@
     margin-bottom: 12px;
     text-align: center;
 }
-
+.instructions p {
+    margin: 5px 0;
+}
+.separator {
+    display: block;
+    margin: 10px 0;
+}
+.separator:before {
+    content: '-';
+    margin-right: 15px;
+}
 @media (max-width: 768px) {
     .instructions {
         width: auto;
