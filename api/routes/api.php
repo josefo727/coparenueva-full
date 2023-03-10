@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\SpecialCaseController;
 use App\Http\Controllers\Api\KpiController;
 use App\Http\Controllers\Api\BrokerKpiController;
 use App\Http\Controllers\Api\MyTeamController;
+use App\Http\Controllers\Api\UserIncentiveTableController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +40,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('broker-kpi', [BrokerKpiController::class, 'show'])->name('broker-kpi.show');
     Route::put('user-term', [UserTermController::class, 'update'])->name('user-term.update');
     Route::put('accept-terms', [AcceptTermsController::class, 'update'])->name('accept-terms.update');
+    Route::get('user-incentive-table', [UserIncentiveTableController::class, 'show'])->name('user-incentive-table.show');
+    Route::put('user-incentive-table', [UserIncentiveTableController::class, 'update'])->name('user-incentive-table.update');
     Route::apiResource('members', MemberController::class);
     Route::get('my-team', [MyTeamController::class, 'index']);
     Route::apiResource('special-cases', SpecialCaseController::class);

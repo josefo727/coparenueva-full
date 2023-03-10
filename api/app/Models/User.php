@@ -64,4 +64,9 @@ class User extends Authenticatable
         return $this->terms;
     }
 
+    public function incentiveTable()
+    {
+        return $this->morphOne(File::class, 'fileable')->where('relationship_type', 'incentive_table');
+    }
+
 }

@@ -32,6 +32,7 @@ class BrokerKpiControllerTest extends TestCase
 
         $response->assertStatus(200)
             ->assertJsonStructure([
+                'success',
                 'renewal_target_audience',
                 'renewed_policies',
                 'renewed_premium',
@@ -40,6 +41,7 @@ class BrokerKpiControllerTest extends TestCase
                 'renewal_rate',
                 'incentive_level',
                 'approximate_incentive_value',
+                'updated_at'
             ]);
     }
 }
