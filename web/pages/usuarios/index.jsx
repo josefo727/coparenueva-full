@@ -4,8 +4,10 @@ import styles from '/styles/pages/Users.module.css'
 import { useEffect } from 'react';
 import axios from 'axios';
 import DataTable from 'react-data-table-component';
-import { MdModeEdit, MdDeleteForever } from 'react-icons/md';
+import { MdModeEdit, MdDeleteForever, MdTableChart } from 'react-icons/md';
 import Link from "next/link";
+import {BsTable} from "react-icons/bs";
+import {Tooltip} from "@nextui-org/react";
 
 
 export default function Users() {
@@ -61,6 +63,7 @@ export default function Users() {
       return (
         <div className={styles.contentIcon}>
             <Link className={styles.kpi} href={`/usuarios/kpi/${id}`}>kpi</Link>
+            <Tooltip content={'Tabla de Incentivos'}><Link className={styles.actions} href={`/usuarios/tabla-de-incentivos/${id}`}><MdTableChart/></Link></Tooltip>
             <Link className={styles.actions} href={`/usuarios/editar/${id}`}><MdModeEdit /></Link>
             {!is_admin ? <a className={styles.actions} onClick={() => isModal(id)}><MdDeleteForever /></a> :null}
         </div>

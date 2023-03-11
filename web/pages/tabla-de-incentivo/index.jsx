@@ -1,62 +1,55 @@
 import Layout from '/components/Layout'
-import { useState } from "react";
-import styles from '/styles/pages/Instructions.module.css'
+import {useEffect, useState, useCallback} from "react";
+import styles from '/styles/pages/TableIncentives.module.css'
 import axios from "axios";
-import {router} from "next/client";
+import {Loading} from "@nextui-org/react";
+import { Image } from '@nextui-org/react';
 
-export default function TableIncentives() {
+export default function IncentivesTable() {
     const API_URL = `${process.env.SERVER_API_HOST}`;
-    const [image, setImage] = useState(null);
+    const [load, setLoad] = useState(true);
+    const [incentiveTable, setIncentiveTable] = useState(null);
 
-    const handleImageChange = (event) => {
-        const file = event.target.files[0];
-        setImage(file);
-    };
-
-    const handleSubmit = async e => {
-        e.preventDefault();
-        const DATA = {
-            ...post,
-            ['recipes']: selectedRecipes,
-            ['status']: 'published',
-        };
-        const form = new FormData();
-        if(image) form.append('images', image)
-        Object.keys(POST).forEach(key => {
-            if (!['products', 'images'].includes(key)) form.set(key, POST[key]);
-        });
-
-        const URL = `${API_URL}/api/user-incentive-table`;
-
-        const config = {
+    const getImage = useCallback(async () => {
+        setLoad(true);
+        setIncentiveTable(null);
+        const resp = await axios.get(`${API_URL}/api/user-incentive-table`, {
             headers: {
-                'Content-Type': "multipart/form-data",
-                "Accept": "application/json",
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
-            }
-        };
+            },
+        });
+        setIncentiveTable(resp.data.url);
+        setLoad(false);
+    }, []);
 
-        try {
-            const resp = await axios.post(URL, form, config);
-            console.log(resp)
-        } catch (e) {
-
-        } finally {
-        }
-    }
-
-
+    useEffect(() => {
+        getImage()
+            .then(() => null);
+    },[getImage])
     return (
         <>
             <Layout title='Tabla de incentivos' descripcion='Tabla de incentivos' navTitle='Tabla de incentivos' ruta='incentive'>
-                <div className={styles.containerInstructions}>
-                    <div className={styles.instructions}>
-                        <h1>Instrucciones generales</h1>
-                        <form onSubmit={handleSubmit}>
-                            <input type="file" accept="image/*" name="image" onChange={handleImageChange} />
-                            <button type="submit">Upload Image</button>
-                        </form>
-                    </div>
+                <div className={styles.containerTableIncentives}>
+                    {!load ?
+                        <div className={styles.tableIncentives}>
+                            {!!incentiveTable ?
+                                <Image
+                                    width={'100%'}
+                                    height={'100%'}
+                                    src={`${API_URL}${incentiveTable}`}
+                                    alt='Tabla de incentivos'
+                                    objectFit="cover"
+                                />
+                            :
+                                <p>Todavía no se ha cargado una imagen para este módulo.</p>
+                            }
+                        </div>
+                    :
+                        <div className={styles.tableIncentives}>
+                            <h3>Cargando Tabla de Incentivos</h3>
+                            <Loading/>
+                        </div>
+                    }
                 </div>
             </Layout>
         </>
