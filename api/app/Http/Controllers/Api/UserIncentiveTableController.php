@@ -4,15 +4,17 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\File;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
 
 class UserIncentiveTableController extends Controller
 {
-    public function show()
+    public function show(Request $request)
     {
-        $user = auth()->user();
+        $id = $request->id;
+        $user = !is_null($id) ? User::find($id) : auth()->user();
         $file = $user->incentiveTable;
         if ($file) {
             return response()->json(['url' => Storage::url($file->path)]);
@@ -23,7 +25,7 @@ class UserIncentiveTableController extends Controller
 
     public function update(Request $request)
     {
-        $user = auth()->user();
+        $user = User::find($request->userId);
         $file = $request->file('image');
 
         if (!$file->isValid() || !in_array($file->getMimeType(), ['image/png', 'image/jpeg', 'image/gif'])) {
