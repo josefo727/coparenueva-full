@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import { Sidebar, SubMenu, Menu, MenuItem, useProSidebar, breakPoint } from "react-pro-sidebar";
 import styles from '../styles/Sidebar.module.css';
 import NavbarTop from './NavbarTop';
@@ -37,11 +37,11 @@ export default function Sidebars({navTitle, navSubTitle, ruta, children}) {
         setIsCollapse(!iscollapse)
         collapseSidebar()
     }
-    const condition_2 = false;
 
     const resumen = ruta === 'resumen' ? `${styles.menuItem} ${styles.active}` : `${styles.menuItem}`
     const instructions = ruta === 'instructions' ? `${styles.menuItem} ${styles.active}` : `${styles.menuItem}`
     const playersBase = ruta === 'playersBase' ? `${styles.menuItem} ${styles.active}` : `${styles.menuItem}`
+    const incentive = ruta === 'incentive' ? `${styles.menuItem} ${styles.active}` : `${styles.menuItem}`
     const team = ruta === 'team' ? `${styles.menuItem} ${styles.active}` : `${styles.menuItem}`
     const users = ruta === 'users' ? `${styles.menuItem} ${styles.active}` : `${styles.menuItem}`
     const specials = ruta === 'specials' ? `${styles.menuItem} ${styles.active}` : `${styles.menuItem}`
@@ -89,6 +89,14 @@ export default function Sidebars({navTitle, navSubTitle, ruta, children}) {
                         >
                             <div className={styles.activeBookmark}/>
                             Base de jugadores
+                        </MenuItem>
+                        <MenuItem
+                            icon={<BsFillFileTextFill className={styles.icon}/>}
+                            component={<Link href="/tabla-de-incentivo" />}
+                            className={incentive}
+                        >
+                            <div className={styles.activeBookmark}/>
+                            Tabla de incentivos
                         </MenuItem>
                         <MenuItem
                             icon={<FaUsers className={styles.icon}/>}
