@@ -5,7 +5,7 @@ import styles from '/styles/FormIncentivesTable.module.css';
 import {AiOutlineArrowLeft} from 'react-icons/ai';
 import Router, {useRouter} from 'next/router';
 import Link from "next/link";
-import {Image, Loading} from "@nextui-org/react";
+import {Image, Loading, Spacer} from "@nextui-org/react";
 import {isAuthenticated} from "../../../auth";
 
 export default function Edit() {
@@ -85,6 +85,7 @@ export default function Edit() {
                 <div className={styles.containerIncentivesTable}>
                     <div className={styles.incentivesTable}>
                         <Link className={styles.goBack} href='/usuarios'><AiOutlineArrowLeft/> regresar</Link>
+                        <Spacer y={1}/>
                         {!load && (
                             <>
                                 <div className={styles.tableIncentives}>
