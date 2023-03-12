@@ -1,0 +1,56 @@
+.containerIncentivesTable {
+    height: calc(100vh - 76px);
+    overflow: auto;
+    padding: 0 20px;
+    background: #f3f3f3;
+}
+.incentivesTable {
+    width: 80%;
+    max-width: 700px;
+    margin: 50px auto;
+    padding: 23px 50px;
+    background: #ffffff;
+    border-radius: 21px;
+}
+.goBack {
+    text-decoration: none;
+    color: #010101;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 80px;
+}
+.form {
+    display: flex;
+    flex-direction: column;
+    margin: 2rem 0;
+}
+.addImage {
+    width: 300px;
+    height: 50px;
+    border: 1px dashed #010101;
+    margin: 10px auto;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.btnUpdateImage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 300px;
+    height: 45px;
+    margin: 20px auto 0 auto;
+    background: #3264D3;
+    color: #ffffff;
+    font: 600 14px sans-serif;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: 0.5s;
+    cursor: pointer;
+}
+.btnUpdateImage:hover {
+    background: #344693 !important;
+    transition: 0.5s;
+}

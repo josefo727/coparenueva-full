@@ -13,7 +13,7 @@ class UserIncentiveTableController extends Controller
 {
     public function show(Request $request)
     {
-        $id = $request->id;
+        $id = $request->id ?? null;
         $user = !is_null($id) ? User::find($id) : auth()->user();
         $file = $user->incentiveTable;
         if ($file) {
@@ -38,7 +38,7 @@ class UserIncentiveTableController extends Controller
             $existingFile->delete();
         }
 
-        $path = $file->store('incentive-tables');
+        $path = Storage::disk('public')->put('incentive-tables', $file);
         $file = new File([
             'path' => $path,
             'relationship_type' => 'incentive_table',
