@@ -69,4 +69,9 @@ class User extends Authenticatable
         return $this->morphOne(File::class, 'fileable')->where('relationship_type', 'incentive_table');
     }
 
+    public function kpis()
+    {
+        return $this->hasMany(Kpi::class, 'broker_id');
+    }
+
 }

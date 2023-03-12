@@ -6,17 +6,22 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\KpiFormRequest;
 use App\Models\Kpi;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class KpiController extends Controller
 {
-    public function index(): JsonResponse
+    public function index(Request $request): JsonResponse
     {
-        if ($this->isNotAuthorized()) {
-            return $this->prohibitedAccess();
-        }
-
-        $kpis = Kpi::all();
+        $brokerId = $request->brokerId ?? null;
+        $kpis = Kpi::query()
+            ->when(!auth()->user()->isAdmin(), function($query) {
+                $query->where('broker_id', auth()->user()->id);
+            })
+            ->when(!!$brokerId, function($query) use ($brokerId) {
+                $query->where('broker_id', $brokerId);
+            })
+            ->get();
 
         return response()->json($kpis);
     }
@@ -27,7 +32,15 @@ class KpiController extends Controller
             return $this->prohibitedAccess();
         }
 
-        $kpi = Kpi::create($request->validated());
+        $data = $request->validated();
+
+        $kpi = Kpi::updateOrCreate(
+            [
+                'broker_id' => $data['broker_id'],
+                'month' => $data['month']
+            ],
+            $data
+        );
 
         return response()->json($kpi, 201);
     }

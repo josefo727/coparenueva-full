@@ -98,7 +98,10 @@ class SpecialCaseControllerTest extends TestCase
     {
         $user = User::factory()->create();
         $member = Member::factory()->create(['broker_id' => $user->id]);
-        $specialCase = SpecialCase::factory()->create(['member_id' => $member->id]);
+        $specialCase = SpecialCase::factory()->create([
+            'member_id' => $member->id,
+            'broker_id' => $user->id
+        ]);
 
         $response = $this->getJson(route('special-cases.show', $specialCase->id));
 

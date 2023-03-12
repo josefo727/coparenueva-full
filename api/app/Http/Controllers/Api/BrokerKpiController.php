@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Kpi;
+use App\Services\Month;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BrokerKpiController extends Controller
 {
@@ -13,11 +16,27 @@ class BrokerKpiController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function show(): JsonResponse
+    public function show(Request $request): JsonResponse
     {
+        $value = $request->month;
+        $months = app(Month::class)->getMonthsByValue($value);
         $brokerId = auth()->user()->id;
 
-        $kpi = Kpi::where('broker_id', $brokerId)->first();
+
+        $kpi = Kpi::query()
+            ->select(
+                DB::raw('SUM(renewal_target_audience) as renewal_target_audience'),
+                DB::raw('SUM(renewed_policies) as renewed_policies'),
+                DB::raw('SUM(renewed_premium) as renewed_premium'),
+                DB::raw('AVG(incentive_percentage) as incentive_percentage'),
+                DB::raw('SUM(canceled_policies) as canceled_policies'),
+                DB::raw('LAST_VALUE(broker_id) OVER() as broker_id'),
+                DB::raw('LAST_VALUE(updated_at) OVER() as updated_at')
+            )
+            ->where('broker_id', $brokerId)
+            ->whereIn('month', $months)
+            ->groupBy('broker_id')
+            ->get()->first();
 
         if (is_null($kpi)) {
             return response()->json([

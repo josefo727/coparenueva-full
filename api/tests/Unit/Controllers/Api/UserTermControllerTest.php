@@ -34,7 +34,7 @@ class UserTermController extends TestCase
     }
 
     /** @test */
-    public function show_returns_terms_of_authenticated_user()
+    public function should_show_returns_terms_of_authenticated_user()
     {
         $response = $this->get(route('user-term.show'));
 
@@ -45,7 +45,7 @@ class UserTermController extends TestCase
     }
 
     /** @test */
-    public function update_updates_terms_of_authenticated_user()
+    public function should_update_updates_terms_of_authenticated_user()
     {
         $response = $this->put(route('user-term.update'), [
             'terms' => true,

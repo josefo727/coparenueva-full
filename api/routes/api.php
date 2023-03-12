@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\UserTermController;
 use App\Http\Controllers\Api\SpecialCaseController;
 use App\Http\Controllers\Api\KpiController;
 use App\Http\Controllers\Api\BrokerKpiController;
+use App\Http\Controllers\Api\MonthController;
 use App\Http\Controllers\Api\MyTeamController;
 use App\Http\Controllers\Api\UserIncentiveTableController;
 
@@ -47,4 +48,5 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::apiResource('special-cases', SpecialCaseController::class);
     Route::apiResource('kpis', KpiController::class);
     Route::get('kpis-user/{id}', [KpiController::class, 'kpisUser']);
+    Route::get('months', [MonthController::class, 'index'])->name('months.index');
 });

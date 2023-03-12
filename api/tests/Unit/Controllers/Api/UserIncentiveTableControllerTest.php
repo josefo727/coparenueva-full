@@ -65,7 +65,7 @@ class UserIncentiveTableControllerTest extends TestCase
     }
 
     /** @test */
-    public function show_returns_null_for_authenticated_user_without_incentive_table_file()
+    public function should_show_returns_null_for_authenticated_user_without_incentive_table_file()
     {
         $response = $this->actingAs($this->normalUser)->getJson(route('user-incentive-table.show'));
 
@@ -80,6 +80,7 @@ class UserIncentiveTableControllerTest extends TestCase
 
         $response = $this->actingAs($user)->putJson(route('user-incentive-table.update'), [
             'image' => $file,
+            'userId' => $user->id,
         ]);
 
         $response->assertStatus(Response::HTTP_BAD_REQUEST)->assertJson(['error' => 'El archivo debe ser una imagen válida.']);
@@ -99,6 +100,7 @@ class UserIncentiveTableControllerTest extends TestCase
         $image = UploadedFile::fake()->image('incentive-table.jpg');
         $response = $this->putJson(route('user-incentive-table.update'), [
             'image' => $image,
+            'userId' => $this->normalUser->id,
         ]);
 
         $response->assertSuccessful();

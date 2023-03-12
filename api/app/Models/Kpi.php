@@ -15,7 +15,8 @@ class Kpi extends Model
         'renewed_premium',
         'incentive_percentage',
         'canceled_policies',
-        'broker_id'
+        'broker_id',
+        'month'
     ];
 
     protected $casts = [

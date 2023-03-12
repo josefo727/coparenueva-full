@@ -75,7 +75,9 @@ class KpiControllerTest extends TestCase
         $response->assertStatus(200)
             ->assertJsonCount(1)
             ->assertJsonFragment($anotherKpi->toArray())
-            ->assertJsonMissing(['id' => $adminKpi->id, 'broker_id' => $adminKpi->broker_id]);
+            ->assertJsonMissing($adminKpiKpi->makeHidden([
+                'month','created_at', 'updated_at'
+            ])->toArray());
     }
 
     /** @test */
