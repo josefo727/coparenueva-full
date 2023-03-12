@@ -105,7 +105,7 @@ class UserIncentiveTableControllerTest extends TestCase
 
         $response->assertSuccessful();
         Storage::assertMissing($existingFile->path);
-        Storage::assertExists('incentive-tables/' . $image->hashName());
+        Storage::disk('public')->assertExists('incentive-tables/' . $image->hashName());
         $this->assertDatabaseHas('files', [
             'relationship_type' => 'incentive_table',
             'fileable_id' => $this->normalUser->id,
