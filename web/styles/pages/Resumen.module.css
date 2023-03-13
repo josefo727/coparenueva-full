@@ -149,7 +149,9 @@
     width: 30%;
     min-width: 230px;
 }
-
+.selectMonth {
+    background: red;
+}
 @media (max-width: 821px) {
     .containerResumen {
         height: auto;

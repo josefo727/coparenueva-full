@@ -1,10 +1,10 @@
-.containerPki {
+.containerKpi {
     height: calc(100vh - 76px);
     overflow: auto;
     padding: 0 20px;
     background: #f3f3f3;
 }
-.pki {
+.kpi {
     width: 80%;
     max-width: 700px;
     margin: 50px auto;
@@ -43,4 +43,9 @@
 .btnKpi:hover {
     background: #344693 !important;
     transition: 0.5s;
+}
+
+.messageAlert {
+    font-size: 14px;
+    color: red;
 }
