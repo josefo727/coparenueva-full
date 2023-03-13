@@ -103,6 +103,14 @@
     background: #933434;
     transition: 0.5s;
 }
+.goBack {
+    text-decoration: none;
+    color: #010101;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 80px;
+}
 @media (max-width: 768px) {
     .containerMyTeam {
         height: auto;

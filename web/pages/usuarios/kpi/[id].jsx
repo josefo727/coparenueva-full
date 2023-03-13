@@ -9,6 +9,7 @@ import {BsTable} from "react-icons/bs";
 import {Tooltip} from "@nextui-org/react";
 import {useRouter} from "next/router";
 import Layout from "../../../components/Layout";
+import {AiOutlineArrowLeft} from "react-icons/ai";
 
 
 export default function Users() {
@@ -59,11 +60,11 @@ export default function Users() {
             <Link className={styles.buttonCreate}  href={`/usuarios/kpi/crear/${id}`}>Crear KPI</Link>
         )
     }
-    const actions = (id) => {
+    const actions = (ID) => {
       return (
         <div className={styles.contentIcon}>
-            <Link className={styles.actions} href={`/usuarios/kpi/editar/${id}`}><MdModeEdit /></Link>
-            <a className={styles.actions} onClick={() => isModal(id)}><MdDeleteForever /></a>
+            <Link className={styles.actions} href={`/usuarios/kpi/editar/${ID}`}><MdModeEdit /></Link>
+            <a className={styles.actions} onClick={() => isModal(ID)}><MdDeleteForever /></a>
         </div>
       )
     }
@@ -141,6 +142,7 @@ export default function Users() {
             >
                 <div className={styles.containerUsers}>
                     <div className={styles.users} id='tableUsers'>
+                        <Link className={styles.goBack} href={`/usuarios`}><AiOutlineArrowLeft/> regresar</Link>
                         <DataTable
                             columns={columns}
                             data={kpisUser}

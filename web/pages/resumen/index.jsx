@@ -72,9 +72,10 @@ export default function Resumen() {
         const USER = user();
         setUrlSummaryDetail(USER?.url_summary_detail);
     }, [])
-    const level1 = kpi?.incentive_level === 1 ? `${styles.uno} ${styles.levelActive}` : `${styles.uno}`
-    const level2 = kpi?.incentive_level === 2 ? `${styles.dos} ${styles.levelActive}` : `${styles.dos}`
-    const level3 = kpi?.incentive_level === 3 ? `${styles.tres} ${styles.levelActive}` : `${styles.tres}`
+    const level1 = kpi?.incentive_level === 1 ? `${styles.uno} ${styles.active}` : `${styles.uno}`
+    const level2 = kpi?.incentive_level === 2 ? `${styles.dos} ${styles.active}` : `${styles.dos}`
+    const level3 = kpi?.incentive_level === 3 ? `${styles.tres} ${styles.active}` : `${styles.tres}`
+    const level4 = kpi?.incentive_level === 4 ? `${styles.cuatro} ${styles.active}` : `${styles.cuatro}`
     return (
         <>
             <Layout
@@ -97,74 +98,91 @@ export default function Resumen() {
                     </div>
 
                     <section className={styles.containerBox}>
-                        <div className={`${styles.box} ${styles.policies}`}>
-                            <div className={styles.contentIconTitle}>
-                                <span>Pólizas a renovar <br/> “Público objetivo”</span>
-                            </div>
-                            <h1 className={styles.valor }>{kpi?.renewal_target_audience || '0'}</h1>
-                        </div>
-                        <div className={`${styles.box}`}>
-                            <div className={styles.contentIconTitle}>
-                                <span>Pólizas <br/> renovadas</span>
-                            </div>
-                            <h2 className={styles.valor}>{kpi?.renewed_policies || '0'}</h2>
-                        </div>
-                        <div className={`${styles.box}`}>
-                            <div className={styles.contentIconTitle}>
-                                <span>Índice de <br/> renovación</span>
-                            </div>
-                            <h2 className={styles.valor}>{kpi?.renewal_rate || '0'}%</h2>
-                        </div>
-                        <div className={`${styles.box}`}>
-                            <div className={styles.contentIconTitle}>
-                                <span>Prima  <br/> renovada</span>
-                            </div>
-                            <h2 className={styles.valor}>${kpi?.renewed_premium || '0'}k</h2>
-                        </div>
-                        {
-                            kpi.success ?
-                                <div className={`${styles.box2}`}>
-                                    <Text>Nivel de incentivo</Text>
-                                    <div className={level3} >
-                                        <Text> 3 </Text>
-                                    </div>
-                                    <div className={level2} >
-                                        <Text> 2 </Text>
-                                    </div>
-                                    <div className={level1} >
-                                        <Text> 1 </Text>
-                                    </div>
+                        <div className={styles.contentLeft}>
+                            <div className={`${styles.box} ${styles.policies}`}>
+                                <div className={styles.contentIconTitle}>
+                                    <span>Pólizas a renovar <br/> “Público objetivo”</span>
                                 </div>
-                            :null
-                        }
-                        <div className={`${styles.box}`}>
-                            <span>Valor <br/> aproximado <br/> de incentivo</span>
-                            <h2 className={styles.valor}>
-                                ${kpi?.approximate_incentive_value || '0'}k
-                            </h2>
+                                <h1 className={styles.valor }>{kpi?.renewal_target_audience || '0'}</h1>
+                            </div>
+                            <p>*No te olvides que esta es solo  una proporción de todos los clientes a renovar.</p>
                         </div>
-                        <div className={`${styles.box}`}>
-                            <span>Pólizas <br/> canceladas </span>
-                            <h2 className={styles.valor}>
-                                {kpi?.canceled_policies || '0'}
-                            </h2>
+                        <div className={styles.contentRight}>
+                            <div className={`${styles.box}`}>
+                                <div className={styles.contentIconTitle}>
+                                    <span>Pólizas <br/> renovadas</span>
+                                </div>
+                                <h2 className={styles.valor}>{kpi?.renewed_policies || '0'}</h2>
+                            </div>
+                            <div className={`${styles.box}`}>
+                                <div className={styles.contentIconTitle}>
+                                    <span>Índice de <br/> renovación</span>
+                                </div>
+                                <h2 className={styles.valor}>{kpi?.renewal_rate || '0'}%</h2>
+                            </div>
+                            <div className={`${styles.box}`}>
+                                <div className={styles.contentIconTitle}>
+                                    <span>Prima  <br/> renovada</span>
+                                </div>
+                                <h2 className={styles.valor}>${kpi?.renewed_premium || '0'}k</h2>
+                            </div>
+                            {
+                                kpi.success ?
+                                    <div className={`${styles.box2}`}>
+                                        <Text>Nivel de incentivo</Text>
+                                        <div className={level4} >
+                                            <Text> 4 </Text>
+                                        </div>
+                                        <div className={level3} >
+                                            <Text> 3 </Text>
+                                        </div>
+                                        <div className={level2} >
+                                            <Text> 2 </Text>
+                                        </div>
+                                        <div className={level1} >
+                                            <Text> 1 </Text>
+                                        </div>
+                                    </div>
+                                    :null
+                            }
+                            <div className={`${styles.box}`}>
+                                <span>Valor <br/> aproximado <br/> de incentivo</span>
+                                <h2 className={styles.valor}>
+                                    ${kpi?.approximate_incentive_value || '0'}k
+                                </h2>
+                            </div>
+                            <div className={`${styles.box}`}>
+                                <span>Pólizas <br/> canceladas </span>
+                                <h2 className={styles.valor}>
+                                    {kpi?.canceled_policies || '0'}
+                                </h2>
+                            </div>
                         </div>
                     </section>
                     <div className={`${styles.containerBoxEnd}`}>
+                        <div>
+                            <Text css={{ color: "#010101" }}>
+                                RECUERDA QUE ESTAS PÓLIZAS/CONTRATOS DEVEN PERMANECER ACTIVAS POR 100 DÍAS
+                            </Text>
+                        </div>
                         {!!urlSummaryDetail ?
-                            <div>
+                            <>
+                                <div>
+                                    <Text css={{ color: "#808B96" }}>
+                                        Si quieres conocer el detalle de las pólizas/contratos renovados y cancelados, haz click aquí:
+                                    </Text>
+                                </div>
                                 <a
                                     href={urlSummaryDetail}
                                     target='_blank' className={styles.downloadLink}
                                     rel="noreferrer"
-                                >Descargar informe detallado</a>
-                            </div>
+                                >Descargar informe</a>
+                            </>
                         :null
                         }
                         <div>
                             <Text css={{ color: "#808B96" }}>
-                                Este reporte se actualizará cada semana
-                                Fecha de actualización: {kpi?.updated_at}
+                                Este reporte se actualizará cada semana. Ultima fecha de actualización: {kpi?.updated_at}
                             </Text>
                         </div>
                     </div>
