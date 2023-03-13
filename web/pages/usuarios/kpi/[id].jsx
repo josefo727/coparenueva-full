@@ -5,8 +5,6 @@ import axios from 'axios';
 import DataTable from 'react-data-table-component';
 import { MdModeEdit, MdDeleteForever, MdTableChart } from 'react-icons/md';
 import Link from "next/link";
-import {BsTable} from "react-icons/bs";
-import {Tooltip} from "@nextui-org/react";
 import {useRouter} from "next/router";
 import Layout from "../../../components/Layout";
 
@@ -40,7 +38,7 @@ export default function Users() {
         }
         try {
             await axios.delete(`${API_URL}/api/kpis/${idKpiDelete}`, headers)
-            await closeModal();
+            closeModal();
             await getKpisUser(id);
         }catch (e) {
         }
@@ -135,7 +133,7 @@ export default function Users() {
         <>
             <Layout
                 title='KPI'
-                descripcion='KpI'
+                descripcion='Kpi'
                 navTitle='KPI'
                 ruta='users'
             >
