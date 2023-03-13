@@ -40,8 +40,8 @@
     background: #ffffff;
     color: #000000;
     border-radius: 26px;
-    min-width: 145px;
-    min-height: 100px;
+    min-width: 195px;
+    min-height: 160px;
     margin: 5px;
     padding: 10px;
     font-size: 16px;
@@ -54,7 +54,7 @@
     border-radius: 26px;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: center;
     flex-direction: column;
     width: 12%;
     min-width: 145px;
@@ -71,7 +71,7 @@
     color: #ffffff;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: center;
     width: 70%;
     max-width: 380px;
     height: 35px;
@@ -121,6 +121,8 @@
 .contentIconTitle {
     display: flex;
     align-items: center;
+    text-align: center;
+    font-size: 14px;
 }
 .icon {
     display: flex;
@@ -171,7 +173,11 @@
 .selectMonth {
     background: red;
 }
-@media (max-width: 821px) {
+@media (max-width: 1023px) {
+    .containerBox {
+        flex-direction: column;
+        max-width: 276px;
+    }
     .containerResumen {
         height: auto;
         padding: 0 20px;

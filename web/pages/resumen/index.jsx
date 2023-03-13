@@ -1,7 +1,7 @@
 import Layout from '/components/Layout'
 import React, {useEffect, useState, useCallback, useMemo } from "react";
 import styles from  '/styles/pages/Resumen.module.css'
-import { Text } from '@nextui-org/react';
+import { Text, Spacer } from '@nextui-org/react';
 import {user} from "../../auth";
 import axios from "axios";
 import Select from "react-select";
@@ -86,7 +86,7 @@ export default function Resumen() {
                 ruta='resumen'
             >
                 <div className={styles.containerResumen}>
-
+                    <Spacer y={2}/>
                     <div style={{maxWidth: '400px'}}>
                         <Select
                             classNamePrefix={styles.selectMonth}
@@ -101,7 +101,7 @@ export default function Resumen() {
                         <div className={styles.contentLeft}>
                             <div className={`${styles.box} ${styles.policies}`}>
                                 <div className={styles.contentIconTitle}>
-                                    <span>Pólizas a renovar <br/> “Público objetivo”</span>
+                                    <span>PÓLIZAS/CONTRATOS A <br/> RENOVAR <br/> "GRUPO OBJETIVO"</span>
                                 </div>
                                 <h1 className={styles.valor }>{kpi?.renewal_target_audience || '0'}</h1>
                             </div>
@@ -110,21 +110,23 @@ export default function Resumen() {
                         <div className={styles.contentRight}>
                             <div className={`${styles.box}`}>
                                 <div className={styles.contentIconTitle}>
-                                    <span>Pólizas <br/> renovadas</span>
+                                    <span>PÓLIZAS/CONTRATOS <br/> RENOVADAS</span>
                                 </div>
                                 <h2 className={styles.valor}>{kpi?.renewed_policies || '0'}</h2>
                             </div>
                             <div className={`${styles.box}`}>
                                 <div className={styles.contentIconTitle}>
-                                    <span>Índice de <br/> renovación</span>
+                                    <span>PÓLIZAS/CONTRATOS <br/> CANCELADAS </span>
                                 </div>
-                                <h2 className={styles.valor}>{kpi?.renewal_rate || '0'}%</h2>
+                                <h2 className={styles.valor}>
+                                    {kpi?.canceled_policies || '0'}
+                                </h2>
                             </div>
                             <div className={`${styles.box}`}>
                                 <div className={styles.contentIconTitle}>
-                                    <span>Prima  <br/> renovada</span>
+                                    <span>PERCISTENCIA</span>
                                 </div>
-                                <h2 className={styles.valor}>${kpi?.renewed_premium || '0'}k</h2>
+                                <h2 className={styles.valor}>{kpi?.renewal_rate || '0'}%</h2>
                             </div>
                             {
                                 kpi.success ?
@@ -146,15 +148,17 @@ export default function Resumen() {
                                     :null
                             }
                             <div className={`${styles.box}`}>
-                                <span>Valor <br/> aproximado <br/> de incentivo</span>
-                                <h2 className={styles.valor}>
-                                    ${kpi?.approximate_incentive_value || '0'}k
-                                </h2>
+                                <div className={styles.contentIconTitle}>
+                                    <span>Prima  <br/> renovada</span>
+                                </div>
+                                <h2 className={styles.valor}>${kpi?.renewed_premium || '0'}k</h2>
                             </div>
                             <div className={`${styles.box}`}>
-                                <span>Pólizas <br/> canceladas </span>
+                                <div className={styles.contentIconTitle}>
+                                    <span>Valor <br/> aproximado <br/> de incentivo</span>
+                                </div>
                                 <h2 className={styles.valor}>
-                                    {kpi?.canceled_policies || '0'}
+                                    ${kpi?.approximate_incentive_value || '0'}k
                                 </h2>
                             </div>
                         </div>

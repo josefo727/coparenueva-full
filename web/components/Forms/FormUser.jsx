@@ -9,6 +9,7 @@ export default function FormUser( {user, setInput, createUser, updateUser, isCre
         document.querySelector('#email').value = user?.email || '';
         document.querySelector('#url').value = user?.url || '';
         document.querySelector('#urlDetail').value = user?.url_summary_detail || '';
+        document.querySelector('#baseLine').value = user.base_line || 0;
         document.querySelector('#password').value = user?.password || '';
     },[user])
     return (
@@ -57,6 +58,19 @@ export default function FormUser( {user, setInput, createUser, updateUser, isCre
                     onChange={e => setInput(e)}
                     bordered
                     label="URL resumen"
+                />
+                <Spacer y={1} />
+                <Input
+                    id='baseLine'
+                    name='base_line'
+                    type='number'
+                    min="0"
+                    step="1"
+                    bordered
+                    label="Linea Base"
+                    className={styles.baseLine}
+                    defaultValue={user?.base_line}
+                    onChange={e => setInput(e)}
                 />
                 <Spacer y={1} />
                 <Input.Password
