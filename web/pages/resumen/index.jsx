@@ -101,7 +101,7 @@ export default function Resumen() {
                         <div className={styles.contentLeft}>
                             <div className={`${styles.box} ${styles.policies}`}>
                                 <div className={styles.contentIconTitle}>
-                                    <span>PÓLIZAS/CONTRATOS A <br/> RENOVAR <br/> "GRUPO OBJETIVO"</span>
+                                    <span>PÓLIZAS/CONTRATOS A <br/> RENOVAR <br/> &quot;GRUPO OBJETIVO&quot;</span>
                                 </div>
                                 <h1 className={styles.valor }>{kpi?.renewal_target_audience || '0'}</h1>
                             </div>
