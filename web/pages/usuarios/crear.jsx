@@ -9,6 +9,7 @@ import {AiOutlineArrowLeft} from "react-icons/ai";
 
 export default function Create() {
     const [user, setUser] = useState({
+        base_line: 0,
         name: '',
         email: '',
         password: '',
@@ -18,6 +19,10 @@ export default function Create() {
     const API_URL = `${process.env.SERVER_API_HOST}`;
 
     const createUser = async () => {
+        setUser({
+            ...user,
+            ['base_line'] : parseInt(user.base_line)
+        })
         const headers = {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`,

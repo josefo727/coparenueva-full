@@ -80,6 +80,13 @@ export default function Users() {
             name: 'E-mail',
             selector: row => row.email,
             sortable: true,
+            reorder: true,
+            minWidth: '300px'
+        },
+        {
+            name: 'Linea Base',
+            selector: row => row.base_line,
+            sortable: true,
             reorder: true
         },
         {
@@ -116,7 +123,7 @@ export default function Users() {
                         />
                     </div>
                 </div>
-                {showModal ?
+                {showModal && (
                     <div className={styles.contentDeleteConfirm}>
                         <div className={styles.deleteConfirm}>
                             <p>Esta seguro de eliminar este usuario</p>
@@ -126,7 +133,7 @@ export default function Users() {
                             </div>
                         </div>
                     </div>
-                :null}
+                )}
             </Layout>
         </>
     )

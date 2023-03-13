@@ -5,6 +5,7 @@
 .name,
 .email,
 .url,
+.baseLine,
 .terms {
     border-radius: 11px;
     box-shadow: 0 0 0 2px #111419;

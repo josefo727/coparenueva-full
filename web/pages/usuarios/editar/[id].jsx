@@ -33,6 +33,10 @@ export default function Edit() {
     }, [getUser])
 
     const updateUser = async () => {
+        setUser({
+            ...user,
+            ['base_line'] : Number(user.base_line)
+        })
         if ( !!user.name && !!user.email ) {
             const headers = {
                 headers: {

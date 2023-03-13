@@ -6,10 +6,22 @@
 }
 .containerBox {
     display: flex;
-    flex-wrap: wrap;
     padding: 30px 15px;
     margin: auto;
     max-width: 930px;
+}
+.contentLeft {
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+}
+.contentLeft p{
+    font-size: 14px;
+    margin: 10px;
+}
+.contentRight {
+    display: flex;
+    flex-wrap: wrap;
 }
 .containerBox2 {
     display: flex;
@@ -21,15 +33,15 @@
     text-align: center;
 }
 .box {
-    background: #ffffff;
-    color: #000000;
-    border-radius: 26px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    min-width: 145px;
-    min-height: 100px;
+    background: #ffffff;
+    color: #000000;
+    border-radius: 26px;
+    min-width: 195px;
+    min-height: 160px;
     margin: 5px;
     padding: 10px;
     font-size: 16px;
@@ -72,36 +84,45 @@
     background: #344693;
     transition: 0.5s;
 }
-
-.tres{
+.uno, .dos, .tres, .cuatro {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
     background-color: gray;
     width: 40px;
-    height: 75px;
-    border-radius: 100px;
-}
+    height: 60px;
 
-.dos {
-    background-color: gray;
-    width: 40px;
-    height: 75px;
-    border-radius: 100px;
-    transform: translate(0px, -35px);
 }
-
 .uno {
-    background-color: gray;
-    width: 40px;
-    height: 75px;
-    border-radius: 100px;
-    transform: translate(0px, -70px);
+    border-radius: 0 0 20px 20px;
+    z-index: 1;
+    transform: translate(0px, -40px);
 }
-.levelActive {
+.dos {
+    border-radius: 0 0 20px 20px;
+    z-index: 2;
+    transform: translate(0px, -20px);
+}
+.tres {
+    border-radius: 0 0 20px 20px;
+    z-index: 3;
+    transform: translate(0, 0);
+}
+.cuatro{
+    border-radius: 20px;
+    z-index: 4;
+    transform: translate(0, 20px);
+}
+
+.active {
     background-color: orange !important;
 }
 
 .contentIconTitle {
     display: flex;
     align-items: center;
+    text-align: center;
+    font-size: 14px;
 }
 .icon {
     display: flex;
@@ -152,7 +173,11 @@
 .selectMonth {
     background: red;
 }
-@media (max-width: 821px) {
+@media (max-width: 1023px) {
+    .containerBox {
+        flex-direction: column;
+        max-width: 276px;
+    }
     .containerResumen {
         height: auto;
         padding: 0 20px;
