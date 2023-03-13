@@ -30,6 +30,7 @@ class UserController extends Controller
             'password' => bcrypt($request->input('password')),
             'url' => $request->input('url'),
             'url_summary_detail' => $request->input('url_summary_detail'),
+            'base_line' => $request->input('base_line'),
         ]);
 
         return response()->json($user, Response::HTTP_CREATED);

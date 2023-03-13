@@ -79,7 +79,8 @@ class UserControllerTest extends TestCase
             'name' => $user->name,
             'email' => $user->email,
             'password' => 'password',
-            'password_confirmation' => 'password'
+            'password_confirmation' => 'password',
+            'base_line' => rand(70, 85),
         ];
 
         $response = $this->postJson(route('users.store'), $data);
@@ -110,6 +111,7 @@ class UserControllerTest extends TestCase
             'name' => 'Test User Updated',
             'email' => 'testuserupdated@example.com',
             'password' => 'new_password',
+            'base_line' => rand(70, 85),
         ];
 
         $response = $this->putJson(route('users.update', $user), $data);
@@ -139,6 +141,7 @@ class UserControllerTest extends TestCase
         $data = [
             'name' => 'Test User Updated',
             'email' => 'testuserupdated@example.com',
+            'base_line' => rand(70, 85),
         ];
 
         $response = $this->putJson(route('users.update', $user), $data);

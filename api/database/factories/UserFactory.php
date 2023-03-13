@@ -26,6 +26,7 @@ class UserFactory extends Factory
             'is_admin' => false,
             'url' => fake()->url,
             'url_summary_detail' => fake()->url,
+            'base_line' => rand(70, 85),
             'remember_token' => Str::random(10),
         ];
     }

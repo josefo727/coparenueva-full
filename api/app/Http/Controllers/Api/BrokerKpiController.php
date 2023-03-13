@@ -21,7 +21,7 @@ class BrokerKpiController extends Controller
         $value = $request->month;
         $months = app(Month::class)->getMonthsByValue($value);
         $brokerId = auth()->user()->id;
-
+        $baseLine = (int) auth()->user()->base_line;
 
         $kpi = Kpi::query()
             ->select(
@@ -48,14 +48,17 @@ class BrokerKpiController extends Controller
 
         $incentiveLevel = null;
         switch (true) {
-            case ($renewalRate >= 70 && $renewalRate < 81):
+            case ($renewalRate >= $baseLine && $renewalRate < 86):
                 $incentiveLevel = 1;
                 break;
-            case ($renewalRate >= 81 && $renewalRate < 91):
+            case ($renewalRate >= 86 && $renewalRate < 91):
                 $incentiveLevel = 2;
                 break;
-            case ($renewalRate >= 91 && $renewalRate <= 100):
+            case ($renewalRate >= 91 && $renewalRate < 96):
                 $incentiveLevel = 3;
+                break;
+            case $renewalRate >= 96:
+                $incentiveLevel = 4;
                 break;
         }
 
