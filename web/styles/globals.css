@@ -38,3 +38,19 @@ body {
     content: 'Usuarios por pagina';
     font-size: 12px;
 }
+/****** Resumen Users ******/
+#selectMonth {
+    display: flex;
+}
+#selectMonth .Resumen_selectMonth__xZ31Q__control {
+    background: #3264D3;
+    border-radius: 20px;
+    min-width: 300px;
+}
+
+#selectMonth .Resumen_selectMonth__xZ31Q__single-value {
+    color: #ffffff;
+    text-transform: uppercase;
+    font: 600 14px sans-serif;
+    text-align: center;
+}

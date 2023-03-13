@@ -43,8 +43,7 @@ export default function Edit() {
         }
     };
     const updateIncentiveTable = async () => {
-        console.log(newImage);
-        // setLoad(true);
+        setLoad(true);
         const form = new FormData();
         form.append('userId', id);
         form.append('image', newImage);

@@ -130,7 +130,9 @@ export default function FormSpecialCases({special, isEdit, getSpecialCases}) {
                 <Spacer y={1} />
                 <h3 className={styles.title}>¿Deseas reportar un caso?</h3>
                 <Spacer y={2} />
+                <label className='nextui-c-hzQjrs nextui-input-block-label' htmlFor="member">Miembro de equipo</label>
                 <Select
+                    id={'member'}
                     className={styles.inputs}
                     options={options}
                     value={selected}
