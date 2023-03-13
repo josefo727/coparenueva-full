@@ -80,7 +80,8 @@ export default function Users() {
             name: 'E-mail',
             selector: row => row.email,
             sortable: true,
-            reorder: true
+            reorder: true,
+            minWidth: '300px'
         },
         {
             name: 'Linea Base',
