@@ -13,6 +13,18 @@
     border-radius: 21px;
     font-size: 14px;
 }
+.instructions .subTitle {
+    font: 600 14px sans-serif;
+    margin: 18px 0 15px 0;
+}
+.separator {
+    display: block;
+    margin: 14px 0;
+}
+.separator:before {
+    content: '-';
+    margin-right: 15px;
+}
 .downloadLink {
     color: #ffffff;
     background: #344693;
@@ -26,17 +38,6 @@
     border-radius: 30px;
     margin-bottom: 12px;
     text-align: center;
-}
-.instructions p {
-    margin: 5px 0;
-}
-.separator {
-    display: block;
-    margin: 10px 0;
-}
-.separator:before {
-    content: '-';
-    margin-right: 15px;
 }
 @media (max-width: 768px) {
     .instructions {

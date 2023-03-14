@@ -105,7 +105,7 @@ export default function Resumen() {
                                 </div>
                                 <h1 className={styles.valor }>{kpi?.renewal_target_audience || '0'}</h1>
                             </div>
-                            <p>*No te olvides que esta es solo  una proporción de todos los clientes a renovar.</p>
+                            <p>*No te olvides que esta es solo una proporción de todos los clientes a renovar.</p>
                         </div>
                         <div className={styles.contentRight}>
                             <div className={`${styles.box}`}>
@@ -166,7 +166,7 @@ export default function Resumen() {
                     <div className={`${styles.containerBoxEnd}`}>
                         <div>
                             <Text css={{ color: "#010101" }}>
-                                RECUERDA QUE ESTAS PÓLIZAS/CONTRATOS DEVEN PERMANECER ACTIVAS POR 100 DÍAS
+                                RECUERDA QUE ESTAS PÓLIZAS/CONTRATOS DEBEN PERMANECER ACTIVAS POR 100 DÍAS
                             </Text>
                         </div>
                         {!!urlSummaryDetail ?

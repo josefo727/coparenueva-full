@@ -39,28 +39,27 @@ export default function TermsAndConditions() {
             <Layout title='Términos y Condiciones' descripcion='Términos y Condiciones' navTitle='Términos y condiciones' ruta='terms'>
                 <div className={styles.containerTerms}>
                     <div className={styles.terms}>
-                        <p><strong>Términos y condiciones para el cálculo del índice de renovación</strong></p>
+                        <p><strong>Términos y condiciones para el cálculo del índice de persistencia:</strong></p>
                         <br/>
-                        <span className={styles.separator}>Si el cliente tiene dos o más pólizas y/o contratos que se encuentren en el grupo objetivo de la campaña, cada uno será considerado de manera independiente para el cálculo del índice de renovación.</span>
-                        <span className={styles.separator}>Los cambios de plan/póliza/contrato serán considerados para el cálculo del índice de renovación siempre que la vigencia del nuevo plan/póliza/contrato no exceda 31 días en relación con la cancelación del plan/póliza/contrato anterior.</span>
-                        <span className={styles.separator}>Los cambios de Titular a Dependiente serán considerados para el cálculo del índice de renovación, siempre que no vaya a una póliza/contrato que sea considerado nuevo negocio, es decir, que exceda los 31 días después de la fecha de su emisión.</span>
-                        <span className={styles.separator}>Los cambios de Dependiente a Titular no serán considerados para el cálculo del índice de renovación; puesto que el cálculo de dicho índice se hace por póliza, más no por afiliado/asegurado.</span>
-                        <span className={styles.separator}>Si una póliza y/o contrato cambia de socio estratégico antes de su fecha de renovación a otro socio y este la renueva, está sí sumará al cálculo de índice de renovación.</span>
-                        <span className={styles.separator}>Si una póliza y/o contrato cambia de Agente antes de su fecha de renovación a otro Agente (que sí forme parte de la Campaña) que renueva dicha póliza y/o contrato, esta no sumará al cálculo de índice de renovación del nuevo Agente; puesto que dicha póliza y/o contrato no formaba parte del grupo objetivo de las pólizas a renovar.</span>
-                        <span className={styles.separator}>La internacionalización de una póliza; es decir, el cambio de una póliza emitida en BMI Ecuador a BMI Miami, no sumará al cálculo del índice de renovación.</span>
-                        <span className={styles.separator}>No se realizarán exclusiones a causa de cancelación de póliza y/o contrato por fallecimiento.</span>
+                        <span className={styles.separator}>Si el cliente tiene dos o más pólizas y/o contratos que se encuentren en el grupo objetivo de la campaña, cada uno será considerado de manera independiente para el cálculo del índice de persistencia.</span>
+                        <span className={styles.separator}>Los cambios de plan/póliza/contrato en la misma compañía o entre compañías de clientes vigentes, serán considerados para el cálculo del índice de persistencia siempre que la vigencia del nuevo plan/póliza/contrato no exceda 31 días en relación con la cancelación del plan/póliza/contrato anterior.</span>
+                        <span className={styles.separator}>Los cambios de Titular a Dependiente serán considerados para el cálculo del índice de persistencia, siempre que no vaya a una póliza/contrato que sea considerado nuevo negocio, es decir, que exceda los 31 días después de la fecha de su emisión.</span>
+                        <span className={styles.separator}>Los cambios de Dependiente a Titular no serán considerados para el cálculo del índice de persistencia; puesto que el cálculo de dicho índice se hace por póliza, más no por afiliado/asegurado y son considerados como nuevo negocio.</span>
+                        <span className={styles.separator}>La internacionalización de una póliza, es decir, el cambio de una póliza emitida en BMI Ecuador a BMI Miami, no sumará al cálculo del índice de persistencia.</span>
+                        <span className={styles.separator}>Los cambios de socios estratégicos no afectarán al cálculo de persistencia.</span>
+                        <span className={styles.separator}>Los cambios de agente no afectarán al cálculo de la persistencia del socio estratégico anterior y tampoco son parte del cálculo de persistencia del nuevo socio estratégico.</span>
                         <br/>
                         <p><strong>No se realizará ningún tipo de excepción que no esté explícitamente descrita en los términos y condiciones de la campaña.</strong></p>
                     </div>
                     {
                         !isAdmin &&
                         <div className={styles.terms}>
-                            {
-                                hasAcceptedTheTerms
-                                    ? 'Usted ha aceptado los términos y condiciones.'
-                                    : <div>
-                                        <span onClick={accept}><GrCheckbox /></span> Acepto los términos y condiciones leídos
-                                    </div>
+                            {hasAcceptedTheTerms ?
+                                'Usted ha aceptado los términos y condiciones.'
+                            :
+                                <div className={styles.check}>
+                                    <span onClick={accept}><GrCheckbox /></span> Acepto los términos y condiciones leídos
+                                </div>
                             }
                         </div>
                     }

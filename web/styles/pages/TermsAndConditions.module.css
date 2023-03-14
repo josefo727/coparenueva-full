@@ -20,6 +20,13 @@
     content: '-';
     margin-right: 15px;
 }
+.check {
+    display: flex;
+    align-items: center;
+}
+.check span {
+    margin-right: 10px;
+}
 @media (max-width: 768px) {
     .terms {
         width: auto;
