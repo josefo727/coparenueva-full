@@ -124,7 +124,7 @@ export default function Resumen() {
                             </div>
                             <div className={`${styles.box}`}>
                                 <div className={styles.contentIconTitle}>
-                                    <span>PERCISTENCIA</span>
+                                    <span>PERSISTENCIA</span>
                                 </div>
                                 <h2 className={styles.valor}>{kpi?.renewal_rate || '0'}%</h2>
                             </div>
