@@ -90,14 +90,17 @@ export default function Sidebars({navTitle, navSubTitle, ruta, children}) {
                             <div className={styles.activeBookmark}/>
                             Base de jugadores
                         </MenuItem>
-                        <MenuItem
-                            icon={<BsFillFileTextFill className={styles.icon}/>}
-                            component={<Link href="/tabla-de-incentivo" />}
-                            className={incentive}
-                        >
-                            <div className={styles.activeBookmark}/>
-                            Tabla de incentivos
-                        </MenuItem>
+                        {
+                            false &&
+                            <MenuItem
+                                icon={<BsFillFileTextFill className={styles.icon}/>}
+                                component={<Link href="/tabla-de-incentivo" />}
+                                className={incentive}
+                            >
+                                <div className={styles.activeBookmark}/>
+                                Tabla de incentivos
+                            </MenuItem>
+                        }
                         <MenuItem
                             icon={<FaUsers className={styles.icon}/>}
                             component={<Link href="/mi-equipo" />}
