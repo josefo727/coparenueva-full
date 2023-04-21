@@ -151,14 +151,14 @@ export default function Resumen() {
                                 <div className={styles.contentIconTitle}>
                                     <span>Prima  <br/> renovada</span>
                                 </div>
-                                <h2 className={styles.valor}>${kpi?.renewed_premium || '0'}k</h2>
+                                <h2 className={styles.valor}>${kpi?.renewed_premium || '0'}</h2>
                             </div>
                             <div className={`${styles.box}`}>
                                 <div className={styles.contentIconTitle}>
                                     <span>Valor <br/> aproximado <br/> de incentivo</span>
                                 </div>
                                 <h2 className={styles.valor}>
-                                    ${kpi?.approximate_incentive_value || '0'}k
+                                    ${kpi?.approximate_incentive_value || '0'}
                                 </h2>
                             </div>
                         </div>
