@@ -12,7 +12,9 @@ class SpecialCaseController extends Controller
     public function index()
     {
         $specialCases = SpecialCase::query()
-            ->where('broker_id', auth()->user()->id)
+            ->when(!auth()->user()->isAdmin(), function($query) {
+                $query->where('broker_id', auth()->user()->id);
+            })
             ->get();
 
         $specialCases = $specialCases->map(function($sc) {

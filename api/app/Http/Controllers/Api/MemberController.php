@@ -11,7 +11,11 @@ class MemberController extends Controller
 {
     public function index()
     {
-        $members = Member::where('broker_id', auth()->id())->get();
+        $members = Member::query()
+            ->when(!auth()->user()->isAdmin(), function($query) {
+                $query->where('broker_id', auth()->user()->id);
+            })
+            ->get();
 
         return response()->json(['data' => $members], Response::HTTP_OK);
     }
