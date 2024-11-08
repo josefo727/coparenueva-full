@@ -102,4 +102,3 @@ services:
       - proxy-network
     profiles:
       - production
-
