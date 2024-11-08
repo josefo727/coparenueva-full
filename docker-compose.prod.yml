@@ -1,0 +1,105 @@
+version: '3.8'
+
+services:
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    container_name: nginx-proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /certs:/etc/nginx/certs:ro
+      - /etc/nginx/vhost.d:/etc/nginx/vhost.d:rw
+      - /usr/share/nginx/html:/usr/share/nginx/html:rw
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+    labels:
+      - com.github.nginx-proxy.nginx=true
+    networks:
+      - proxy-network
+
+  letsencrypt:
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    container_name: nginx-proxy-letsencrypt
+    volumes:
+      - /certs:/etc/nginx/certs:rw
+      - /etc/nginx/vhost.d:/etc/nginx/vhost.d:rw
+      - /etc/acme.sh:/etc/acme.sh:rw
+      - /usr/share/nginx/html:/usr/share/nginx/html:rw
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    depends_on:
+      - nginx-proxy
+    networks:
+      - proxy-network
+
+  redis:
+    image: "redis:alpine"
+    volumes:
+      - "/redis:/data"
+    networks:
+      - proxy-network
+    healthcheck:
+      test:
+        - CMD
+        - redis-cli
+        - ping
+      retries: 3
+      timeout: 5s
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: '1000M'
+
+  mysql:
+    image: mysql/mysql-server:8.0
+    container_name: mysql-container
+    environment:
+      MYSQL_ROOT_PASSWORD: '${MYSQL_ROOT_PASSWORD}'
+      MYSQL_DATABASE: '${MYSQL_DATABASE}'
+      MYSQL_USER: '${MYSQL_USER}'
+      MYSQL_PASSWORD: '${MYSQL_ROOT_PASSWORD}'
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - proxy-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", '${MYSQL_ROOT_PASSWORD}']
+      retries: 3
+      timeout: 5s
+
+  bmi-api:
+    image: ghcr.io/sun-asterisk-research/php-dev:8.1
+    container_name: bmi-api-container
+    restart: unless-stopped
+    working_dir: /srv/app
+    environment:
+      DOCUMENT_ROOT: /srv/app/public
+      VIRTUAL_HOST: bmi-api.jose-gutierrez.com
+      LETSENCRYPT_HOST: bmi-api.jose-gutierrez.com
+      LETSENCRYPT_EMAIL: josefo727@gmail.com
+    volumes:
+      - ./api:/srv/app
+    depends_on:
+      - nginx-proxy
+      - mysql
+      - redis
+    networks:
+      - proxy-network
+    expose:
+      - "80"
+
+  bmi-web:
+    image: your-dockerhub-username/bmi-web:latest
+    container_name: bmi-web-container
+    environment:
+      - VIRTUAL_HOST=bmi.jose-gutierrez.com
+      - LETSENCRYPT_HOST=bmi.jose-gutierrez.com
+      - LETSENCRYPT_EMAIL=tu-email@example.com
+    depends_on:
+      - nginx-proxy
+      - bmi-api
+    networks:
+      - proxy-network
+    profiles:
+      - production
+
