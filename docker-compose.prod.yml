@@ -63,7 +63,7 @@ services:
     networks:
       - proxy-network
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", '${MYSQL_ROOT_PASSWORD}']
+      test: ["CMD", "mysqladmin", "ping", "-p'${MYSQL_ROOT_PASSWORD}'"]
       retries: 3
       timeout: 5s
 
@@ -78,7 +78,7 @@ services:
       LETSENCRYPT_HOST: bmi-api.jose-gutierrez.com
       LETSENCRYPT_EMAIL: josefo727@gmail.com
     volumes:
-      - ./api:/srv/app
+      - ./../bmi/api:/srv/app
     depends_on:
       - nginx-proxy
       - mysql
@@ -89,12 +89,12 @@ services:
       - "80"
 
   bmi-web:
-    image: your-dockerhub-username/bmi-web:latest
+    image: josefo727/bmi-web
     container_name: bmi-web-container
     environment:
       - VIRTUAL_HOST=bmi.jose-gutierrez.com
       - LETSENCRYPT_HOST=bmi.jose-gutierrez.com
-      - LETSENCRYPT_EMAIL=tu-email@example.com
+      - LETSENCRYPT_EMAIL=josefo727@gmail.com
     depends_on:
       - nginx-proxy
       - bmi-api
